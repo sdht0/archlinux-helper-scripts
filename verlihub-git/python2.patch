@@ -1,0 +1,11 @@
+diff -aur verlihub/configure verlihub-new/configure
+--- verlihub/configure	2013-05-06 19:59:23.807525200 +0530
++++ verlihub-new/configure	2013-05-06 23:00:19.127701000 +0530
+@@ -74,6 +74,7 @@
+ 	REAL_BUILD_DIR=`pwd`
+ 	# finally start cmake
+ 	cmake -D CMAKE_INSTALL_PREFIX=$PREFIX \
++        -D PYTHON_INCLUDE_DIR:PATH=/usr/include/python2.7 \
+         -D CMAKE_BUILD_TYPE=$BUILD_TYPE \
+         -D VERBOSE=$DEBUG \
+         "$SRC_DIR" \

@@ -1,0 +1,46 @@
+# Maintainer: Gustavo Alvarez <sl1pkn07@gmail.com>
+
+pkgname=verlihub-git
+pkgver=20130506
+pkgrel=1
+pkgdesc="A DC++ protocol server (hub) (GIT version)"
+arch=('i686' 'x86_64')
+license=('LGPL')
+url="http://www.verlihub-project.org/"
+depends=('geoip' 'mariadb' 'gettext' 'pcre' 'zlib' 'openssl')
+makedepends=('git' 'cmake')
+optdepends=('lua: for Lua plugins'
+            'python2: for Python plugins')
+replace=('verlihub')
+conflicts=('verlihub')
+source=('python2.patch')
+md5sums=('1c2c432b955433c4b783e360bf4e0abb')
+
+_gitroot="git://github.com/VerliHub/verlihub.git"
+_gitname="verlihub"
+
+build() {
+    msg "Connecting to GIT server..."
+
+    if [ -d "${srcdir}"/"${_gitname}" ] ; then
+        cd "${_gitname}" && git pull origin
+    else
+        git clone "${_gitroot}"
+    fi
+    
+    [ -d "${srcdir}"/"${_gitname}"-build ] && rm -fr "${srcdir}"/"${_gitname}"-build
+    cp -R "${srcdir}"/"${_gitname}" "${srcdir}"/"${_gitname}"-build
+    
+    msg "GIT checkout done or server timeout"
+    msg "Starting build..."
+	
+    cd "${srcdir}"/"${_gitname}"-build
+    patch -p1 -i $srcdir/python2.patch
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    cd "${srcdir}"/"${_gitname}"-build
+    make DESTDIR="${pkgdir}" install
+}
