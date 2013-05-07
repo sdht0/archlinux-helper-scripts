@@ -7,8 +7,10 @@ pkgdesc="A DC++ protocol server (hub) - GIT version"
 arch=('i686' 'x86_64')
 license=('LGPL')
 url="http://www.verlihub-project.org/"
-depends=('geoip' 'mariadb' 'gettext' 'pcre' 'zlib' 'openssl' 'lua' 'python2')
-makedepends=('git' 'cmake')
+depends=('geoip' 'mariadb' 'gettext' 'pcre' 'zlib' 'openssl')
+makedepends=('git' 'cmake' 'lua' 'python2')
+optdepends=('lua: for Lua plugins'
+            'python2: for Python plugins')
 conflicts=('verlihub')
 provides=('verlihub')
 source=('git://github.com/VerliHub/verlihub.git'
@@ -21,12 +23,12 @@ _gitname="verlihub"
 pkgver() {
   cd $_gitname
   # Use the tag of the last commit
-  git describe --always | sed 's|-|.|g'
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
 }
 
 prepare() {
     cd $_gitname
-    patch -p1 -i $srcdir/python2.patch
+    patch -p1 -i "$srcdir/python2.patch"
 }
 
 build() {
