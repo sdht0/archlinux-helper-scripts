@@ -1,7 +1,7 @@
 # Maintainer: Gustavo Alvarez <sl1pkn07@gmail.com>
 
 pkgname=verlihub-git
-pkgver=514a92e
+pkgver=0.0.0.0
 pkgrel=1
 pkgdesc="A DC++ protocol server (hub) - GIT version"
 arch=('i686' 'x86_64')
