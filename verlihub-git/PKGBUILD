@@ -1,7 +1,8 @@
 # Maintainer: Gustavo Alvarez <sl1pkn07@gmail.com>
 
-pkgname=verlihub-git
-pkgver=0.0.0.0
+_pkgname=verlihub
+pkgname=$_pkgname-git
+pkgver=766.514a92e
 pkgrel=1
 pkgdesc="A DC++ protocol server (hub) - GIT version"
 arch=('i686' 'x86_64')
@@ -13,31 +14,27 @@ optdepends=('lua: for Lua plugins'
             'python2: for Python plugins')
 conflicts=('verlihub')
 provides=('verlihub')
+install=$pkgname.install
 source=('git://github.com/VerliHub/verlihub.git'
-        'python2.patch')
+        'verlihub.service')
 md5sums=('SKIP'
-         '93d5288c62d0ba40930ad9cb234d1fdd')
-
-_gitname="verlihub"
+         '5796a52003035027bb4976150f658c0a')
 
 pkgver() {
-  cd $_gitname
-  # Use the tag of the last commit
-  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
-}
-
-prepare() {
-    cd $_gitname
-    patch -p1 -i "$srcdir/python2.patch"
+    cd "$srcdir/$_pkgname"
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
 }
 
 build() {
-    cd $_gitname
-    ./configure --prefix=/usr
+    cd "$srcdir/$_pkgname"
+    cmake -DCMAKE_INSTALL_PREFIX=/usr -DPYTHON_LIBRARY="/usr/lib/libpython2.7.so.1.0" -DPYTHON_INCLUDE_DIR="/usr/include/python2.7" .
     make
 }
 
 package() {
-    cd $_gitname
+    cd "$srcdir/$_pkgname"
     make DESTDIR="${pkgdir}" install
+    
+    install -m755 -d "${pkgdir}/usr/lib/systemd/system"
+    install -m644 "${srcdir}/verlihub.service" "${pkgdir}/usr/lib/systemd/system/"
 }
