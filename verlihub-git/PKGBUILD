@@ -9,8 +9,8 @@ arch=('i686' 'x86_64')
 license=('LGPL')
 url="http://www.verlihub-project.org/"
 depends=('geoip' 'mariadb' 'gettext' 'pcre' 'zlib' 'openssl')
-makedepends=('git' 'cmake' 'lua' 'python2')
-optdepends=('lua: for Lua plugins'
+makedepends=('git' 'cmake' 'lua51' 'python2')
+optdepends=('lua51: for Lua plugins'
             'python2: for Python plugins')
 conflicts=('verlihub')
 provides=('verlihub')
