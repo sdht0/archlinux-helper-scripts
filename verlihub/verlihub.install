@@ -1,15 +1,15 @@
 showmessage(){
-    echo "If this is the first time you're installing Verlihub,"
-    echo "run as root:"
+    echo "If this is the first time you're installing Verlihub, run as root:"
     echo "vh --install"
     echo ""
     echo "The systemd file has been written assuming configuration"
     echo "folder is in /etc/verlihub. If you choose a different folder,"
-    echo "edit the PID path in the service file to that folder."
+    echo "edit the PID path in the service file to relect the change."
     echo ""
     echo "After Verlihub has been set up, you can use:"
     echo "systemctl enable verlihub"
     echo "systemctl [start/stop/restart] verlihub"
+    echo ""
 }
 
 post_install() {
