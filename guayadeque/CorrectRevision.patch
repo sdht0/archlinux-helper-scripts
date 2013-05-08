@@ -1,0 +1,22 @@
+diff -aur guayadeque/CMakeLists.txt guayadeque-new/CMakeLists.txt
+--- guayadeque/CMakeLists.txt	2013-05-07 22:21:35.000000000 +0530
++++ guayadeque-new/CMakeLists.txt	2013-05-08 08:02:00.509592800 +0530
+@@ -132,18 +132,6 @@
+ INCLUDE(${wxWidgets_USE_FILE})
+ 
+ #
+-IF( EXISTS ${PROJECT_SOURCE_DIR}/.svn )
+-	# Probably a SVN workspace, determine revision level
+-     	FIND_PACKAGE(Subversion)
+-     	IF(Subversion_FOUND)
+-        	Subversion_WC_INFO(${PROJECT_SOURCE_DIR} GUAYADEQUE)
+-        	MESSAGE("Current revision is ${GUAYADEQUE_WC_REVISION}")
+-		SET( _GUREVISION_ ${GUAYADEQUE_WC_REVISION})
+-        ELSE(Subversion_FOUND)
+-        	SET( _GUREVISION_ "" )
+-	ENDIF(Subversion_FOUND)
+-ENDIF( EXISTS ${PROJECT_SOURCE_DIR}/.svn ) 
+-
+ CONFIGURE_FILE( ${CMAKE_CURRENT_SOURCE_DIR}/src/Version.h.in ${CMAKE_CURRENT_SOURCE_DIR}/src/Version.h )
+ 
+ #    
