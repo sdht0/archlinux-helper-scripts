@@ -1,0 +1,40 @@
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=libdbusmenu-qt5-bzr
+pkgver=255
+pkgrel=1
+pkgdesc="A library that provides a Qt implementation of the DBusMenu spec"
+arch=('i686' 'x86_64')
+url="https://launchpad.net/libdbusmenu-qt"
+license=('GPL')
+depends=('qt5-base')
+makedepends=('cmake-git' 'bzr' 'doxygen')
+conflicts=('libdbusmenu-qt5')
+provides=('libdbusmenu-qt5')
+source=(bzr+lp:libdbusmenu-qt)
+md5sums=('SKIP')
+
+pkgver() {
+  cd libdbusmenu-qt
+  bzr revno
+}
+
+prepare() {
+  mkdir -p build
+}
+
+build() {
+  cd build
+  /opt/kf5/bin/cmake ../libdbusmenu-qt \
+    -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+    -DCMAKE_BUILD_TYPE=DebugFull \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DUSE_QT5=On \
+    -DWITH_DOC=Off
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="${pkgdir}" install
+}

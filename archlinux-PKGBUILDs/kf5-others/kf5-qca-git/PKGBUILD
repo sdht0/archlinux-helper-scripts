@@ -1,0 +1,39 @@
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=kf5-qca-git
+pkgver=kde4.3.116.g17cf184
+pkgrel=1
+pkgdesc='Qt Cryptographic Architecture'
+arch=('i686' 'x86_64')
+url='http://delta.affinix.com/qca/'
+license=('LGPL')
+depends=('qt5-base' 'ca-certificates' 'libsasl')
+makedepends=('git' 'cmake-git' 'extra-cmake-modules-git')
+source=('git://anongit.kde.org/qca.git')
+md5sums=('SKIP')
+
+pkgver() {
+  cd qca
+  git describe --always | sed 's|-|.|g'
+}
+
+prepare() {
+  mkdir -p build
+}
+
+build() {
+  cd build
+  /opt/kf5/bin/cmake ../qca \
+    -DCMAKE_PREFIX_PATH=/opt/kf5 \
+    -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+    -DCMAKE_BUILD_TYPE=DebugFull \
+    -DCMAKE_SKIP_RPATH=ON \
+    -DLIB_SUFFIX="" \
+    -DCMAKE_INSTALL_LIBDIR=lib
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR=${pkgdir} install
+}

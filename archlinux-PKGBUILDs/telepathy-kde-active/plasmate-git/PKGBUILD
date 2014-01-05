@@ -1,0 +1,32 @@
+_pkgname=plasmate
+pkgname=plasmate-git
+pkgver=940.3f5af57
+pkgrel=1
+pkgdesc='A small IDE taylored for development of Plasma components, such as Widgets, Runners, Dataengines.'
+arch=('i686' 'x86_64')
+url='http://www.kde.org'
+license=('LGPL')
+depends=('kdelibs' 'gpgme' 'kdepimlibs')
+makedepends=('cmake' 'git' 'automoc4' 'boost')
+source=("git://anongit.kde.org/$_pkgname")
+sha1sums=('SKIP')
+
+pkgver() {
+    cd "$srcdir/$_pkgname"
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+build() {
+    mkdir -p "$srcdir/build"
+    cd "$srcdir/build"
+
+    cmake ../$_pkgname \
+      -DCMAKE_BUILD_TYPE=debugfull \
+      -DCMAKE_INSTALL_PREFIX=/usr
+    make
+}
+
+package() {
+    cd "$srcdir/build"
+    make DESTDIR="${pkgdir}" install
+}

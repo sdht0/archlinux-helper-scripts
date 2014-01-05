@@ -1,0 +1,40 @@
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=telepathy-kde-auth-handler-git
+_pkgname=ktp-auth-handler
+pkgver=0.7.0.2.gf36f74c
+pkgrel=1
+pkgdesc="Provide UI/KWallet Integration For Passwords and SSL Errors on Account Connect"
+arch=('i686' 'x86_64')
+url="http://community.kde.org/Real-Time_Communication_and_Collaboration"
+license=('GPL')
+depends=('telepathy-kde-common-internals-git' 'qjson' 'qca-ossl' 'libaccounts-qt' 'signon')
+makedepends=('git' 'cmake' 'automoc4')
+groups=('kde-telepathy-git')
+conflicts=('telepathy-kde-auth-handler')
+provides=('telepathy-kde-auth-handler')
+source=("git://anongit.kde.org/$_pkgname.git")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  git describe --always | sed 's|-|.|g;s|v||'
+}
+
+prepare() {
+  mkdir -p "$srcdir/build"
+}
+
+build() {
+  cd "$srcdir/build"
+
+  cmake ../$_pkgname \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=DebugFull
+  make
+}
+
+package() {
+  cd "$srcdir/build"
+  make DESTDIR="${pkgdir}" install
+}

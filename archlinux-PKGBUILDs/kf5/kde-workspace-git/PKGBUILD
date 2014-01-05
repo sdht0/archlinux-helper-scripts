@@ -1,0 +1,45 @@
+# Maintainer: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=kde-workspace-git
+pkgver=plasma2tp.r74.g16b25c0
+pkgrel=1
+pkgdesc='Provides the interface and basic tools for the KDE workspace'
+arch=('i686' 'x86_64')
+url='https://projects.kde.org/projects/kde/kde-workspace'
+license=('LGPL')
+depends=('kf5-frameworkintegration-git' 'kf5-kcmutils-git' 'kf5-knotifyconfig-git' 'kf5-kprintutils-git'
+         'kf5-kdesu-git' 'kf5-knewstuff-git' 'kf5-khtml-git' 'plasma-framework-git' 'libdbusmenu-qt5-bzr' 'qimageblitz'
+         'libxkbfile' 'libxcursor' 'lm_sensors' 'libraw1394' 'libusb-compat'
+         'pciutils' 'libbsd' 'kf5-akonadi-git' 'qt5-webkit' 'qt5-tools')
+makedepends=('extra-cmake-modules-git' 'git' 'kf5-kdoctools-git')
+conflicts=('kde-workspace')
+provides=('kde-workspace')
+source=('git://anongit.kde.org/kde-workspace.git')
+md5sums=('SKIP')
+
+pkgver() {
+  cd kde-workspace
+  git describe --long | sed -E 's/([^-]*-g)/r\1/;s/-/./g'
+}
+
+prepare() {
+  mkdir -p build
+}
+
+build() {
+  export XDG_DATA_DIRS="/opt/kf5/share:$XDG_DATA_DIRS"
+  export CMAKE_PREFIX_PATH="/opt/kf5"
+
+  cd build
+  /opt/kf5/bin/cmake ../kde-workspace \
+    -DCMAKE_BUILD_TYPE=DebugFull \
+    -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+    -DLIB_INSTALL_DIR=lib
+#    -DSYSCONF_INSTALL_DIR=/etc
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="${pkgdir}" install
+}

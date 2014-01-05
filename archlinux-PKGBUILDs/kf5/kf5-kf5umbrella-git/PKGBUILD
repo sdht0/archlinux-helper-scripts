@@ -1,0 +1,38 @@
+
+pkgname=kf5-kf5umbrella-git
+_pkgname=kf5umbrella
+pkgver=5.e457a0a
+pkgrel=1
+pkgdesc="KF5 Umbrella"
+arch=('i686' 'x86_64')
+url="http://projects.kde.org/projects/frameworks/kf5umbrella"
+license=('LGPL')
+depends=('qt5-base')
+makedepends=('extra-cmake-modules-git' 'git')
+conflicts=("kf5-${_pkgname}" "${_pkgname}-git" "${_pkgname}")
+provides=("kf5-${_pkgname}" "${_pkgname}")
+source=("git://anongit.kde.org/kf5umbrella")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "${_pkgname}"
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+  mkdir -p build
+}
+
+build() {
+  cd build
+  /opt/kf5/bin/cmake ../"${_pkgname}" \
+    -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+    -DCMAKE_BUILD_TYPE=DebugFull \
+    -DLIB_INSTALL_DIR=lib
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="${pkgdir}" install
+}

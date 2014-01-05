@@ -1,0 +1,42 @@
+
+pkgname=kf5-kconfigwidgets-git
+_pkgname=kconfigwidgets
+pkgver=8.ade928f
+pkgrel=1
+pkgdesc="Widgets for KConfig"
+arch=('i686' 'x86_64')
+url="http://projects.kde.org/projects/frameworks/kconfigwidgets"
+license=('LGPL')
+depends=('kf5-kauth-git' 'kf5-kcodecs-git' 'kf5-kconfig-git' 'kf5-karchive-git'
+         'kf5-kguiaddons-git' 'kf5-ki18n-git' 'kf5-kwidgetsaddons-git')
+makedepends=('extra-cmake-modules-git' 'git' 'kf5-kdoctools-git')
+conflicts=("kf5-${_pkgname}" "${_pkgname}-git" "${_pkgname}")
+provides=("kf5-${_pkgname}" "${_pkgname}")
+source=("git://anongit.kde.org/kconfigwidgets")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "${_pkgname}"
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+  mkdir -p build
+}
+
+build() {
+  export XDG_DATA_DIRS="/opt/kf5/share:$XDG_DATA_DIRS"
+
+  cd build
+  /opt/kf5/bin/cmake ../"${_pkgname}" \
+    -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+    -DCMAKE_BUILD_TYPE=DebugFull \
+    -DLIB_INSTALL_DIR=lib \
+    -DBUILD_TESTING=OFF
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="${pkgdir}" install
+}

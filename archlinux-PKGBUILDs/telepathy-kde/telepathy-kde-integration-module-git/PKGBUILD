@@ -1,0 +1,40 @@
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=telepathy-kde-integration-module-git
+_pkgname=ktp-kded-module
+pkgver=0.6.80.21.g12f2b56
+pkgrel=1
+pkgdesc="Sits in KDED and takes care of various bits of system integration like setting user to auto-away or handling connection errors"
+arch=('i686' 'x86_64')
+url="http://community.kde.org/Real-Time_Communication_and_Collaboration"
+license=('GPL')
+depends=('telepathy-kde-common-internals-git')
+makedepends=('git' 'cmake' 'automoc4')
+groups=('kde-telepathy-git')
+conflicts=('telepathy-kde-integration-module')
+provides=('telepathy-kde-integration-module')
+source=("git://anongit.kde.org/$_pkgname.git")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  git describe --always | sed 's|-|.|g;s|v||'
+}
+
+prepare() {
+  mkdir -p "$srcdir/build"
+}
+
+build() {
+  cd "$srcdir/build"
+
+  cmake ../$_pkgname \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=DebugFull
+  make
+}
+
+package() {
+  cd "$srcdir/build"
+  make DESTDIR="${pkgdir}" install
+}

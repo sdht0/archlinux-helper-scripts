@@ -1,0 +1,41 @@
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=telepathy-kde-desktop-applets-git
+_pkgname=ktp-desktop-applets
+pkgver=0.6.80.9.gf682609
+pkgrel=1
+pkgdesc="The KDE-Telepathy Plasma desktop applets"
+arch=('i686' 'x86_64')
+url="http://community.kde.org/Real-Time_Communication_and_Collaboration"
+license=('GPL')
+depends=('telepathy-kde-common-internals-git' 'kdebase-workspace')
+makedepends=('git' 'cmake' 'automoc4')
+groups=('kde-telepathy-git')
+conflicts=('telepathy-kde-contact-applet' 'telepathy-kde-presence-applet' 'telepathy-kde-desktop-applets')
+replaces=('telepathy-kde-contact-applet' 'telepathy-kde-presence-applet')
+provides=('telepathy-kde-desktop-applets')
+source=("git://anongit.kde.org/$_pkgname.git")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  git describe --always | sed 's|-|.|g;s|v||'
+}
+
+prepare() {
+  mkdir -p "$srcdir/build"
+}
+
+build() {
+  cd "$srcdir/build"
+
+  cmake ../$_pkgname \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=DebugFull
+  make
+}
+
+package() {
+  cd "$srcdir/build"
+  make DESTDIR="${pkgdir}" install
+}

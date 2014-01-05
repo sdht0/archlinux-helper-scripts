@@ -1,0 +1,38 @@
+
+pkgname=kf5-khtml-git
+_pkgname=khtml
+pkgver=10.18dfaab
+pkgrel=1
+pkgdesc="KHtml"
+arch=('i686' 'x86_64')
+url="http://projects.kde.org/projects/frameworks/khtml"
+license=('LGPL')
+depends=('phonon-qt5' 'giflib' 'kf5-kparts-git' 'kf5-kwallet-framework-git' 'kf5-kinit-git')
+makedepends=('extra-cmake-modules-git' 'git')
+conflicts=("kf5-${_pkgname}" "${_pkgname}-git" "${_pkgname}")
+provides=("kf5-${_pkgname}" "${_pkgname}")
+source=("git://anongit.kde.org/khtml")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "${_pkgname}"
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+  mkdir -p build
+}
+
+build() {
+  cd build
+  /opt/kf5/bin/cmake ../"${_pkgname}" \
+    -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+    -DCMAKE_BUILD_TYPE=DebugFull \
+    -DLIB_INSTALL_DIR=lib
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="${pkgdir}" install
+}

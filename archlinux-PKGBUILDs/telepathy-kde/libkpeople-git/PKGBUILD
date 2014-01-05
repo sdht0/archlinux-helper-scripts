@@ -1,0 +1,40 @@
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+# Contributor: Antonio Rojas <nqn1976 @ gmail.com>
+
+pkgname=libkpeople-git
+_pkgname=libkpeople
+pkgver=0.0.80.194.gddf7b15
+pkgrel=1
+pkgdesc="A contact aggregation library for KDE"
+arch=('i686' 'x86_64')
+url='http://community.kde.org/KTp/libkpeople'
+license=('LGPL')
+depends=('kdepimlibs')
+makedepends=('git' 'cmake' 'automoc4' 'boost')
+provides=('libkpeople')
+conflicts=('libkpeople')
+source=("git://anongit.kde.org/$_pkgname.git")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  git describe --always | sed 's|-|.|g;s|v||'
+}
+
+prepare() {
+  mkdir -p "$srcdir/build"
+}
+
+build() {
+  cd "$srcdir/build"
+
+  cmake ../$_pkgname \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=DebugFull
+  make
+}
+
+package() {
+  cd "$srcdir/build"
+  make DESTDIR="${pkgdir}" install
+}

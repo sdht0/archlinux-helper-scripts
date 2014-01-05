@@ -1,0 +1,45 @@
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+# Contributor: Laurent Carlier <lordheavym@gmail.com>
+
+pkgname=telepathy-kde-accounts-kcm-git
+_pkgname=ktp-accounts-kcm
+pkgver=0.7.0.24.g17bafe4
+pkgrel=1
+pkgdesc="KCM Module for configuring Telepathy Instant Messaging Accounts. Now includes protocol-specific UI's"
+url="https://projects.kde.org/projects/kdereview/ktp-accounts-kcm"
+arch=('i686' 'x86_64')
+license=('GPL')
+depends=('telepathy-kde-common-internals-git' 'telepathy-mission-control')
+makedepends=('cmake' 'automoc4' 'git')
+optdepends=('telepathy-gabble: XMPP/Jabber/GTalk support'
+            'telepathy-haze: all protocols supported by libpurple')
+conflicts=('telepathy-kde-accounts-kcm'
+           'telepathy-accounts-kcm-git'
+           'telepathy-kde-accounts-kcm-plugins'
+           'telepathy-accounts-kcm-plugins-git')
+provides=('telepathy-accounts-kcm-git' 'telepathy-kde-accounts-kcm-git')
+source=("git://anongit.kde.org/$_pkgname.git")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  git describe --always | sed 's|-|.|g;s|v||'
+}
+
+prepare() {
+  mkdir -p "$srcdir/build"
+}
+
+build() {
+  cd "$srcdir/build"
+
+  cmake ../$_pkgname \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=DebugFull
+  make
+}
+
+package() {
+  cd "$srcdir/build"
+  make DESTDIR="${pkgdir}" install
+}

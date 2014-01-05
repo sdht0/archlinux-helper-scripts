@@ -1,0 +1,38 @@
+
+pkgname=kf5-kjobwidgets-git
+_pkgname=kjobwidgets
+pkgver=8.825f5cd
+pkgrel=1
+pkgdesc="KJobWidgets"
+arch=('i686' 'x86_64')
+url="http://projects.kde.org/projects/frameworks/kjobwidgets"
+license=('LGPL')
+depends=('kf5-kcoreaddons-git' 'kf5-kwidgetsaddons-git' 'qt5-x11extras')
+makedepends=('extra-cmake-modules-git' 'git')
+conflicts=("kf5-${_pkgname}" "${_pkgname}-git" "${_pkgname}")
+provides=("kf5-${_pkgname}" "${_pkgname}")
+source=("git://anongit.kde.org/kjobwidgets")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "${_pkgname}"
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+  mkdir -p build
+}
+
+build() {
+  cd build
+  /opt/kf5/bin/cmake ../"${_pkgname}" \
+    -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+    -DCMAKE_BUILD_TYPE=DebugFull \
+    -DLIB_INSTALL_DIR=lib
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="${pkgdir}" install
+}

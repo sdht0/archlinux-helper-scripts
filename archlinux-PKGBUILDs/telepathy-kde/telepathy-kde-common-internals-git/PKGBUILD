@@ -1,0 +1,40 @@
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+# Contributor: George Brooke <george+arch.aur@george-brooke.co.uk>
+
+pkgname=telepathy-kde-common-internals-git
+_pkgname=ktp-common-internals
+pkgver=0.7.0.109.gc728def
+pkgrel=1
+pkgdesc="Common components for Kde-Telepathy"
+arch=('i686' 'x86_64')
+url="https://projects.kde.org/projects/extragear/network/telepathy/ktp-common-internals"
+license=('LGPL')
+depends=('kdebase-runtime' 'telepathy-logger-qt-git' 'libkpeople-git')
+makedepends=('git' 'cmake' 'automoc4' 'boost')
+conflicts=('telepathy-kde-common-internals')
+provides=('telepathy-kde-common-internals')
+source=("git://anongit.kde.org/$_pkgname.git")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  git describe --always | sed 's|-|.|g;s|v||'
+}
+
+prepare() {
+  mkdir -p "$srcdir/build"
+}
+
+build() {
+  cd "$srcdir/build"
+
+  cmake ../$_pkgname \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=DebugFull
+  make
+}
+
+package() {
+  cd "$srcdir/build"
+  make DESTDIR="${pkgdir}" install
+}

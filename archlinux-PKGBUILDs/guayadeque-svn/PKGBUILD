@@ -1,0 +1,50 @@
+# Maintainer: Limao Luo <luolimao+AUR@gmail.com>
+# Contributor: sausageandeggs <sausageandeggs@archlinux.us>
+# Contributor: Martin Herndl <martin.herndl@gmail.com>
+
+_pkgname=guayadeque
+pkgname=$_pkgname-svn
+pkgver=1882
+pkgrel=1
+pkgdesc="Full Featured Linux media player for large collections"
+arch=('i686' 'x86_64')
+url='http://sourceforge.net/projects/$_pkgname'
+license=('GPL3')
+depends=('desktop-file-utils' 'flac' 'taglib' 'wxsqlite3>=3.0.1')
+makedepends=('cmake' 'subversion')
+optdepends=('gstreamer0.10-plugins: all Gstreamer plugins to play all kind of music files')
+provides=($_pkgname)
+conflicts=($_pkgname)
+install=$pkgname.install
+source=("$_pkgname::svn+https://$_pkgname.svn.sourceforge.net/svnroot/$_pkgname/Trunk"
+        'CMakeLists.patch'
+        'CorrectRevision.patch'
+        'NotificationFix.patch')
+md5sums=('SKIP'
+         '5b13bce8303e4aea2616db8c6e3d65c6'
+         '6ea1d992ad1ce4b2da2fb95c651d9b6d'
+         '6073683e240a987a9c1ac25e2a764f6f')
+
+pkgver() {
+    cd "$SRCDEST/$_pkgname"
+    svnversion | tr -d [A-z]
+}
+
+prepare() {
+    cd "$srcdir/$_pkgname"
+    patch -Np1 -i "$srcdir/CMakeLists.patch"
+    patch -Np1 -i "$srcdir/CorrectRevision.patch"
+    patch -Np1 -i "$srcdir/NotificationFix.patch"
+}
+
+build() {
+    cd "$srcdir/$_pkgname"
+    ./buildt
+    cmake -DCMAKE_INSTALL_PREFIX=/usr -DWXSQLITE3_LIB=wxcode_gtk2u_wxsqlite3-2.8 -D_GUREVISION_=$pkgver .
+    make
+}
+
+package() {
+    cd "$srcdir/$_pkgname"
+    make DESTDIR="$pkgdir" install
+}

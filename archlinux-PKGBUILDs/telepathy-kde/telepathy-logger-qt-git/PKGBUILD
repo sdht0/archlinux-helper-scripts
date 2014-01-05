@@ -1,0 +1,42 @@
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+# Contributor: George Brooke <george+arch.aur@george-brooke.co.uk>
+
+pkgname=telepathy-logger-qt-git
+_pkgname=telepathy-logger-qt
+pkgver=0.8.0.1.gfee77b3
+pkgrel=1
+pkgdesc="Qt bindings for telepathy logger"
+arch=('i686' 'x86_64')
+url='https://projects.kde.org/projects/extragear/network/telepathy/telepathy-logger-qt'
+license=('GPL')
+depends=('telepathy-qt' 'telepathy-logger' 'qt-gstreamer')
+makedepends=('git' 'automoc4' 'cmake' 'python2' 'doxygen' 'boost')
+conflicts=('telepathy-logger-qt')
+provides=('telepathy-logger-qt')
+source=("git://anongit.kde.org/$_pkgname.git")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  git describe --always | sed 's|-|.|g;s|v||'
+}
+
+prepare() {
+  mkdir -p "$srcdir/build"
+}
+
+build() {
+  cd "$srcdir/build"
+
+  cmake ../$_pkgname \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=DebugFull \
+    -DQT_QMAKE_EXECUTABLE=/usr/bin/qmake-qt4 \
+    -DPYTHON_EXECUTABLE=/usr/bin/python2
+  make
+}
+
+package() {
+  cd "$srcdir/build"
+  make DESTDIR="${pkgdir}" install
+}

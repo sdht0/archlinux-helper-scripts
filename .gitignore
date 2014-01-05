@@ -2,3 +2,10 @@
 *.tar.xz
 */pkg/
 */src/
+build/
+sources/
+kdesrc-build/
+archlinux-logs/
+archlinux-chroot/
+archlinux-pkgfiles/
+archlinux-sources/

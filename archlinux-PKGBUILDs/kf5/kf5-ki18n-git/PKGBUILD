@@ -1,0 +1,38 @@
+
+pkgname=kf5-ki18n-git
+_pkgname=ki18n
+pkgver=11.cfa4540
+pkgrel=1
+pkgdesc="Ki18n"
+arch=('i686' 'x86_64')
+url="http://projects.kde.org/projects/frameworks/ki18n"
+license=('LGPL')
+depends=('kf5-kjs-git')
+makedepends=('extra-cmake-modules-git' 'git')
+conflicts=("kf5-${_pkgname}" "${_pkgname}-git" "${_pkgname}")
+provides=("kf5-${_pkgname}" "${_pkgname}")
+source=("git://anongit.kde.org/ki18n")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "${_pkgname}"
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+  mkdir -p build
+}
+
+build() {
+  cd build
+  /opt/kf5/bin/cmake ../"${_pkgname}" \
+    -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+    -DCMAKE_BUILD_TYPE=DebugFull \
+    -DLIB_INSTALL_DIR=lib
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="${pkgdir}" install
+}

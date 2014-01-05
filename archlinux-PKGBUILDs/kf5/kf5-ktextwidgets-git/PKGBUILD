@@ -1,0 +1,38 @@
+
+pkgname=kf5-ktextwidgets-git
+_pkgname=ktextwidgets
+pkgver=8.90f4355
+pkgrel=1
+pkgdesc="KTextWidgets"
+arch=('i686' 'x86_64')
+url="http://projects.kde.org/projects/frameworks/ktextwidgets"
+license=('LGPL')
+depends=('kf5-kcompletion-git' 'kf5-kservice-git' 'kf5-kiconthemes-git' 'kf5-sonnet-git')
+makedepends=('extra-cmake-modules-git' 'git')
+conflicts=("kf5-${_pkgname}" "${_pkgname}-git" "${_pkgname}")
+provides=("kf5-${_pkgname}" "${_pkgname}")
+source=("git://anongit.kde.org/ktextwidgets")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "${_pkgname}"
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+  mkdir -p build
+}
+
+build() {
+  cd build
+  /opt/kf5/bin/cmake ../"${_pkgname}" \
+    -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+    -DCMAKE_BUILD_TYPE=DebugFull \
+    -DLIB_INSTALL_DIR=lib
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="${pkgdir}" install
+}

@@ -1,0 +1,38 @@
+
+pkgname=kf5-kunitconversion-git
+_pkgname=kunitconversion
+pkgver=8.430acbc
+pkgrel=1
+pkgdesc="KUnitConversion"
+arch=('i686' 'x86_64')
+url="http://projects.kde.org/projects/frameworks/kunitconversion"
+license=('LGPL')
+depends=('kf5-kconfig-git' 'kf5-ki18n-git')
+makedepends=('extra-cmake-modules-git' 'git')
+conflicts=("kf5-${_pkgname}" "${_pkgname}-git" "${_pkgname}")
+provides=("kf5-${_pkgname}" "${_pkgname}")
+source=("git://anongit.kde.org/kunitconversion")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "${_pkgname}"
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+  mkdir -p build
+}
+
+build() {
+  cd build
+  /opt/kf5/bin/cmake ../"${_pkgname}" \
+    -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+    -DCMAKE_BUILD_TYPE=DebugFull \
+    -DLIB_INSTALL_DIR=lib
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="${pkgdir}" install
+}

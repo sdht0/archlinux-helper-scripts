@@ -1,0 +1,40 @@
+
+pkgname=kf5-kde4support-git
+_pkgname=kde4support
+pkgver=28.311887c
+pkgrel=1
+pkgdesc="KDE 4 Support"
+arch=('i686' 'x86_64')
+url="http://projects.kde.org/projects/frameworks/kde4support"
+license=('LGPL')
+depends=('kf5-kparts-git' 'kf5-kunitconversion-git' 'qt5-tools' 'kf5-kdesignerplugin-git')
+makedepends=('extra-cmake-modules-git' 'git' 'kf5-kdoctools-git')
+conflicts=("kf5-${_pkgname}" "${_pkgname}-git" "${_pkgname}")
+provides=("kf5-${_pkgname}" "${_pkgname}")
+source=("git://anongit.kde.org/kde4support")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "${_pkgname}"
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+  mkdir -p build
+}
+
+build() {
+  export XDG_DATA_DIRS="/opt/kf5/share:$XDG_DATA_DIRS"
+
+  cd build
+  /opt/kf5/bin/cmake ../"${_pkgname}" \
+    -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+    -DCMAKE_BUILD_TYPE=DebugFull \
+    -DLIB_INSTALL_DIR=lib
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="${pkgdir}" install
+}

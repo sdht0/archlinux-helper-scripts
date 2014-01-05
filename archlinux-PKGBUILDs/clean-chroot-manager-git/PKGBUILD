@@ -1,0 +1,41 @@
+# Maintainer: graysky <graysky AT archlinux DOT us>
+
+pkgname='clean-chroot-manager-git'
+_pkgname='clean-chroot-manager'
+pkgver=34.b4a5500
+pkgrel=1
+pkgdesc='Wrapper script for managing clean chroots.'
+arch=('any')
+url='https://github.com/graysky2/clean-chroot-manager'
+license=('MIT')
+depends=('devtools')
+makedepends=('git')
+conflicts=('clean_chroot_manager' 'clean-chroot-manager')
+replaces=('clean_chroot_manager')
+provides=('clean-chroot-manager')
+source=("git+https://github.com/graysky2/$_pkgname.git"
+		'd.diff')
+sha256sums=('SKIP'
+            'SKIP')
+install=ccm.install
+
+pkgver() {
+    cd "$srcdir/$_pkgname"
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+    cd "$srcdir/$_pkgname"
+    patch -Np1 -i "$srcdir/d.diff"
+}
+
+build() {
+    cd "$srcdir/$_pkgname"
+    make
+}
+
+package() {
+    cd "$srcdir/$_pkgname"
+    make DESTDIR="$pkgdir" install
+    install -Dm644 MIT "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}

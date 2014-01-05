@@ -1,0 +1,40 @@
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=telepathy-kde-contact-runner-git
+_pkgname=ktp-contact-runner
+pkgver=0.6.80.11.gf847382
+pkgrel=1
+pkgdesc="KRunner plugin for KDE Telepathy"
+arch=('i686' 'x86_64')
+url="http://community.kde.org/Real-Time_Communication_and_Collaboration"
+license=('GPL')
+depends=('telepathy-kde-common-internals-git')
+makedepends=('git' 'cmake' 'automoc4')
+groups=('kde-telepathy-git')
+conflicts=('telepathy-kde-contact-runner')
+provides=('telepathy-kde-contact-runner')
+source=("git://anongit.kde.org/$_pkgname.git")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  git describe --always | sed 's|-|.|g;s|v||'
+}
+
+prepare() {
+  mkdir -p "$srcdir/build"
+}
+
+build() {
+  cd "$srcdir/build"
+
+  cmake ../$_pkgname \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=DebugFull
+  make
+}
+
+package() {
+  cd "$srcdir/build"
+  make DESTDIR="${pkgdir}" install
+}
