@@ -7,7 +7,7 @@ pkgdesc="Widgets for KConfig"
 arch=('i686' 'x86_64')
 url="http://projects.kde.org/projects/frameworks/kconfigwidgets"
 license=('LGPL')
-depends=('kf5-kauth-git' 'kf5-kcodecs-git' 'kf5-kconfig-git' 'kf5-karchive-git'
+depends=('kf5-kauth-git' 'kf5-kcodecs-git' 'kf5-kconfig-git'
          'kf5-kguiaddons-git' 'kf5-ki18n-git' 'kf5-kwidgetsaddons-git')
 makedepends=('extra-cmake-modules-git' 'git' 'kf5-kdoctools-git')
 conflicts=("kf5-${_pkgname}" "${_pkgname}-git" "${_pkgname}")

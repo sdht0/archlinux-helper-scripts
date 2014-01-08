@@ -8,7 +8,7 @@ pkgdesc='KIO'
 arch=('i686' 'x86_64')
 url='https://projects.kde.org/projects/frameworks/kio'
 license=('LGPL')
-depends=('krb5' 'kf5-solid-git' 'knotifications-git' 'kjobwidgets-git' 'kbookmarks-git'
+depends=('krb5' 'solid-git' 'knotifications-git' 'kjobwidgets-git' 'kbookmarks-git'
          'qt5-script')
 makedepends=('extra-cmake-modules-git' 'git' 'kdoctools-git')
 groups=('kf5')

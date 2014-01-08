@@ -1,6 +1,6 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
-pkgname=libdbusmenu-qt5-bzr
+pkgname=kde5-libdbusmenu-qt5-bzr
 pkgver=255
 pkgrel=1
 pkgdesc="A library that provides a Qt implementation of the DBusMenu spec"
@@ -9,8 +9,6 @@ url="https://launchpad.net/libdbusmenu-qt"
 license=('GPL')
 depends=('qt5-base')
 makedepends=('cmake-git' 'bzr' 'doxygen')
-conflicts=('libdbusmenu-qt5')
-provides=('libdbusmenu-qt5')
 source=(bzr+lp:libdbusmenu-qt)
 md5sums=('SKIP')
 

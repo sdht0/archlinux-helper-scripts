@@ -2,7 +2,7 @@
 
 pkgname=extra-cmake-modules-git
 _pkgname=extra-cmake-modules
-pkgver=2449.83dbc09
+pkgver=2457.eb7cdf3
 pkgrel=1
 pkgdesc='Extra CMake modules'
 arch=('any')

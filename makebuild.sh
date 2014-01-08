@@ -29,11 +29,9 @@ fd=$BASEDIR/archlinux-PKGBUILDs/${folder}$pkgname
 cd  $fd || exit 2 && \
 echo "Entering $(pwd)..." && \
 if [[ "$usemakepkg" = "usemakepkg" ]];then
-    makepkg --config=$BASEDIR/makepkg.conf $uoptions
-    [[ $? -ne 0 ]] && exit 1
+    makepkg --config=$BASEDIR/makepkg.conf $uoptions || exit 1
 else
-    sudo ccm s $uoptions
-    [[ $? -ne 0 ]] && exit 1
+    sudo ccm s $uoptions || exit 1
 fi && \
 . PKGBUILD && \
 find $BASEDIR/archlinux-pkgfiles \( -name "$pkgname*.tar.xz" -or -name "$pkgname*.tar.gz" \) \

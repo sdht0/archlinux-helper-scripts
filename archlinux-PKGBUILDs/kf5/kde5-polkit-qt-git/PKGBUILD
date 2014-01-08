@@ -1,6 +1,6 @@
 # Maintainer: Andrea Scarpino <andrea@archlinux.org>
 
-pkgname=kf5-polkit-git
+pkgname=kde5-polkit-qt-git
 pkgver=v0.103.0.7.g3a5f879
 pkgrel=1
 pkgdesc="Qt5 wrapper around polkit-1 client libraries, used by kdelibs to provide the polkit-1 kauth backend and by KDE's polkit client"
@@ -9,8 +9,6 @@ url='https://projects.kde.org/projects/kdesupport/polkit-qt-1'
 license=('LGPL')
 depends=('qt5-base' 'polkit')
 makedepends=('extra-cmake-modules-git' 'git')
-provides=('kf5-polkit')
-conflicts=('kf5-polkit')
 source=(git://anongit.kde.org/polkit-qt-1.git#branch=qt5)
 md5sums=('SKIP')
 

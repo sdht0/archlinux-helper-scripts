@@ -1,21 +1,14 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
-pkgname=plasma-framework-git
+pkgname=kde5-plasma-framework-git
 _pkgname=plasma-framework
-pkgver=12061.160e97c
+pkgver=12066.d2879f6
 pkgrel=1
 pkgdesc='Plasma library and runtime components based upon KF5 and Qt5'
 arch=('i686' 'x86_64')
 url='https://projects.kde.org/projects/playground/libs/plasma-framework'
 license=('LGPL')
-depends=('qt5-quick1' 'kf5-kidletime-git' 'kf5-kitemmodels-git'
-         'kf5-kwidgetsaddons-git' 'kf5-kcodecs-git' 'kf5-karchive-git' 'kf5-solid-git' 'kf5-threadweaver-git'
-         'kf5-kglobalaccel-git' 'kf5-kauth-git' 'kf5-kwallet-framework-git' 'kf5-kguiaddons-git'
-         'kf5-kconfigwidgets-git' 'kf5-kitemviews-git' 'kf5-knotifications-git' 'kf5-kiconthemes-git'
-         'kf5-kcompletion-git' 'kf5-kjobwidgets-git' 'kf5-sonnet-git' 'kf5-ktextwidgets-git' 'kf5-kxmlgui-git'
-         'kf5-kbookmarks-git' 'kf5-kdeclarative-git' 'kf5-kunitconversion-git' 'kf5-kparts-git' 'kf5-kross-git'
-         'kf5-kdnssd-framework-git' 'kf5-kde4support-git' 'kf5-kdesignerplugin-git' 'kf5-kinit-git'
-         'kactivities-frameworks-git')
+depends=('qt5-quick1' 'kf5-kf5umbrella-git' 'kde5-kactivities-frameworks-git')
 makedepends=('extra-cmake-modules-git' 'git' 'qt5-tools' 'kf5-kdoctools-git')
 conflicts=("${_pkgname}")
 provides=("${_pkgname}")
