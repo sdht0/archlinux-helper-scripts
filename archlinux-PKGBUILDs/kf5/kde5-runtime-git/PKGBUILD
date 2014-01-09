@@ -8,7 +8,7 @@ arch=('i686' 'x86_64')
 url='https://projects.kde.org/projects/kde/kde-runtime'
 license=('LGPL')
 depends=('qt5-x11extras' 'qt5-svg' 'openexr' 'exiv2' 'smbclient'
-         'kde5-plasma-frameworks-git')
+         'kde5-plasma-framework-git')
 makedepends=('extra-cmake-modules-git' 'git' 'openslp')
 source=('git://anongit.kde.org/kde-runtime.git#branch=frameworks')
 md5sums=('SKIP')
@@ -24,7 +24,7 @@ prepare() {
 
 build() {
   cd build
-  cmake ../kde-runtime \
+  /opt/kf5/bin/cmake ../kde-runtime \
     -DCMAKE_BUILD_TYPE=Debug \
     -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
     -DLIB_INSTALL_DIR=lib \

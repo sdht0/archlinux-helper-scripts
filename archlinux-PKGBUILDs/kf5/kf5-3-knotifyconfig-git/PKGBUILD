@@ -1,0 +1,38 @@
+
+pkgname=kf5-knotifyconfig-git
+_pkgname=knotifyconfig
+pkgver=8.4e62f2d
+pkgrel=1
+pkgdesc="KNotifyConfig"
+arch=('i686' 'x86_64')
+url="http://projects.kde.org/projects/frameworks/knotifyconfig"
+license=('LGPL')
+depends=('kde5-phonon-qt5-git' 'kf5-kio-git')
+makedepends=('extra-cmake-modules-git' 'git')
+conflicts=("kf5-${_pkgname}" "${_pkgname}-git" "${_pkgname}")
+provides=("kf5-${_pkgname}" "${_pkgname}")
+source=("git://anongit.kde.org/knotifyconfig")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "${_pkgname}"
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+  mkdir -p build
+}
+
+build() {
+  cd build
+  /opt/kf5/bin/cmake ../"${_pkgname}" \
+    -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+    -DCMAKE_BUILD_TYPE=Debug \
+    -DLIB_INSTALL_DIR=lib
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="${pkgdir}" install
+}

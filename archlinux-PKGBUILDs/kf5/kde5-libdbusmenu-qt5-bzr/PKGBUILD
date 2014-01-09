@@ -8,7 +8,7 @@ arch=('i686' 'x86_64')
 url="https://launchpad.net/libdbusmenu-qt"
 license=('GPL')
 depends=('qt5-base')
-makedepends=('cmake-git' 'bzr' 'doxygen')
+makedepends=('cmake-git' 'bzr' 'doxygen' 'qjson')
 source=(bzr+lp:libdbusmenu-qt)
 md5sums=('SKIP')
 
@@ -25,8 +25,8 @@ build() {
   cd build
   /opt/kf5/bin/cmake ../libdbusmenu-qt \
     -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
-    -DCMAKE_BUILD_TYPE=DebugFull \
-    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_BUILD_TYPE=Debug \
+    -DCMAKE_INSTALL_LIBDIR=/opt/kf5/lib \
     -DUSE_QT5=On \
     -DWITH_DOC=Off
   make

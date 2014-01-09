@@ -35,5 +35,5 @@ else
 fi && \
 . PKGBUILD && \
 find $BASEDIR/archlinux-pkgfiles \( -name "$pkgname*.tar.xz" -or -name "$pkgname*.tar.gz" \) \
-		-not \( -name "$pkgname-$pkgver-$pkgrel*.tar.xz" -or -name "$pkgname-$pkgver-$pkgrel*.tar.gz" \) -exec rm -rf {}
+		-not \( -name "$pkgname-$pkgver-$pkgrel*.tar.xz" -or -name "$pkgname-$pkgver-$pkgrel*.tar.gz" \) -exec rm -rf {} \;
 echo

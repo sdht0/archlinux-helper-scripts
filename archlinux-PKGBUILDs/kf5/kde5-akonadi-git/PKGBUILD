@@ -21,18 +21,18 @@ pkgver() {
 }
 
 prepare() {
-  mkdir build
+  mkdir -p build
 }
 
 build() {
   cd build
   /opt/kf5/bin/cmake ../akonadi \
-    -DCMAKE_BUILD_TYPE=DebugFull \
+    -DCMAKE_BUILD_TYPE=Debug \
     -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
     -DAKONADI_BUILD_TESTS=OFF \
     -DQT5_BUILD=ON \
     -DWITH_SOPRANO=OFF \
-    -DLIB_INSTALL_DIR=lib
+    -DLIB_INSTALL_DIR=/opt/kf5/lib
   make
 }
 

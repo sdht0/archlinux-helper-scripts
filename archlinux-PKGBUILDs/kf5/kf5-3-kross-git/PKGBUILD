@@ -1,0 +1,40 @@
+
+pkgname=kf5-kross-git
+_pkgname=kross
+pkgver=8.9e574ef
+pkgrel=1
+pkgdesc="Kross"
+arch=('i686' 'x86_64')
+url="http://projects.kde.org/projects/frameworks/kross"
+license=('LGPL')
+depends=('kf5-kparts-git' 'kf5-kiconthemes-git' 'qt5-tools')
+makedepends=('extra-cmake-modules-git' 'git' 'kf5-kdoctools-git')
+conflicts=("kf5-${_pkgname}" "${_pkgname}-git" "${_pkgname}")
+provides=("kf5-${_pkgname}" "${_pkgname}")
+source=("git://anongit.kde.org/kross")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "${_pkgname}"
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+  mkdir -p build
+}
+
+build() {
+  export XDG_DATA_DIRS="/opt/kf5/share:$XDG_DATA_DIRS"
+
+  cd build
+  /opt/kf5/bin/cmake ../"${_pkgname}" \
+    -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+    -DCMAKE_BUILD_TYPE=Debug \
+    -DLIB_INSTALL_DIR=lib
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="${pkgdir}" install
+}

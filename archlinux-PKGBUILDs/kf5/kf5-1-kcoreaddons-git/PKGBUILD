@@ -1,0 +1,39 @@
+
+pkgname=kf5-kcoreaddons-git
+_pkgname=kcoreaddons
+pkgver=14.959c2d6
+pkgrel=1
+pkgdesc="KCoreAddons"
+arch=('i686' 'x86_64')
+url="http://projects.kde.org/projects/frameworks/kcoreaddons"
+license=('LGPL')
+depends=('qt5-base' 'shared-mime-info')
+makedepends=('extra-cmake-modules-git' 'git')
+conflicts=("kf5-${_pkgname}" "${_pkgname}-git" "${_pkgname}")
+provides=("kf5-${_pkgname}" "${_pkgname}")
+#install=${_pkgname}.install
+source=("git://anongit.kde.org/kcoreaddons")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "${_pkgname}"
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+  mkdir -p build
+}
+
+build() {
+  cd build
+  /opt/kf5/bin/cmake ../"${_pkgname}" \
+    -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+    -DCMAKE_BUILD_TYPE=Debug \
+    -DLIB_INSTALL_DIR=lib
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="${pkgdir}" install
+}

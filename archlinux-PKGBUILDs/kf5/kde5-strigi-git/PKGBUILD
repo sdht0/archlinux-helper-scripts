@@ -43,9 +43,9 @@ build() {
   /opt/kf5/bin/cmake ../strigi \
     -DCMAKE_PREFIX_PATH=/opt/kf5 \
     -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
-    -DCMAKE_BUILD_TYPE=DebugFull \
+    -DCMAKE_BUILD_TYPE=Debug \
     -DCMAKE_SKIP_RPATH=ON \
-    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_INSTALL_LIBDIR=/opt/kf5/lib \
     -DENABLE_INOTIFY=ON \
     -DENABLE_LOG4CXX=OFF \
     -DENABLE_FAM=OFF \

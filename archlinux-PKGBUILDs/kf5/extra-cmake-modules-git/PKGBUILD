@@ -2,7 +2,7 @@
 
 pkgname=extra-cmake-modules-git
 _pkgname=extra-cmake-modules
-pkgver=2457.eb7cdf3
+pkgver=2458.e7c402c
 pkgrel=1
 pkgdesc='Extra CMake modules'
 arch=('any')
@@ -26,7 +26,7 @@ build() {
   cd build
   /opt/kf5/bin/cmake ../extra-cmake-modules \
     -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
-    -DCMAKE_BUILD_TYPE=DebugFull
+    -DCMAKE_BUILD_TYPE=Debug
   make
 }
 

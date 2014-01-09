@@ -30,7 +30,7 @@ build() {
 
   cd build
   /opt/kf5/bin/cmake ../kde-workspace \
-    -DCMAKE_BUILD_TYPE=DebugFull \
+    -DCMAKE_BUILD_TYPE=Debug \
     -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
     -DLIB_INSTALL_DIR=lib
 #    -DSYSCONF_INSTALL_DIR=/etc
