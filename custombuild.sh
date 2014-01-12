@@ -82,8 +82,7 @@ case "$pkggroup" in
         folder="-"
         packages=('cower'
                 'google-talkplugin'
-                'eiskaltdcpp-qt'
-                'wxsqlite3')
+                'eiskaltdcpp-qt')
         cd $PKGBUILDSDIR
         for ((i=1;i<=${#packages[@]};i++));do
             cower -df ${packages[$i]}
@@ -125,4 +124,3 @@ done
 printf "\nCleaning pkg files..." && \
 find $PKGBUILDSDIR -name '*.xz' -exec rm -rf {} \; && \
 echo "done"
-echo
