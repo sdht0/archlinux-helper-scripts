@@ -21,7 +21,7 @@ source=("$_pkgname::svn+https://$_pkgname.svn.sourceforge.net/svnroot/$_pkgname/
 md5sums=('SKIP')
 
 pkgver() {
-    cd "$SRCDEST/$_pkgname"
+    cd "$srcdir/$_pkgname"
     svnversion | tr -d [A-z]
 }
 
@@ -31,8 +31,7 @@ build() {
         -DCMAKE_BUILD_TYPE='Debug' \
         -DCMAKE_INSTALL_PREFIX='/usr' \
         -DwxWidgets_wxrc_EXECUTABLE='/usr/bin/wxrc-2.8' \
-        -DwxWidgets_CONFIG_EXECUTABLE='/usr/bin/wx-config-2.8'\
-        -D_GUREVISION_=$pkgver
+        -DwxWidgets_CONFIG_EXECUTABLE='/usr/bin/wx-config-2.8'
     make
 }
 
