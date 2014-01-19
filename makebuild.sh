@@ -34,6 +34,8 @@ else
     sudo ccm s $uoptions || exit 1
 fi && \
 . PKGBUILD && \
-find $BASEDIR/archlinux-pkgfiles \( -name "$pkgname*.tar.xz" -or -name "$pkgname*.tar.gz" \) \
-		-not \( -name "$pkgname-$pkgver-$pkgrel*.tar.xz" -or -name "$pkgname-$pkgver-$pkgrel*.tar.gz" \) -exec rm -rf {} \;
+for i in $pkgname;do
+	find $BASEDIR/archlinux-pkgfiles \( -name "$i*.tar.xz" -or -name "$i*.tar.gz" \) \
+		-not \( -name "$i-$pkgver-$pkgrel*.tar.xz" -or -name "$i-$pkgver-$pkgrel*.tar.gz" \) -exec rm -rf {} \;
+done
 echo

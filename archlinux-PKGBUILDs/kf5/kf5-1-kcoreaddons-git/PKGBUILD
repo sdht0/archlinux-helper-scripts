@@ -1,7 +1,7 @@
 
 pkgname=kf5-kcoreaddons-git
 _pkgname=kcoreaddons
-pkgver=14.959c2d6
+pkgver=17.08f24dd
 pkgrel=1
 pkgdesc="KCoreAddons"
 arch=('i686' 'x86_64')

@@ -25,14 +25,14 @@ case "$pkggroup" in
         prepackages=("shared-mime-info" "qt5-base" "git")
         packages=(
                 # buid system
-                'cmake-git'
-                'extra-cmake-modules-git'
+#                 'cmake-git'
+#                 'extra-cmake-modules-git'
 
                 # dependencies
-                'kde5-libdbusmenu-qt5-bzr' 'kde5-attica-git' 'kde5-akonadi-git' 'kde5-polkit-qt-git' 'kde5-strigi-git' 'kde5-phonon-qt5-git'
+#                 'kde5-libdbusmenu-qt5-bzr' 'kde5-attica-git' 'kde5-akonadi-git' 'kde5-polkit-qt-git' 'kde5-strigi-git' 'kde5-phonon-qt5-git'
 
                 # tier 1
-                'kf5-1-kitemmodels-git' 'kf5-1-kitemviews-git' 'kf5-1-karchive-git' 'kf5-1-kcodecs-git' 'kf5-1-kconfig-git'
+                'kf5-1-kitemmodels-git' 'kf5-1-kitemviews-git' 'kf5-1-karchive-git' 'kf5-1-kcodecs-git'  'kf5-1-kconfig-git'
                 'kf5-1-kcoreaddons-git' 'kf5-1-kdbusaddons-git' 'kf5-1-kglobalaccel-git' 'kf5-1-kguiaddons-git' 'kf5-1-kidletime-git'
                 'kf5-1-kimageformats-git' 'kf5-1-kjs-git' 'kf5-1-kplotting-git' 'kf5-1-kwidgetsaddons-git' 'kf5-1-kwindowsystem-git'
                 'kf5-1-solid-git' 'kf5-1-sonnet-git' 'kf5-1-threadweaver-git'
@@ -105,7 +105,7 @@ if [[ "$usemakepkg" != "usemakepkg" ]];then
 else
     echo -n "Cleaning build dir..." && \
     rm -rf $BASEDIR/build/makepkg/* && \
-    find $PKGBUILDSDIR -name '*.gz' -exec rm -rf {} \; && \
+    find $PKGBUILDSDIR -name '*.xz' -exec rm -rf {} \; && \
     echo "done"
 fi
 

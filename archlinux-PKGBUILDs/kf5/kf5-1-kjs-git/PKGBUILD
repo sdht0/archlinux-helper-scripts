@@ -1,7 +1,7 @@
 
 pkgname=kf5-kjs-git
 _pkgname=kjs
-pkgver=7.6454359
+pkgver=9.b1eaee4
 pkgrel=1
 pkgdesc="KJS"
 arch=('i686' 'x86_64')

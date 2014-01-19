@@ -29,7 +29,7 @@ build() {
   /opt/kf5/bin/cmake ../plasma-framework \
     -DCMAKE_BUILD_TYPE=Debug \
     -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
-    -DLIB_INSTALL_DIR=lib
+    -DLIB_INSTALL_DIR=/opt/kf5/lib
   make
 }
 
