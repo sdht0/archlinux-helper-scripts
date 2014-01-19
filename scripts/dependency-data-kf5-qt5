@@ -140,7 +140,7 @@ frameworks/kjsembed: frameworks/ki18n
 frameworks/kjsembed: frameworks/kdoctools
 frameworks/knotifyconfig: frameworks/kio
 frameworks/knotifyconfig: frameworks/ki18n
-frameworks/knotifyconfig: frameworks/knotifications #test dependency
+frameworks/knotifyconfig: frameworks/knotifications
 frameworks/kded: frameworks/ki18n
 frameworks/kded: frameworks/kcoreaddons
 frameworks/kded: frameworks/kdbusaddons
@@ -245,7 +245,7 @@ frameworks/khtml: frameworks/kparts
 frameworks/khtml: frameworks/kio
 frameworks/khtml: frameworks/kwallet-framework
 frameworks/khtml: frameworks/kglobalaccel
-frameworks/khtml: kdesupport/phonon/phonon[master]
+frameworks/khtml: kdesupport/phonon/phonon
 
 # Lie about kf5umbrella: it doesn't depend on anything, but we use it as way to depend on all frameworks
 frameworks/kf5umbrella: frameworks/karchive

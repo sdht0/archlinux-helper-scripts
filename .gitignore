@@ -10,3 +10,4 @@ archlinux-logs/
 archlinux-chroot/
 archlinux-pkgfiles/
 archlinux-sources/
+__pycache__/

@@ -1,0 +1,41 @@
+
+pkgname=kf5-kservice-git
+_pkgname=kservice
+pkgver=1
+pkgrel=1
+pkgdesc="KService"
+arch=('i686' 'x86_64')
+url="http://projects.kde.org/projects/frameworks/kservice"
+license=('LGPL')
+depends=('kf5-kconfig-git' 'kf5-ki18n-git' 'kf5-kdoctools-git' 'kf5-kcrash-git' 'kf5-kdbusaddons-git')
+makedepends=('extra-cmake-modules-git' 'git')
+group=("kf5")
+conflicts=("${_pkgname}-git")
+provides=("${_pkgname}-git")
+source=("git://anongit.kde.org/kservice")
+md5sums=('SKIP')
+
+pkgver() {
+    cd "${_pkgname}"
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+    mkdir -p build
+}
+
+build() {
+    export XDG_DATA_DIRS="/opt/kf5/share:$XDG_DATA_DIRS"
+
+    cd build
+    /opt/kf5/bin/cmake ../"${_pkgname}" \
+        -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+        -DCMAKE_BUILD_TYPE=Debug \
+        -DLIB_INSTALL_DIR=lib
+    make
+}
+
+package() {
+    cd build
+    make DESTDIR="${pkgdir}" install
+}

@@ -26,7 +26,7 @@ build() {
   /opt/kf5/bin/cmake ../polkit-qt-1 \
     -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
     -DCMAKE_BUILD_TYPE=Debug \
-    -DLIB_INSTALL_DIR=/opt/kf5/lib
+    -DLIB_INSTALL_DIR=lib
   make
 }
 

@@ -1,114 +1,114 @@
-frameworks/kded
-frameworks/kcoreaddons,frameworks/kservice,frameworks/ki18n,frameworks/kinit,frameworks/kdbusaddons,frameworks/kwindowsystem,frameworks/kdoctools,frameworks/kcrash
+kinit
+kwindowsystem,kservice,kio,ki18n,kcrash
 
-frameworks/kinit
-frameworks/kcrash,frameworks/kservice,frameworks/ki18n,frameworks/kio,frameworks/kwindowsystem
+kdesignerplugin
+kplotting,kdoctools,kio,kdewebkit
 
-frameworks/kross
-frameworks/kio,frameworks/kparts,frameworks/ki18n,frameworks/kiconthemes
+kiconthemes
+kitemviews,kwidgetsaddons,ki18n,kconfigwidgets
 
-frameworks/kunitconversion
-frameworks/kconfig,frameworks/ki18n
+kauth
+kcoreaddons
 
-frameworks/kprintutils
-frameworks/kparts,frameworks/ki18n
+kmediaplayer
+kparts,ki18n,kxmlgui
 
-frameworks/kservice
-frameworks/kcoreaddons,frameworks/kconfig,frameworks/ki18n,frameworks/kdbusaddons,frameworks/kdoctools,frameworks/kcrash
+kde4support
+knotifications,kitemviews,kcrash,kio,kguiaddons,kwindowsystem,kcompletion,kparts,kinit,kunitconversion,kconfigwidgets,kdesignerplugin,kiconthemes,ki18n,kbookmarks,kdbusaddons,kxmlgui,kglobalaccel,kservice,kconfig,kdoctools,kwidgetsaddons,ktextwidgets
 
-frameworks/kdeclarative
-frameworks/ki18n,frameworks/kio,frameworks/kconfig,frameworks/kiconthemes
+kfileaudiopreview
+kio,ki18n,kdesupport/phonon/phonon
 
-frameworks/ki18n
-frameworks/kjs
+knotifications
+kwindowsystem
 
-frameworks/kdesu
-frameworks/kcoreaddons,frameworks/kpty,frameworks/kservice
+kded
+kwindowsystem,kservice,kcoreaddons,ki18n,kdoctools,kinit,kcrash,kdbusaddons
 
-frameworks/frameworkintegration
-frameworks/kguiaddons,frameworks/kio,frameworks/ki18n,frameworks/kiconthemes,frameworks/kconfigwidgets,frameworks/knotifications,frameworks/kitemviews,frameworks/kwidgetsaddons,frameworks/kconfig
+ki18n
+kjs
 
-frameworks/kjsembed
-frameworks/kdoctools,frameworks/ki18n,frameworks/kjs
+kxmlgui
+kiconthemes,kglobalaccel,ki18n,kitemviews,kwindowsystem,kwidgetsaddons,kconfigwidgets,ktextwidgets,kconfig
 
-frameworks/kdnssd-framework
-frameworks/kconfig
+kcmutils
+kiconthemes,kservice,kcoreaddons,ki18n,kitemviews,kxmlgui,kconfigwidgets
 
-frameworks/kauth
-frameworks/kcoreaddons
+kdesu
+kpty,kservice,kcoreaddons
 
-frameworks/kdesignerplugin
-frameworks/kplotting,frameworks/kio,frameworks/kdoctools,frameworks/kdewebkit
+kpty
+ki18n,kcoreaddons
 
-frameworks/kcmutils
-frameworks/kcoreaddons,frameworks/kservice,frameworks/ki18n,frameworks/kiconthemes,frameworks/kconfigwidgets,frameworks/kxmlgui,frameworks/kitemviews
+kdewebkit
+knotifications,kparts,kio,kwallet-framework,kcoreaddons
 
-frameworks/kjobwidgets
-frameworks/kcoreaddons,frameworks/kwidgetsaddons
+kcrash
+kwindowsystem,kcoreaddons
 
-frameworks/kdoctools
-frameworks/karchive
+khtml
+knotifications,kjs,kcrash,kitemviews,kio,kguiaddons,kwindowsystem,kcompletion,kparts,kinit,kconfigwidgets,kiconthemes,ki18n,kxmlgui,kdesupport/phonon/phonon,kdbusaddons,kglobalaccel,kservice,kwallet-framework,kcoreaddons,karchive,ktextwidgets
 
-frameworks/kwallet-framework
-frameworks/kconfig,frameworks/kwindowsystem
+kprintutils
+kparts,ki18n
 
-frameworks/knotifyconfig
-frameworks/knotifications#testdependency,frameworks/kio,frameworks/ki18n
+kross
+kparts,kiconthemes,kio,ki18n
 
-frameworks/kbookmarks
-frameworks/kconfigwidgets,frameworks/kcoreaddons,frameworks/kwidgetsaddons,frameworks/kxmlgui,frameworks/kiconthemes
+kbookmarks
+kwidgetsaddons,kiconthemes,kxmlgui,kconfigwidgets,kcoreaddons
 
-frameworks/kdewebkit
-frameworks/knotifications,frameworks/kcoreaddons,frameworks/kparts,frameworks/kwallet-framework,frameworks/kio
+kf5umbrella
+kidletime,kdesu,kauth,frameworkintegration,knotifications,kded,kjs,solid,kcrash,kprintutils,kio,kdnssd-framework,kguiaddons,knewstuff,kwindowsystem,knotifyconfig,kcompletion,kitemmodels,kparts,kinit,kcodecs,kjobwidgets,kconfigwidgets,kdesignerplugin,kiconthemes,ki18n,kbookmarks,kcmutils,kwallet-framework,kservice,khtml,threadweaver,kdbusaddons,kross,kxmlgui,sonnet,kdeclarative,kglobalaccel,kde4support,kconfig,kcoreaddons,kdoctools,kemoticons,karchive,ktextwidgets
 
-frameworks/kfileaudiopreview
-kdesupport/phonon/phonon,frameworks/kio,frameworks/ki18n
+kdnssd-framework
+kconfig
 
-frameworks/kcompletion
-frameworks/kwidgetsaddons,frameworks/kconfig
+kdeclarative
+kiconthemes,kio,kconfig,ki18n
 
-frameworks/kde4support
-frameworks/kinit,frameworks/kunitconversion,frameworks/kservice,frameworks/kwindowsystem,frameworks/kitemviews,frameworks/kdoctools,frameworks/kbookmarks,frameworks/kguiaddons,frameworks/kwidgetsaddons,frameworks/kio,frameworks/kiconthemes,frameworks/kglobalaccel,frameworks/kparts,frameworks/kcrash,frameworks/ktextwidgets,frameworks/ki18n,frameworks/kdbusaddons,frameworks/kdesignerplugin,frameworks/kcompletion,frameworks/kconfig,frameworks/kconfigwidgets,frameworks/knotifications,frameworks/kxmlgui
+frameworkintegration
+kguiaddons,kiconthemes,kconfig,knotifications,ki18n,kitemviews,kwidgetsaddons,kio,kconfigwidgets
 
-frameworks/kio
-frameworks/kguiaddons,frameworks/kcoreaddons,frameworks/kdoctools,frameworks/kcompletion,frameworks/kbookmarks,frameworks/knotifications,frameworks/kservice,frameworks/ki18n,frameworks/kiconthemes,frameworks/kconfigwidgets,frameworks/karchive,frameworks/kdbusaddons,frameworks/kxmlgui,frameworks/kwindowsystem,frameworks/kitemviews,frameworks/kjobwidgets,frameworks/kwidgetsaddons,frameworks/kcrash,frameworks/solid,frameworks/ktextwidgets
+knewstuff
+kiconthemes,solid,kio,kbookmarks,ki18n,kitemviews,kdesupport/attica,karchive,kxmlgui,ktextwidgets
 
-frameworks/knewstuff
-frameworks/kxmlgui,frameworks/kio,frameworks/ki18n,frameworks/kiconthemes,frameworks/karchive,frameworks/kbookmarks,kdesupport/attica,frameworks/kitemviews,frameworks/solid,frameworks/ktextwidgets
+kservice
+kconfig,kcoreaddons,ki18n,kdoctools,kcrash,kdbusaddons
 
-frameworks/kiconthemes
-frameworks/kconfigwidgets,frameworks/kitemviews,frameworks/kwidgetsaddons,frameworks/ki18n
+kio
+kguiaddons,kiconthemes,kservice,kbookmarks,kcoreaddons,knotifications,kxmlgui,kitemviews,ki18n,karchive,kdoctools,solid,kcrash,kjobwidgets,kdbusaddons,kwidgetsaddons,kcompletion,kwindowsystem,kconfigwidgets,ktextwidgets
 
-frameworks/kconfigwidgets
-frameworks/kguiaddons,frameworks/kcoreaddons,frameworks/kwidgetsaddons,frameworks/ki18n,frameworks/kcodecs,frameworks/kauth,frameworks/kdoctools,frameworks/kconfig
+kwallet-framework
+kwindowsystem,kconfig
 
-frameworks/knotifications
-frameworks/kwindowsystem
+knotifyconfig
+knotifications,kio,ki18n
 
-frameworks/kpty
-frameworks/kcoreaddons,frameworks/ki18n
+kdoctools
+karchive
 
-frameworks/kf5umbrella
-frameworks/kinit,frameworks/kross,frameworks/frameworkintegration,frameworks/kcompletion,frameworks/kservice,frameworks/kdeclarative,frameworks/kdesu,frameworks/kjs,frameworks/karchive,frameworks/kwindowsystem,frameworks/kdoctools,frameworks/kbookmarks,frameworks/kguiaddons,frameworks/threadweaver,frameworks/kde4support,frameworks/kidletime,frameworks/kio,frameworks/kiconthemes,frameworks/kitemmodels,frameworks/kglobalaccel,frameworks/kparts,frameworks/kcrash,frameworks/ktextwidgets,frameworks/kprintutils,frameworks/ki18n,frameworks/kcodecs,frameworks/kdnssd-framework,frameworks/kauth,frameworks/kdbusaddons,frameworks/kdesignerplugin,frameworks/kcmutils,frameworks/kjobwidgets,frameworks/kwallet-framework,frameworks/knotifyconfig,frameworks/kcoreaddons,frameworks/kded,frameworks/kconfig,frameworks/knewstuff,frameworks/khtml,frameworks/kconfigwidgets,frameworks/knotifications,frameworks/solid,frameworks/kxmlgui,frameworks/sonnet,frameworks/kemoticons
+kparts
+knotifications,kio,ktextwidgets,kxmlgui
 
-frameworks/kxmlgui
-frameworks/ki18n,frameworks/kiconthemes,frameworks/kconfigwidgets,frameworks/kglobalaccel,frameworks/kwindowsystem,frameworks/kitemviews,frameworks/kwidgetsaddons,frameworks/kconfig,frameworks/ktextwidgets
+kemoticons
+karchive,kservice
 
-frameworks/kmediaplayer
-frameworks/kparts,frameworks/ki18n,frameworks/kxmlgui
+kcompletion
+kwidgetsaddons,kconfig
 
-frameworks/khtml
-frameworks/kinit,frameworks/kservice,frameworks/kjs,frameworks/karchive,frameworks/kwindowsystem,frameworks/kitemviews,frameworks/kguiaddons,frameworks/kio,frameworks/kiconthemes,frameworks/kglobalaccel,frameworks/kparts,frameworks/kcrash,frameworks/ktextwidgets,frameworks/ki18n,kdesupport/phonon/phonon[master],frameworks/kdbusaddons,frameworks/kwallet-framework,frameworks/kcoreaddons,frameworks/kcompletion,frameworks/kconfigwidgets,frameworks/knotifications,frameworks/kxmlgui
+kjsembed
+kdoctools,kjs,ki18n
 
-frameworks/kparts
-frameworks/knotifications,frameworks/kio,frameworks/kxmlgui,frameworks/ktextwidgets
+kjobwidgets
+kwidgetsaddons,kcoreaddons
 
-frameworks/kcrash
-frameworks/kcoreaddons,frameworks/kwindowsystem
+kconfigwidgets
+kguiaddons,kauth,kconfig,kcoreaddons,ki18n,kdoctools,kcodecs,kwidgetsaddons
 
-frameworks/kemoticons
-frameworks/karchive,frameworks/kservice
+ktextwidgets
+kiconthemes,kservice,kconfig,ki18n,kcompletion,kwindowsystem,kwidgetsaddons,sonnet,kconfigwidgets
 
-frameworks/ktextwidgets
-frameworks/kcompletion,frameworks/sonnet,frameworks/kservice,frameworks/ki18n,frameworks/kiconthemes,frameworks/kconfigwidgets,frameworks/kwindowsystem,frameworks/kwidgetsaddons,frameworks/kconfig
+kunitconversion
+ki18n,kconfig
 

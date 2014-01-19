@@ -1,0 +1,40 @@
+
+pkgname=kf5-solid-git
+_pkgname=solid
+pkgver=1
+pkgrel=1
+pkgdesc="Solid"
+arch=('i686' 'x86_64')
+url="http://projects.kde.org/projects/frameworks/solid"
+license=('LGPL')
+depends=('qt5-declarative' 'media-player-info' 'upower' 'udisks2')
+makedepends=('extra-cmake-modules-git' 'git')
+group=("kf5")
+conflicts=("${_pkgname}-git")
+provides=("${_pkgname}-git")
+source=("git://anongit.kde.org/solid")
+md5sums=('SKIP')
+
+pkgver() {
+    cd "${_pkgname}"
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+    mkdir -p build
+}
+
+build() {
+    cd build
+    /opt/kf5/bin/cmake ../"${_pkgname}" \
+        -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+        -DCMAKE_BUILD_TYPE=Debug \
+        -DLIB_INSTALL_DIR=lib \
+        -DHUPNP_ENABLED=FALSE
+    make
+}
+
+package() {
+    cd build
+    make DESTDIR="${pkgdir}" install
+}

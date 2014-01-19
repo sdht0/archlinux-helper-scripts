@@ -26,7 +26,7 @@ build() {
   /opt/kf5/bin/cmake ../libdbusmenu-qt \
     -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
     -DCMAKE_BUILD_TYPE=Debug \
-    -DCMAKE_INSTALL_LIBDIR=/opt/kf5/lib \
+    -DCMAKE_INSTALL_LIBDIR=lib \
     -DUSE_QT5=On \
     -DWITH_DOC=Off
   make
