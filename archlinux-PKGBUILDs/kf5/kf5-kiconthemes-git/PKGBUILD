@@ -1,7 +1,7 @@
 
 pkgname=kf5-kiconthemes-git
 _pkgname=kiconthemes
-pkgver=1
+pkgver=11.c4f1c8c
 pkgrel=1
 pkgdesc="KIconThemes"
 arch=('i686' 'x86_64')

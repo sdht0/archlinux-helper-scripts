@@ -2,7 +2,7 @@
 
 pkgname=kde5-plasma-framework-git
 _pkgname=plasma-framework
-pkgver=12066.d2879f6
+pkgver=12127.db3dd7a
 pkgrel=1
 pkgdesc='Plasma library and runtime components based upon KF5 and Qt5'
 arch=('i686' 'x86_64')

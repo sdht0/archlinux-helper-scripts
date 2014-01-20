@@ -1,7 +1,7 @@
 
 pkgname=kf5-kdbusaddons-git
 _pkgname=kdbusaddons
-pkgver=1
+pkgver=11.bf36ab8
 pkgrel=1
 pkgdesc="KDBusAddons"
 arch=('i686' 'x86_64')

@@ -1,7 +1,7 @@
 
 pkgname=kf5-kimageformats-git
 _pkgname=kimageformats
-pkgver=1
+pkgver=11.b71ede5
 pkgrel=1
 pkgdesc="KImageFormats"
 arch=('i686' 'x86_64')

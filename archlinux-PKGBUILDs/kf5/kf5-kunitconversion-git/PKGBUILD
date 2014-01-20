@@ -1,7 +1,7 @@
 
 pkgname=kf5-kunitconversion-git
 _pkgname=kunitconversion
-pkgver=1
+pkgver=10.72678ee
 pkgrel=1
 pkgdesc="KUnitConversion"
 arch=('i686' 'x86_64')

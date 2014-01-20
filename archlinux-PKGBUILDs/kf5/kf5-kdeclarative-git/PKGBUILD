@@ -1,7 +1,7 @@
 
 pkgname=kf5-kdeclarative-git
 _pkgname=kdeclarative
-pkgver=1
+pkgver=12.8a6efdf
 pkgrel=1
 pkgdesc="KDeclarative"
 arch=('i686' 'x86_64')

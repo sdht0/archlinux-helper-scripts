@@ -1,13 +1,13 @@
 
 pkgname=kf5-kjsembed-git
 _pkgname=kjsembed
-pkgver=1
+pkgver=10.39d8246
 pkgrel=1
 pkgdesc="KJSEmbed"
 arch=('i686' 'x86_64')
 url="http://projects.kde.org/projects/frameworks/kjsembed"
 license=('LGPL')
-depends=('kf5-kdoctools-git' 'kf5-ki18n-git' 'qt5-svg')
+depends=('kf5-kdoctools-git' 'kf5-ki18n-git' 'qt5-svg' 'qt5-tools')
 makedepends=('extra-cmake-modules-git' 'git')
 group=("kf5")
 conflicts=("${_pkgname}-git")

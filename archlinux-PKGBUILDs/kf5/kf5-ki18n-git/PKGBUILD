@@ -1,7 +1,7 @@
 
 pkgname=kf5-ki18n-git
 _pkgname=ki18n
-pkgver=1
+pkgver=18.da83418
 pkgrel=1
 pkgdesc="Ki18n"
 arch=('i686' 'x86_64')

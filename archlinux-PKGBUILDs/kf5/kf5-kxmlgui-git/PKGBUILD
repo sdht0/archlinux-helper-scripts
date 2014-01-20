@@ -1,7 +1,7 @@
 
 pkgname=kf5-kxmlgui-git
 _pkgname=kxmlgui
-pkgver=1
+pkgver=22.d4ecd4c
 pkgrel=1
 pkgdesc="KXMLGUI"
 arch=('i686' 'x86_64')

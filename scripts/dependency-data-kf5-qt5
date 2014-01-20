@@ -52,6 +52,14 @@ frameworks/ki18n: frameworks/kjs
 frameworks/kdoctools: frameworks/karchive
 frameworks/kwallet-framework: frameworks/kconfig
 frameworks/kwallet-framework: frameworks/kwindowsystem
+frameworks/kwallet-framework: frameworks/kcoreaddons
+frameworks/kwallet-framework: frameworks/kdbusaddons
+frameworks/kwallet-framework: frameworks/ki18n
+frameworks/kwallet-framework: frameworks/kiconthemes
+frameworks/kwallet-framework: frameworks/knotifications
+frameworks/kwallet-framework: frameworks/kservice
+frameworks/kwallet-framework: frameworks/kwidgetsaddons
+frameworks/kwallet-framework: frameworks/kwindowsystem
 
 # Frameworks, tier3
 frameworks/kbookmarks: frameworks/kconfigwidgets
@@ -277,6 +285,7 @@ frameworks/kf5umbrella: frameworks/kio
 frameworks/kf5umbrella: frameworks/kitemmodels
 frameworks/kf5umbrella: frameworks/kjobwidgets
 frameworks/kf5umbrella: frameworks/kjs
+frameworks/kf5umbrella: frameworks/kjsembed
 frameworks/kf5umbrella: frameworks/knewstuff
 frameworks/kf5umbrella: frameworks/knotifications
 frameworks/kf5umbrella: frameworks/knotifyconfig

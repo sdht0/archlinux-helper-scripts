@@ -1,7 +1,7 @@
 
 pkgname=kf5-kpty-git
 _pkgname=kpty
-pkgver=1
+pkgver=9.84fcbce
 pkgrel=1
 pkgdesc="KPty"
 arch=('i686' 'x86_64')

@@ -35,7 +35,7 @@ else
 fi && \
 . PKGBUILD && \
 for i in $pkgname;do
-	find $BASEDIR/archlinux-pkgfiles \( -name "$i*.tar.xz" -or -name "$i*.tar.gz" \) \
-		-not \( -name "$i-$pkgver-$pkgrel*.tar.xz" -or -name "$i-$pkgver-$pkgrel*.tar.gz" \) -exec rm -rf {} \;
+    find $BASEDIR/archlinux-pkgfiles \( -name "$i*.tar.xz" -or -name "$i*.tar.gz" \) \
+        -not \( -name "$i-$pkgver-$pkgrel*.tar.xz" -or -name "$i-$pkgver-$pkgrel*.tar.gz" \) -exec mv {} $BASEDIR/archlinux-logs/old-pkgfiles/ \;
 done
 echo

@@ -1,8 +1,8 @@
 diff --git a/common/clean-chroot-manager32.in b/common/clean-chroot-manager32.in
-index b0369f4..83ca25d 100644
+index b0369f4..d0e679a 100644
 --- a/common/clean-chroot-manager32.in
 +++ b/common/clean-chroot-manager32.in
-@@ -129,39 +129,62 @@ check2() {
+@@ -129,45 +129,68 @@ check2() {
  }
  
  build() {
@@ -56,11 +56,9 @@ index b0369f4..83ca25d 100644
  
 -	# setup a local repo and add adjust files in chroot
 -	[[ ! -d $CHROOTPATH32/root/repo ]] && mkdir $CHROOTPATH32/root/repo
-+	pushd $WORKINGPATH/startdir > /dev/null
-+
-+	# source PKGBUILD to get package details
-+	. PKGBUILD
-+	# save any changes in pkgver and pkgrel to PKGBUILD
++	# source chroot PKGBUILD to get package details
++	. $WORKINGPATH/startdir/PKGBUILD
++	# save any changes in pkgver and pkgrel to user PKGBUILD
 +	sed -i "s/^pkgver=.*/pkgver=$pkgver/" PKGBUILD
 +	sed -i "s/^pkgrel=.*/pkgrel=$pkgrel/" PKGBUILD
 +
@@ -71,6 +69,7 @@ index b0369f4..83ca25d 100644
  	echo -e "${YELLOW}---->${ALL_OFF}${BOLD} ${mesg}${ALL_OFF}"
 +
 +	pkgpath=$(pwd) && [[ -n "$PKGDEST" ]] && pkgpath=$PKGDEST
++	pushd $WORKINGPATH/startdir > /dev/null
  	for i in *.pkg.tar.xz; do
 -		cp "$i" $REPO
 -		repo-add $REPO/chroot_local.db.tar.gz $REPO/"$i" || exit 1
@@ -79,16 +78,14 @@ index b0369f4..83ca25d 100644
  
  		# ensure that the chroot package matches the live pacman cache package
  		# which avoids checksum errors if the user builds the same $pkgname-$pkgver
-@@ -169,6 +192,8 @@ EOF
+ 		# more than once
  		[[ -f "/var/cache/pacman/pkg/$i" ]] && rm -f "/var/cache/pacman/pkg/$i"
  	done
- 
 +	popd > /dev/null
-+
+ 
  	# The rm statement above can return 1 if the file to remove is not found,
  	# causing the function to return a non-zero error code even if everything
- 	# went fine.  If we've made it to this point, the build was run
-@@ -279,7 +304,7 @@ case "$1" in
+@@ -279,7 +302,7 @@ case "$1" in
  			mesg=
  			create
  		fi
@@ -97,7 +94,7 @@ index b0369f4..83ca25d 100644
  		;;
  	u)
  		check2 && update
-@@ -294,6 +319,7 @@ case "$1" in
+@@ -294,6 +317,7 @@ case "$1" in
  		echo
  		echo -e ${BOLD}" --- BUILDING ---"${ALL_OFF}
  		echo -e ${BOLD}" s) Run makepkg in clean chroot"${ALL_OFF}
@@ -106,10 +103,10 @@ index b0369f4..83ca25d 100644
  		echo -e ${BOLD}" --- MISCELLANEOUS ---"${ALL_OFF}
  		echo -e ${BOLD}" l) List local repo in chroot (packages you build)"${ALL_OFF}
 diff --git a/common/clean-chroot-manager64.in b/common/clean-chroot-manager64.in
-index dc6509f..eb1fa8b 100644
+index dc6509f..0a7253b 100644
 --- a/common/clean-chroot-manager64.in
 +++ b/common/clean-chroot-manager64.in
-@@ -140,40 +140,62 @@ check2() {
+@@ -140,46 +140,68 @@ check2() {
  }
  
  build() {
@@ -163,11 +160,9 @@ index dc6509f..eb1fa8b 100644
  
 -	# setup a local repo and add adjust files in chroot
 -	[[ ! -d $CHROOTPATH64/root/repo ]] && mkdir $CHROOTPATH64/root/repo
-+	pushd $WORKINGPATH/startdir > /dev/null
-+
-+	# source PKGBUILD to get package details
-+	. PKGBUILD
-+	# save any changes in pkgver and pkgrel to PKGBUILD
++	# source chroot PKGBUILD to get package details
++	. $WORKINGPATH/startdir/PKGBUILD
++	# save any changes in pkgver and pkgrel to user PKGBUILD
 +	sed -i "s/^pkgver=.*/pkgver=$pkgver/" PKGBUILD
 +	sed -i "s/^pkgrel=.*/pkgrel=$pkgrel/" PKGBUILD
 +
@@ -181,22 +176,21 @@ index dc6509f..eb1fa8b 100644
 -		cp "$i" $REPO
 -		repo-add $REPO/chroot_local.db.tar.gz $REPO/"$i" || exit 1
 +	pkgpath=$(pwd) && [[ -n "$PKGDEST" ]] && pkgpath=$PKGDEST
++	pushd $WORKINGPATH/startdir > /dev/null
 +	for i in *.pkg.tar.xz; do
 +		cp "$pkgpath/$i" $REPO && repo-add $REPO/chroot_local.db.tar.gz $REPO/"$i" || exit 1
 +		cp "$pkgpath/$i" $WORKINGPATH/repo && repo-add $WORKINGPATH/repo/chroot_local.db.tar.gz $WORKINGPATH/repo/"$i" > /dev/null || exit 1
  
  		# ensure that the chroot package matches the live pacman cache package
  		# which avoids checksum errors if the user builds the same $pkgname-$pkgver
-@@ -181,6 +203,8 @@ EOF
+ 		# more than once
  		[[ -f "/var/cache/pacman/pkg/$i" ]] && rm -f "/var/cache/pacman/pkg/$i"
  	done
- 
 +	popd > /dev/null
-+
+ 
  	# The rm statement above can return 1 if the file to remove is not found,
  	# causing the function to return a non-zero error code even if everything
- 	# went fine.  If we've made it to this point, the build was run
-@@ -323,7 +347,7 @@ case "$1" in
+@@ -323,7 +345,7 @@ case "$1" in
  			mesg=
  			create
  		fi
@@ -205,7 +199,7 @@ index dc6509f..eb1fa8b 100644
  		;;
  	u)
  		check2 && update
-@@ -339,6 +363,7 @@ case "$1" in
+@@ -339,6 +361,7 @@ case "$1" in
  		echo
  		echo -e ${BOLD}" --- BUILDING ---"${ALL_OFF}
  		echo -e ${BOLD}" s) Run makepkg in clean chroot"${ALL_OFF}

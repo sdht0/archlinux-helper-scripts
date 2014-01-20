@@ -1,0 +1,26 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index f1bd8a7..f3a578e 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -87,12 +87,6 @@ set_package_properties(ZLIB PROPERTIES DESCRIPTION "Support for gzip compressed
+ #                        TYPE REQUIRED
+ #                       )
+ 
+-# TODO remove it in future
+-find_package(LibAttica NO_MODULE)
+-set_package_properties(LibAttica PROPERTIES DESCRIPTION "Support for Get Hot New Stuff related stuff"
+-                       URL "https://projects.kde.org/attica"
+-                       TYPE REQUIRED
+-                      )
+ 
+ find_package(DBusMenuQt5)
+ set_package_properties(DBusMenuQt5 PROPERTIES DESCRIPTION "Support for notification area menus via the DBusMenu protocol"
+@@ -235,7 +229,7 @@ find_package(USB)
+ macro_bool_to_01(LIBUSB_FOUND HAVE_LIBUSB)
+ set_package_properties(USB PROPERTIES DESCRIPTION "User level access to USB devices"
+                        URL "http://libusb.sourceforge.net"
+-                       TYPE OPTIONAL		
++                       TYPE OPTIONAL
+                        PURPOSE "Provides Logitech mouse support in KControl."
+ 		       )
+ 

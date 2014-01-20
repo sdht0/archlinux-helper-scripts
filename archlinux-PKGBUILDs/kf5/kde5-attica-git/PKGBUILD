@@ -1,7 +1,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kde5-attica-git
-pkgver=v4.95.0
+pkgver=v4.95.0.6.gfa292f8
 pkgrel=1
 pkgdesc='A Qt5 library that implements the Open Collaboration Services API'
 arch=('i686' 'x86_64')
@@ -29,7 +29,7 @@ build() {
     -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
     -DATTICA_ENABLE_TESTS=OFF \
     -DQT4_BUILD=OFF \
-    -DLIB_DESTINATION=/opt/kf5/lib
+    -DLIB_DESTINATION=lib
   make
 }
 

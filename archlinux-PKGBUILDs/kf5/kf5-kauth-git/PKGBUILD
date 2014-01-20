@@ -1,7 +1,7 @@
 
 pkgname=kf5-kauth-git
 _pkgname=kauth
-pkgver=1
+pkgver=11.5248757
 pkgrel=1
 pkgdesc="KAuth"
 arch=('i686' 'x86_64')

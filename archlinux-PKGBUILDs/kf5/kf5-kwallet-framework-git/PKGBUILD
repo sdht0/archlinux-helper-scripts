@@ -1,13 +1,13 @@
 
 pkgname=kf5-kwallet-framework-git
 _pkgname=kwallet-framework
-pkgver=1
+pkgver=457.c47e879
 pkgrel=1
 pkgdesc=""
 arch=('i686' 'x86_64')
 url="http://projects.kde.org/projects/frameworks/kwallet-framework"
 license=('LGPL')
-depends=('kf5-kwindowsystem-git' 'kf5-kconfig-git')
+depends=('kf5-kservice-git' 'kf5-kiconthemes-git' 'kf5-knotifications-git')
 makedepends=('extra-cmake-modules-git' 'git')
 group=("kf5")
 conflicts=("${_pkgname}-git")

@@ -2,7 +2,7 @@
 # Contributor: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=kde5-akonadi-git
-pkgver=v1.11.0.79.g48f56b9
+pkgver=v1.11.0.81.g1894a32
 pkgrel=1
 arch=('i686' 'x86_64')
 url='http://community.kde.org/KDE_PIM/Akonadi'
@@ -32,7 +32,7 @@ build() {
     -DAKONADI_BUILD_TESTS=OFF \
     -DQT5_BUILD=ON \
     -DWITH_SOPRANO=OFF \
-    -DLIB_INSTALL_DIR=lib
+    -DCMAKE_INSTALL_LIBDIR=lib
   make
 }
 

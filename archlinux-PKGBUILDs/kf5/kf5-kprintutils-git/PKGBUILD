@@ -1,7 +1,7 @@
 
 pkgname=kf5-kprintutils-git
 _pkgname=kprintutils
-pkgver=1
+pkgver=9.01fbcaa
 pkgrel=1
 pkgdesc="KPrintUtils"
 arch=('i686' 'x86_64')

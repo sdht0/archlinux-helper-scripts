@@ -1,0 +1,41 @@
+# Maintainer: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=plasma-nm-git
+pkgver=plasma2tp.r0.g424a4cf
+pkgrel=1
+pkgdesc='Plasma applet written in QML for managing network connections'
+arch=('i686' 'x86_64')
+url='https://projects.kde.org/projects/playground/network/plasma-nm'
+license=('GPL2')
+depends=('plasma-framework-git' 'libnm-qt' 'frameworkintegration-git')
+makedepends=('cmake' 'git')
+optdepends=('mobile-broadband-provider-info: Database of mobile broadband service providers')
+provides=('plasma-nm')
+conflicts=('plasma-nm')
+source=("git://anongit.kde.org/plasma-nm.git#branch=frameworks")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd plasma-nm
+  git describe --long | sed -E 's/([^-]*-g)/r\1/;s/-/./g'
+}
+
+prepare() {
+  mkdir -p build
+}
+
+build() {
+  cd build
+  cmake ../plasma-nm \
+    -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DLIB_INSTALL_DIR=lib \
+    -DBUILD_TESTING=OFF
+#    -DSYSCONF_INSTALL_DIR=/etc
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="${pkgdir}" install
+}

@@ -1,7 +1,7 @@
 
 pkgname=kf5-frameworkintegration-git
 _pkgname=frameworkintegration
-pkgver=1
+pkgver=20.cb44473
 pkgrel=1
 pkgdesc="Framework providing components to allow applications to integrate with a KDE Workspace"
 arch=('i686' 'x86_64')
