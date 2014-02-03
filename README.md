@@ -1,10 +1,15 @@
 Archlinux Helper Scripts
 ========================
 
-This is a collection of Bash helper script to:
+This is a collection of Bash helper scripts to:
 
-* install Arch Linux on _my_ system.
+* help install Arch Linux on _my_ system.
 * help build multiple PKGBUILDs at once, especially a group of packages of same application.
+
+Install scripts
+---------------
+Scripts for my particular installation and configuration of Arch Linux.
+
 
 There are two main build scripts:
 
@@ -24,12 +29,12 @@ This is used to build a group of related packages using `makebuild.sh`.
 
 Folder structure:
 
-$BASEDIR
-|-- archlinux-PKGBUILDs
-|-- archlinux-pkgfiles
-|-- archlinux-sources
-|-- build
-|-- archlinux-logs
+$BASEDIR  
+|-- archlinux-PKGBUILDs  
+|-- archlinux-pkgfiles  
+|-- archlinux-sources  
+|-- build  
+|-- archlinux-logs 
 
 * I have all my PKGBUILDs in the `$BASEDIR/archlinux-PKGBUILDs` folder, with sub-folders used for packages of same group.
 * The folder names are the same as the name of the package.
