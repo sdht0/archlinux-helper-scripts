@@ -1,7 +1,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kte-collaborative-git
-pkgver=773.22f826a
+pkgver=774.6f81b4c
 pkgrel=1
 pkgdesc='A plugin for KTextEditor which allows to edit text documents collaboratively'
 arch=('i686' 'x86_64')

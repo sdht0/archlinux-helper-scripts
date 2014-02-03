@@ -1,15 +1,18 @@
-Archlinux Package Build Helpers
-==============================
+Archlinux Helper Scripts
+========================
 
-This is a collection of helper scripts which eases the building of multiple PKGBUILDs at once, especially of a group of packages of same application.
+This is a collection of Bash helper script to:
 
-There are two main bash scripts:
+* install Arch Linux on _my_ system.
+* help build multiple PKGBUILDs at once, especially a group of packages of same application.
+
+There are two main build scripts:
 
 makebuild.sh
 ------------
 This is used to build a single package using either makepkg or in a chroot using [clean chroot manager](https://github.com/graysky2/clean-chroot-manager).
 
-Example usage:  
+Example usage:
 
 * `./makebuild.sh cower -` : Builds using ccm
 * `./makebuild.sh clean-chroot-manager-git - "-si --needed --noconfirm" usemakepkg` : Builds using makepkg using given arguments
@@ -19,25 +22,25 @@ custombuild.sh
 -------------
 This is used to build a group of related packages using `makebuild.sh`.
 
-Folder structure:  
+Folder structure:
 
-$BASEDIR  
-|-- archlinux-PKGBUILDs  
-|-- archlinux-pkgfiles  
-|-- archlinux-sources  
-|-- build  
+$BASEDIR
+|-- archlinux-PKGBUILDs
+|-- archlinux-pkgfiles
+|-- archlinux-sources
+|-- build
 |-- archlinux-logs
 
 * I have all my PKGBUILDs in the `$BASEDIR/archlinux-PKGBUILDs` folder, with sub-folders used for packages of same group.
 * The folder names are the same as the name of the package.
 * I further separate the various outputs of the build as shown above by using `makepkg.conf` and `clean-chroot-manager.conf`.
 
-Variables:  
+Variables:
 
 * `packages`: The order in which packages are to be built
 * `prepackages`: A set of common dependencies which are installed in the base chroot to prevent installing them repeatedly for each package
 
-Example usage:  
+Example usage:
 
 * `./custombuild.sh telepathy` : Builds using ccm after creating a new chroot
 * `./custombuild.sh kf5 "-sif --noconfirm" usemakepkg` : Builds using makepkg using given arguments

@@ -2,7 +2,7 @@
 
 _pkgname=plasma-mobile
 pkgname=kde-plasma-mobile-git
-pkgver=5395.819b4e5
+pkgver=5404.77ac170
 pkgrel=1
 pkgdesc="A KDE Plasma shell for touch-screen based devices"
 arch=(i686 x86_64)

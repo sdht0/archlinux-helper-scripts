@@ -3,7 +3,7 @@
 
 pkgname=telepathy-kde-common-internals-git
 _pkgname=ktp-common-internals
-pkgver=0.7.0.115.g4e667d0
+pkgver=0.7.0.121.g6a4fb94
 pkgrel=1
 pkgdesc="Common components for Kde-Telepathy"
 arch=('i686' 'x86_64')
