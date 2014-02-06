@@ -29,10 +29,10 @@ case "$pkggroup" in
                 'extra-cmake-modules-git'
 
                 # dependencies
-                'kde5-libdbusmenu-qt5-bzr' 'kde5-attica-git' 'kde5-akonadi-git' 'kde5-polkit-qt-git' 'kde5-strigi-git' 'kde5-phonon-qt5-git'
+                'kde5-libdbusmenu-qt5-bzr' 'kde5-akonadi-git' 'kde5-polkit-qt-git' 'kde5-strigi-git' 'kde5-phonon-qt5-git'
 
                 # tier 1
-                'kf5-kitemmodels-git' 'kf5-kitemviews-git' 'kf5-karchive-git' 'kf5-kcodecs-git' 'kf5-kconfig-git'
+                'kf5-attica-git' 'kf5-kitemmodels-git' 'kf5-kitemviews-git' 'kf5-karchive-git' 'kf5-kcodecs-git' 'kf5-kconfig-git'
                 'kf5-kcoreaddons-git' 'kf5-kdbusaddons-git' 'kf5-kglobalaccel-git' 'kf5-kguiaddons-git' 'kf5-kidletime-git'
                 'kf5-kimageformats-git' 'kf5-kjs-git' 'kf5-kplotting-git' 'kf5-kwidgetsaddons-git' 'kf5-kwindowsystem-git'
                 'kf5-solid-git' 'kf5-sonnet-git' 'kf5-threadweaver-git'

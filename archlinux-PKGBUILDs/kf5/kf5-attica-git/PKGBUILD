@@ -1,6 +1,6 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
-pkgname=kde5-attica-git
+pkgname=kf5-attica-git
 pkgver=v4.95.0.6.gfa292f8
 pkgrel=1
 pkgdesc='A Qt5 library that implements the Open Collaboration Services API'
