@@ -1,13 +1,14 @@
 randpw(){ < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-16};echo;}
 echo "Installing packages..." && \
-pacman -S --needed firefox tomboy flashplugin git subversion tsocks wget chromium vlc gimp linuxdcpp \
-                    ntp virtualbox virtualbox-guest-iso googlecl s3cmd imagemagick graphviz unrar unzip zip p7zip wireshark-gtk \
-                    libreoffice libreoffice-extension-pdfimport libreoffice-extension-presenter-screen libreoffice-extension-presentation-minimizer \
-                    aspell aspell-en hunspell hunspell-en hyphen hyphen-en artwiz-fonts \
-                    qt5 qt5-doc python python-beautifulsoup4 python2-beautifulsoup4 python2-pyqt mysql-python qtcreator cmake gdb valgrind \
-                    kdevelop kdevelop-python kdevelop-php racket ghc cabal-install jre7-openjdk jdk7-openjdk \
-                    apache php php-apache mariadb phpmyadmin php-mcrypt php-gd \
-                    openssh nmap rsync devtools ccache skype pidgin ksshaskpass && \
+pacman -S --needed \
+            firefox tomboy flashplugin tsocks chromium vlc gimp linuxdcpp virtualbox virtualbox-guest-iso \
+            googlecl s3cmd imagemagick graphviz wireshark-gtk skype pidgin \
+            libreoffice libreoffice-extension-pdfimport libreoffice-extension-presenter-screen libreoffice-extension-presentation-minimizer \
+            aspell aspell-en hunspell hunspell-en hyphen hyphen-en artwiz-fonts \
+            qt5 qt5-doc python python-beautifulsoup4 python2-beautifulsoup4 python2-pyqt mysql-python qtcreator \
+            kdevelop kdevelop-python kdevelop-php racket ghc cabal-install jre7-openjdk jdk7-openjdk \
+            devtools ccache cmake gdb valgrind unrar unzip zip p7zip ntp rsync wget git subversion \
+            openssh nmap apache php php-apache mariadb phpmyadmin php-mcrypt php-gd && \
 echo "Setting up ntp..." &&
 systemctl enable ntpd && \
 systemctl start ntpd && \
@@ -24,6 +25,12 @@ server = 127.0.0.1
 server_port = 9999
 server_type = 5
 " > /etc/tsocks.conf && \
+echo "Setting flat-volumes=no..." && \
+sed -i "s/^; flat-volumes = yes/flat-volumes = no/" /etc/pulse/daemon.conf && \
+echo "Editing kmixrc..." && \
+grep "VolumePercentageStep" ~/.kde4/share/config/kmixrc > /dev/null && sed -i "s/VolumePercentageStep.*/VolumePercentageStep=3/" ~/.kde4/share/config/kmixrc || sed -i \
+    -e "/VolumeFeedback.*$/a\
+VolumePercentageStep=3" ~/.kde4/share/config/kmixrc && \
 echo "Setting up LAMP..." && \
 systemctl enable httpd && \
 systemctl enable mysqld && \
@@ -78,7 +85,7 @@ Include conf/extra/php5_module.conf
 Include conf/extra/httpd-phpmyadmin.conf
 " >> /etc/httpd/conf/httpd.conf && \
 echo "Setting up phpmyadmin..." && \
-pmapasswd=$(randpw 15) && \
+pmapasswd=$(randpw 20) && \
 echo "CREATE USER 'pma'@'localhost' IDENTIFIED BY '$pmapasswd';
 GRANT USAGE ON mysql.* TO 'pma'@'localhost' IDENTIFIED BY '$pmapasswd';
 GRANT SELECT (
@@ -99,10 +106,4 @@ sed -i \
     -e "/^\/\/ \$cfg\['Servers'\]\[\$i\]/ s,// ,,"  \
     -e "s/^\(\$cfg\['Servers'\]\[\$i\]\['auth_swekey_config'\]\)/\/\/ \1/"  \
     -e "s/\(\['controlpass'\] =\).*/\1 '$pmapasswd';/" /etc/webapps/phpmyadmin/config.inc.php && \
-echo "Setting flat-volumes=no..." && \
-sed -i "s/^; flat-volumes = yes/flat-volumes = no/" /etc/pulse/daemon.conf && \
-echo "Editing kmixrc..." && \
-sed -i \
-    -e "/VolumeFeedback=false$/a\
-VolumePercentageStep=3" ~/.kde4/share/config/kmixrc && \
 echo "Done."

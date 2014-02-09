@@ -20,8 +20,8 @@ sed -i \
     -e '/^\[multilib\]/{$!N; s,#,,}' /etc/pacman.conf && \
 echo "Edit pacman mirrors..." && \
 nano /etc/pacman.d/mirrorlist && \
-echo "Install zsh..." && \
-pacman -Syu zsh bash-completion && \
+echo "Updating pacman..." && \
+pacman -Syu bash-completion  && \
 echo "Set root password..." && \
 passwd && \
 echo "Changing default shell..." && \
@@ -29,15 +29,13 @@ usermod -s /usr/bin/zsh root && \
 echo "Adding user sdh..." && \
 useradd -m -g users -G wheel -s /usr/bin/zsh sdh && \
 echo "Generating zsh config..." && \
-echo ". /home/lfiles/.zshrc
+echo "
+. /home/lfiles/.zshrc
+. /home/lfiles/.bashrc
 " > /home/sdh/.zshrc && \
 echo "Generating bash config..." && \
 echo "#
-# ~/.bashrc
-#
-
 PS1='\W$ '
-
 . /home/lfiles/.bashrc
 " > /home/sdh/.bashrc && \
 echo "Set sdh password..." && \

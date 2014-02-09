@@ -1,0 +1,20 @@
+diff --git a/KTp/Declarative/messages-model.h b/KTp/Declarative/messages-model.h
+index b7ee113..dead4da 100644
+--- a/KTp/Declarative/messages-model.h
++++ b/KTp/Declarative/messages-model.h
+@@ -75,7 +75,6 @@ class MessagesModel : public QAbstractListModel
+     void setVisibleToUser(bool visible);
+ 
+     int  unreadCount() const;
+-    void acknowledgeAllMessages();
+ 
+     bool shouldStartOpened() const;
+ 
+@@ -85,6 +84,7 @@ class MessagesModel : public QAbstractListModel
+ 
+   public Q_SLOTS:
+     void sendNewMessage(const QString &message);
++    void acknowledgeAllMessages();
+ 
+   private Q_SLOTS:
+     void onMessageReceived(const Tp::ReceivedMessage &message);

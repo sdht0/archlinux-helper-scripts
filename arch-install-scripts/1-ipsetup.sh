@@ -1,15 +1,20 @@
+devname=enp19s0
+ip=192.168.102.199/24
+gateway=192.168.100.1
+nameserver=192.168.5.20
+
 echo "Stopping dhcpd service..."
-systemctl stop dhcpcd@enp19s0
+systemctl stop dhcpcd@$devname
 echo "Setting link up..." && \
-ip link set enp19s0 up && \
+ip link set $devname up && \
 echo "Adding ip..." && \
-ip addr flush dev enp19s0 && \
-ip addr add 192.168.102.104/24 dev enp19s0 && \
+ip addr flush dev $devname && \
+ip addr add $ip dev $devname && \
 echo "Adding gateway..." && \
-ip route flush dev enp19s0 && \
-ip route add 192.168.100.1 dev enp19s0 && \
-ip route add default via 192.168.100.1 dev enp19s0 && \
+ip route flush dev $devname && \
+ip route add $gateway dev $devname && \
+ip route add default via $gateway dev $devname && \
 echo "Adding nameserver..." && \
-echo "nameserver 192.168.5.20" > /etc/resolv.conf && \
+echo "nameserver $nameserver" > /etc/resolv.conf && \
 echo "Done." && \
-ping -c3 172.16.32.222
+ping -c3 $gateway
