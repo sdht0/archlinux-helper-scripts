@@ -3,10 +3,14 @@ import findDependencies
 directdependencies=findDependencies.findDependencies()
 
 import xml.etree.ElementTree as ElementTree
-import os
+import os,sys
 tree = ElementTree.parse('/home/lfiles/dev/sources/kde5/kde_projects.xml')
 root = tree.getroot()
-itemlist = root.find('component').findall('module')
+components = root.findall('component')
+for i in components:
+    if i.attrib['identifier']=="frameworks":
+        itemlist = i.findall('module')
+
 allitems=[]
 extradependencies={"frameworkintegration":"'kde5-attica-git'",
                    "kauth":"'kde5-polkit-qt-git'",
@@ -97,7 +101,7 @@ package() {
 }
 '''
 
-basepath = "/home/lfiles/dev/archlinux-PKGBUILDs/kf5-others/a"
+basepath = "/home/lfiles/dev/archlinux-logs/a"
 
 for i in allitems:
     print("'kf5-%s-git'"%i['name'],end=' ')
