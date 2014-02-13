@@ -32,6 +32,7 @@ grep "VolumePercentageStep" ~/.kde4/share/config/kmixrc > /dev/null && sed -i "s
     -e "/VolumeFeedback.*$/a\
 VolumePercentageStep=3" ~/.kde4/share/config/kmixrc && \
 echo "Setting up LAMP..." && \
+serverroot=/home/lfiles/www && \
 systemctl enable httpd && \
 systemctl enable mysqld && \
 systemctl start httpd && \
@@ -40,22 +41,22 @@ mysql_secure_installation && \
 echo "Editing httpd.conf..." && \
 sed -i \
     -e "s|^ServerAdmin.*|ServerAdmin sh.siddhartha@gmail.com|" \
-    -e 's|^DocumentRoot.*|DocumentRoot "/home/lfiles/www"|' \
-    -e 's|<Directory "/srv/http">|<Directory "/home/lfiles/www">|' \
+    -e 's|^DocumentRoot.*|DocumentRoot "'"$serverroot"'"|' \
+    -e 's|<Directory "/srv/http">|<Directory "'"$serverroot"'">|' \
     -e 's|^Include conf/extra/httpd-autoindex.conf|#Include conf/extra/httpd-autoindex.conf|' \
     -e 's|^Include conf/extra/httpd-userdir.conf|#Include conf/extra/httpd-userdir.conf|' \
     -e "/^#MIMEMagicFile/ s,#,," /etc/httpd/conf/httpd.conf && \
-sed -i -e '/^<Directory "\/home\/lfiles\/www">/b br
+sed -i -e '/^<Directory "'"$(echo $serverroot | sed "s|/|\\\/|g")"'">/b br
      b
      : br
-     s|^\(<Directory "/home/lfiles/www">.*\)Options Indexes FollowSymLinks|\1Options Indexes FollowSymLinks MultiViews|
+     s|^\(<Directory "'"$serverroot"'">.*\)Options Indexes FollowSymLinks|\1Options -Indexes FollowSymLinks MultiViews|
      t
      N
      b br' /etc/httpd/conf/httpd.conf && \
-sed -i -e '/^<Directory "\/home\/lfiles\/www">/b br
+sed -i -e '/^<Directory "'"$(echo $serverroot | sed "s|/|\\\/|g")"'">/b br
      b
      : br
-     s|^\(<Directory "/home/lfiles/www">.*\)AllowOverride None|\1AllowOverride All|
+     s|^\(<Directory "'"$serverroot"'">.*\)AllowOverride None|\1AllowOverride All|
      t
      N
      b br' /etc/httpd/conf/httpd.conf && \
@@ -69,7 +70,7 @@ sed -i \
     application/x-httpd-php       php    php5" /etc/httpd/conf/mime.types && \
 echo "Editing php.ini..." && \
 sed -i \
-    -e "s|^open_basedir =.*|open_basedir = /home/lfiles/www/:/tmp/:/usr/share/pear/:/usr/share/webapps/|" \
+    -e "s|^open_basedir =.*|open_basedir = $serverroot/:/tmp/:/usr/share/pear/:/usr/share/webapps/|" \
     -e "s|^;date.timezone =|date.timezone = Asia/Kolkata|"  \
     -e "/^;extension=gd.so/ s,;,,"  \
     -e "/^;extension=mcrypt.so/ s,;,,"  \
