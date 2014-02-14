@@ -3,8 +3,8 @@
 
 pkgname=telepathy-kde-common-internals-git
 _pkgname=ktp-common-internals
-pkgver=0.7.0.124.g69e4a1d
-pkgrel=3
+pkgver=0.7.r1417.f43e37f
+pkgrel=1
 pkgdesc="Common components for Kde-Telepathy"
 arch=('i686' 'x86_64')
 url="https://projects.kde.org/projects/extragear/network/telepathy/ktp-common-internals"
@@ -13,20 +13,17 @@ depends=('kdebase-runtime' 'telepathy-logger-qt-git' 'libkpeople-git')
 makedepends=('git' 'cmake' 'automoc4' 'boost')
 conflicts=('telepathy-kde-common-internals')
 provides=('telepathy-kde-common-internals')
-source=("git://anongit.kde.org/$_pkgname.git"
-        "d.diff")
-md5sums=('SKIP'
-        'SKIP')
+install=telepathy-kde-common-internals.install
+source=("git://anongit.kde.org/$_pkgname.git")
+md5sums=('SKIP')
 
 pkgver() {
   cd "$srcdir/$_pkgname"
-  git describe --always | sed 's|-|.|g;s|v||'
+  echo "0.7.r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
 }
 
 prepare() {
   mkdir -p "$srcdir/build"
-  cd $_pkgname
-  patch -Np1 -i "$srcdir/d.diff"
 }
 
 build() {

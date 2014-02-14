@@ -3,7 +3,7 @@
 
 pkgname=libkpeople-git
 _pkgname=libkpeople
-pkgver=0.0.80.201.g0ffa7e3
+pkgver=0.2.r853.90ff152
 pkgrel=1
 pkgdesc="A contact aggregation library for KDE"
 arch=('i686' 'x86_64')
@@ -18,7 +18,7 @@ md5sums=('SKIP')
 
 pkgver() {
   cd "$srcdir/$_pkgname"
-  git describe --always | sed 's|-|.|g;s|v||'
+  echo "0.2.r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
 }
 
 prepare() {

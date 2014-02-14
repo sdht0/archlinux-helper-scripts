@@ -22,7 +22,7 @@ md5sums=('SKIP'
 
 pkgver() {
     cd "$srcdir/$_pkgname-1.0.0"
-    echo "0.1.$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+    echo "1.0.0.r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
 }
 
 build() {

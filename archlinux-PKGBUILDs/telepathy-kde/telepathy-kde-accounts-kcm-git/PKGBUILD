@@ -3,7 +3,7 @@
 
 pkgname=telepathy-kde-accounts-kcm-git
 _pkgname=ktp-accounts-kcm
-pkgver=0.7.0.36.gdf08944
+pkgver=0.7.r921.df08944
 pkgrel=1
 pkgdesc="KCM Module for configuring Telepathy Instant Messaging Accounts. Now includes protocol-specific UI's"
 url="https://projects.kde.org/projects/kdereview/ktp-accounts-kcm"
@@ -23,7 +23,7 @@ md5sums=('SKIP')
 
 pkgver() {
   cd "$srcdir/$_pkgname"
-  git describe --always | sed 's|-|.|g;s|v||'
+  echo "0.7.r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
 }
 
 prepare() {

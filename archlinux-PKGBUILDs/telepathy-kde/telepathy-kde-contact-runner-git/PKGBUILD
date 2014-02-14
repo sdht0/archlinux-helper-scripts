@@ -2,7 +2,7 @@
 
 pkgname=telepathy-kde-contact-runner-git
 _pkgname=ktp-contact-runner
-pkgver=0.6.80.13.g6a29e5c
+pkgver=0.7.r146.6a29e5c
 pkgrel=1
 pkgdesc="KRunner plugin for KDE Telepathy"
 arch=('i686' 'x86_64')
@@ -18,7 +18,7 @@ md5sums=('SKIP')
 
 pkgver() {
   cd "$srcdir/$_pkgname"
-  git describe --always | sed 's|-|.|g;s|v||'
+  echo "0.7.r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
 }
 
 prepare() {

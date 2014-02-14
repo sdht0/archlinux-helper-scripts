@@ -101,8 +101,7 @@ esac
 if [[ "$usemakepkg" != "usemakepkg" ]];then
     if [[ "$nonewchroot" != "nonewchroot" ]];then
         printf "Are you sure you want to nuke chroot? [Y|n]: "
-        read inp && [[ "$inp" = "n" ]] && exit 1
-        sudo ccm n && sudo ccm c
+        read inp && [[ "$inp" = "n" ]] || sudo ccm n && sudo ccm c
     fi
     echo "Updating and preinstalling packages..." && \
     sudo arch-nspawn $BASEDIR/archlinux-chroot/root pacman -Syu --needed --noconfirm $prepackages[@]

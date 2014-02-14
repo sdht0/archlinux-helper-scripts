@@ -3,7 +3,7 @@
 
 pkgname=telepathy-kde-approver-git
 _pkgname=ktp-approver
-pkgver=0.6.80.20.g548ab3b
+pkgver=0.7.r196.548ab3b
 pkgrel=1
 pkgdesc="KDE Channel Approver for Telepathy"
 arch=('i686' 'x86_64')
@@ -19,7 +19,7 @@ md5sums=('SKIP')
 
 pkgver() {
   cd "$srcdir/$_pkgname"
-  git describe --always | sed 's|-|.|g;s|v||'
+  echo "0.7.r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
 }
 
 prepare() {

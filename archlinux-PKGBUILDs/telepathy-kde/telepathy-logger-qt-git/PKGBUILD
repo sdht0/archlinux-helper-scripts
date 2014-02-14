@@ -3,7 +3,7 @@
 
 pkgname=telepathy-logger-qt-git
 _pkgname=telepathy-logger-qt
-pkgver=0.8.0.1.gfee77b3
+pkgver=0.9.r270.fee77b3
 pkgrel=1
 pkgdesc="Qt bindings for telepathy logger"
 arch=('i686' 'x86_64')
@@ -18,7 +18,7 @@ md5sums=('SKIP')
 
 pkgver() {
   cd "$srcdir/$_pkgname"
-  git describe --always | sed 's|-|.|g;s|v||'
+  echo "0.9.r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
 }
 
 prepare() {

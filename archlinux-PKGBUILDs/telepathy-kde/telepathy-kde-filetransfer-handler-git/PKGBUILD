@@ -3,7 +3,7 @@
 
 pkgname=telepathy-kde-filetransfer-handler-git
 _pkgname=ktp-filetransfer-handler
-pkgver=0.6.80.5.gd592c28
+pkgver=0.7.r169.d592c28
 pkgrel=1
 pkgdesc="KDE Telepathy file transfer handler"
 arch=('i686' 'x86_64')
@@ -19,7 +19,7 @@ md5sums=('SKIP')
 
 pkgver() {
   cd "$srcdir/$_pkgname"
-  git describe --always | sed 's|-|.|g;s|v||'
+  echo "0.7.r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
 }
 
 prepare() {

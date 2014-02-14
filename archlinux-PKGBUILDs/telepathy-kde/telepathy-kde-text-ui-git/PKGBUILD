@@ -3,7 +3,7 @@
 
 pkgname=telepathy-kde-text-ui-git
 _pkgname=ktp-text-ui
-pkgver=0.7.0.56.gc07a667
+pkgver=0.7.r1548.c07a667
 pkgrel=1
 pkgdesc="Telepathy handler for Text Chats"
 arch=('i686' 'x86_64')
@@ -19,7 +19,7 @@ md5sums=('SKIP')
 
 pkgver() {
   cd "$srcdir/$_pkgname"
-  git describe --always | sed 's|-|.|g;s|v||'
+  echo "0.7.r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
 }
 
 prepare() {

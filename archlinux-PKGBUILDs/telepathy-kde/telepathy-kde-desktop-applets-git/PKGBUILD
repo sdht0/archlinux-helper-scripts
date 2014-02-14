@@ -2,7 +2,7 @@
 
 pkgname=telepathy-kde-desktop-applets-git
 _pkgname=ktp-desktop-applets
-pkgver=0.6.80.9.gf682609
+pkgver=0.7.r759.f682609
 pkgrel=1
 pkgdesc="The KDE-Telepathy Plasma desktop applets"
 arch=('i686' 'x86_64')
@@ -19,7 +19,7 @@ md5sums=('SKIP')
 
 pkgver() {
   cd "$srcdir/$_pkgname"
-  git describe --always | sed 's|-|.|g;s|v||'
+  echo "0.7.r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
 }
 
 prepare() {

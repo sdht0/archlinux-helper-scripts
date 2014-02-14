@@ -2,7 +2,7 @@
 
 pkgname=telepathy-kde-send-file-git
 _pkgname=ktp-send-file
-pkgver=0.7.0.2.g39cce82
+pkgver=0.7.r158.39cce82
 pkgrel=1
 pkgdesc="A File manager plugin to launch a file transfer job with a specified contact"
 arch=('i686' 'x86_64')
@@ -14,12 +14,13 @@ groups=('kde-telepathy-git')
 install=telepathy-kde-send-file.install
 conflicts=('telepathy-kde-send-file')
 provides=('telepathy-kde-send-file')
+install=telepathy-kde-send-file.install
 source=("git://anongit.kde.org/$_pkgname.git")
 md5sums=('SKIP')
 
 pkgver() {
   cd "$srcdir/$_pkgname"
-  git describe --always | sed 's|-|.|g;s|v||'
+  echo "0.7.r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
 }
 
 prepare() {

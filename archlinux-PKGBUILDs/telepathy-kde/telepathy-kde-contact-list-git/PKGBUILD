@@ -3,7 +3,7 @@
 
 pkgname=telepathy-kde-contact-list-git
 _pkgname=ktp-contact-list
-pkgver=0.7.0.22.g2091c55
+pkgver=0.7.r905.2091c55
 pkgrel=1
 pkgdesc="KDE Telepathy contact list application"
 arch=('i686' 'x86_64')
@@ -14,12 +14,13 @@ makedepends=('git' 'cmake' 'automoc4')
 conflicts=('telepathy-kde-contact-list'
            'telepathy-contact-list-git')
 provides=('telepathy-kde-contact-list')
+install=telepathy-kde-contact-list.install
 source=("git://anongit.kde.org/$_pkgname.git")
 md5sums=('SKIP')
 
 pkgver() {
   cd "$srcdir/$_pkgname"
-  git describe --always | sed 's|-|.|g;s|v||'
+  echo "0.7.r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
 }
 
 prepare() {
