@@ -3,12 +3,19 @@ Archlinux Helper Scripts
 
 This is a collection of Bash helper scripts to:
 
-* help install Arch Linux on _my_ system.
-* help build multiple PKGBUILDs at once, especially a group of packages of same application.
+* install Arch Linux on _my_ system.
+* submit packages to AUR.
+* build multiple PKGBUILDs at once, especially a group of packages of same application.
+
 
 Install scripts
 ---------------
 Scripts for my particular installation and configuration of Arch Linux.
+
+
+AUR Uploader
+---------------
+Bash script to upload a package file to AUR.
 
 
 There are two main build scripts:
