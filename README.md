@@ -7,21 +7,17 @@ This is a collection of Bash helper scripts to:
 * submit packages to AUR.
 * build multiple PKGBUILDs at once, especially a group of packages of same application.
 
-
 Install scripts
 ---------------
 Scripts for my particular installation and configuration of Arch Linux.
 
-
 AUR Uploader
----------------
+------------
 Bash script to upload a package file to AUR.
 
-
-There are two main build scripts:
-
-makebuild.sh
-------------
+Build scripts
+-------------
+### > makebuild.sh
 This is used to build a single package using either makepkg or in a chroot using [clean chroot manager](https://github.com/graysky2/clean-chroot-manager).
 
 Example usage:
@@ -30,8 +26,7 @@ Example usage:
 * `./makebuild.sh clean-chroot-manager-git - "-si --needed --noconfirm" usemakepkg` : Builds using makepkg using given arguments
 * `./makebuild.sh kde-workspace-git kf5 "noclean" useccm` : Builds using ccm without cleaning the chroot first
 
-custombuild.sh
--------------
+### > custombuild.sh
 This is used to build a group of related packages using `makebuild.sh`.
 
 Folder structure:
@@ -41,7 +36,7 @@ $BASEDIR
 |-- archlinux-pkgfiles  
 |-- archlinux-sources  
 |-- build  
-|-- archlinux-logs 
+|-- archlinux-logs
 
 * I have all my PKGBUILDs in the `$BASEDIR/archlinux-PKGBUILDs` folder, with sub-folders used for packages of same group.
 * The folder names are the same as the name of the package.
@@ -60,7 +55,6 @@ Example usage:
 
 Requirements
 ------------
-
 * makepkg requires installation of base-devel group
 * ccm can be installed from the [AUR](https://aur.archlinux.org/packages/clean-chroot-manager).
 
