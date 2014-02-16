@@ -74,19 +74,19 @@ case "$pkggroup" in
         ;;
     kte)
         folder="kte-collaborative"
-        packages=('libqinfinity-git'
-                'kte-collaborative-git')
+        packages=('libqinfinity-git' 'kte-collaborative-git')
         ;;
     active)
         folder="telepathy-kde-active"
-        packages=('kde-plasma-mobile-git'
-                'plasmate-git')
+        packages=('kde-plasma-mobile-git' 'plasmate-git')
+        ;;
+    plasma-nm)
+        folder="plasma-nm"
+        packages=('libnm-qt' 'kdeplasma-applets-plasma-nm-git')
         ;;
     rest)
         folder="-"
-        packages=('cower'
-                'google-talkplugin'
-                'eiskaltdcpp-qt')
+        packages=('cower' 'google-talkplugin' 'eiskaltdcpp-qt')
         cd $PKGBUILDSDIR
         for ((i=1;i<=${#packages[@]};i++));do
             cower -df ${packages[$i]}
@@ -101,7 +101,7 @@ esac
 if [[ "$usemakepkg" != "usemakepkg" ]];then
     if [[ "$nonewchroot" != "nonewchroot" ]];then
         printf "Are you sure you want to nuke chroot? [Y|n]: "
-        read inp && [[ "$inp" = "n" ]] || sudo ccm n && sudo ccm c
+        read inp && [[ "$inp" = "n" ]] || { sudo ccm n && sudo ccm c }
     fi
     echo "Updating and preinstalling packages..." && \
     sudo arch-nspawn $BASEDIR/archlinux-chroot/root pacman -Syu --needed --noconfirm $prepackages[@]

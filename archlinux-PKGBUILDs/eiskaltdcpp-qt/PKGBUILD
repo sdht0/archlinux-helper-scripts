@@ -5,34 +5,46 @@
 _name=eiskaltdcpp
 pkgname=eiskaltdcpp-qt
 pkgver=2.2.9
-_tarver=$pkgver
-_prerel=
 pkgrel=5
 license=('GPL3')
 arch=('i686' 'x86_64')
 depends=('qt4' 'miniupnpc' 'bzip2' 'pcre' 'lua51' 'libidn')
+makedepends=('pkgconfig' 'cmake' 'gettext')
 optdepends=('aspell: spellchecking'
             'qtscriptgenerator: qt scripts'
             'php: php scripts')
 pkgdesc="Qt-version of DC and ADC client based on dcpp core"
 url="http://code.google.com/p/eiskaltdc/"
-makedepends=('gcc' 'pkgconfig' 'cmake' 'gettext' 'lua51')
 conflicts=('eiskaltdcpp-svn' 'eiskaltdcpp' 'eiskaltdcpp-gtk' 'eiskaltdcpp-gtk-svn')
-options=(!emptydirs)
 install=$pkgname.install
-source=("http://eiskaltdc.googlecode.com/files/$_name-$_tarver$_prerel.tar.xz")
+source=("http://eiskaltdc.googlecode.com/files/$_name-$pkgver.tar.xz")
 
 build() {
   cd $srcdir
-  rm -rf $srcdir/$_name-$_tarver$_prerel/build
-  mkdir $srcdir/$_name-$_tarver$_prerel/build
-  cd $srcdir/$_name-$_tarver$_prerel/build
-  cmake .. -DQT_QMAKE_EXECUTABLE=qmake-qt4 -DCMAKE_INSTALL_PREFIX=/usr -DPERL_REGEX=ON -DLUA_INCLUDE_DIR=/usr/include/lua5.1 \
-    -DUSE_JS=ON -DUSE_GTK=OFF -DLOCAL_BOOST=ON -DWITH_EXAMPLES=ON -DWITH_SOUNDS=ON \
-    -DCMAKE_BUILD_TYPE=Release -DUSE_QT_QML=ON -DLUA_SCRIPT=ON -DWITH_LUASCRIPTS=ON \
-    -DUSE_ASPELL=ON -DWITH_DHT=ON -DUSE_MINIUPNP=ON
+  rm -rf $srcdir/$_name-$pkgver/build
+  mkdir $srcdir/$_name-$pkgver/build
+  cd $srcdir/$_name-$pkgver/build
+  cmake ..\
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DQT_QMAKE_EXECUTABLE=qmake-qt4 \
+        -DPERL_REGEX=ON \
+        -DLUA_INCLUDE_DIR=/usr/include/lua5.1 \
+        -DUSE_JS=ON \
+        -DWITH_EXAMPLES=ON \
+        -DWITH_SOUNDS=ON \
+        -DUSE_QT_QML=ON \
+        -DLUA_SCRIPT=ON \
+        -DWITH_LUASCRIPTS=ON \
+        -DUSE_ASPELL=ON \
+        -DWITH_DHT=ON \
+        -DUSE_MINIUPNP=ON
     # Turn off Miniupnp -- fix http://code.google.com/p/eiskaltdc/issues/detail?id=1131
   make
+}
+
+package() {
+  cd $srcdir/$_name-$pkgver/build
   make DESTDIR=$pkgdir install
 }
 

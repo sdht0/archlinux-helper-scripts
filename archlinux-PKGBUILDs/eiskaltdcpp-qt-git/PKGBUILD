@@ -1,86 +1,50 @@
 # Contributor: dhamp <dhamp@ya.ru>
 
-_name=eiskaltdcpp
-pkgbase=${_name}-git
-pkgname=${_name}-git
-true && pkgname=('eiskaltdcpp-qt-git' 'eiskaltdcpp-daemon-git' 'eiskaltdcpp-core-git' 'eiskaltdcpp-data-git')
-pkgver=2.3.0.4430.670866f
+_pkgname=eiskaltdcpp
+pkgname=${_pkgname}-qt-git
+pkgver=2.3.r4545.e383290
 pkgrel=1
 license=('GPL3')
-arch=('i686' 'x86_64' 'arm')
+arch=('i686' 'x86_64')
+pkgdesc="Qt4-based DC and ADC client based on dcpp core"
 url="http://code.google.com/p/eiskaltdc/"
-conflicts=('eiskaltdcpp')
+depends=('qt4' 'miniupnpc' 'libnotify' 'zlib' 'bzip2' 'pcre' 'lua' 'libidn' 'openssl')
+makedepends=('git' 'cmake' 'boost')
+optdepends=('aspell: spellchecking'
+            'qtscriptgenerator: need for qtscript')
+conflicts=('eiskaltdcpp' 'eiskaltdcpp-qt')
+provides=('eiskaltdcpp-qt')
 options=(!emptydirs)
-source=('git://github.com/eiskaltdcpp/eiskaltdcpp.git')
+install=${_pkgname}.install
+source=('git://github.com/eiskaltdcpp/eiskaltdcpp.git#branch=2.3.x')
 sha1sums=('SKIP')
 
 pkgver() {
-  cd ${_name}
-  echo $(grep -m 2 -A 1 "EiskaltDC++" CMakeLists.txt | grep -o "[[:digit:]]*" | tr '\n' '.')$(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+  cd ${_pkgname}
+  echo "2.3.r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
 }
 
 build() {
-    msg "Starting make..."
-    cd ${srcdir}/${_name}
-    #sed -i s/Lua51/Lua52/g CMakeLists.txt
-    rm -rf ${srcdir}/${_name}/build
-    mkdir ${srcdir}/${_name}/build
-    cd ${srcdir}/${_name}/build
-    cmake ../ -DCMAKE_INSTALL_PREFIX=/usr -DUSE_MINIUPNP=ON -DLOCAL_MINIUPNP=ON -DPERL_REGEX=ON -DLOCAL_BOOST=ON -DLUA_SCRIPT=ON  -DWITH_DHT=ON -DUSE_QT=OFF
+    cd ${srcdir}/${_pkgname}
+    cmake . \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DQT_QMAKE_EXECUTABLE=qmake-qt4 \
+        -DPERL_REGEX=ON \
+        -DUSE_MINIUPNP=ON \
+        -DLOCAL_MINIUPNP=ON \
+        -DWITH_EXAMPLES=ON \
+        -DWITH_SOUNDS=ON \
+        -DLUA_SCRIPT=ON  \
+        -DWITH_LUASCRIPTS=ON \
+        -DWITH_DHT=ON \
+        -DUSE_QT=ON \
+        -DUSE_QT_QML=ON \
+        -DUSE_JS=ON
+    make
 }
 
-package_eiskaltdcpp-qt-git() {
-    depends=('qt4' 'eiskaltdcpp-core-git' 'eiskaltdcpp-data-git')
-    optdepends=('aspell: spellchecking'
-                'qtscriptgenerator: need for qtscript')
-    pkgdesc="EiskaltDC++: Qt4-based DC and ADC client based on dcpp core"
-    conflicts=('eiskaltdcpp-qt' 'eiskaltdcpp')
-    provides=('eiskaltdcpp-qt')
-    install=${_name}.install
-    cd ${srcdir}/${_name}/build
-    cmake ../  -DUSE_JS=ON -DUSE_QT=ON
-    make --no-print-directory translations_qt
-    make --no-print-directory -C eiskaltdcpp-qt DESTDIR=${pkgdir} install clean
+package() {
+    cd ${srcdir}/${_pkgname}
+    make DESTDIR=${pkgdir} install
 }
-
-package_eiskaltdcpp-cli-git() {
-    depends=('eiskaltdcpp-daemon-git' 'eiskaltdcpp-data-git' 'perl-term-shellui' 'perl-data-dump' 'perl-json-rpc')
-    pkgdesc="EiskaltDC++ cli interface for daemon with xmlrpc"
-    cd ${srcdir}/${_name}/build
-    make --no-print-directory -C eiskaltdcpp-cli DESTDIR=${pkgdir} install clean
-}
-
-package_eiskaltdcpp-daemon-git() {
-    depends=('eiskaltdcpp-core-git' 'eiskaltdcpp-data-git' 'gcc-libs')
-    pkgdesc="EiskaltDC++ Daemon"
-    conflicts=('eiskaltdcpp-daemon' 'eiskaltdcpp')
-    provides=('eiskaltdcpp-daemon')
-    cd ${srcdir}/${_name}/build
-    cmake ../ -DNO_UI_DAEMON=ON -DJSONRPC_DAEMON=ON
-    make --no-print-directory -C eiskaltdcpp-daemon DESTDIR=${pkgdir} install clean
-}
-
-package_eiskaltdcpp-core-git() {
-    depends=('zlib' 'bzip2' 'openssl' 'lua' 'libidn' 'pcre')
-    pkgdesc="EiskaltDC++ Core"
-    conflicts=('eiskaltdcpp-core' 'eiskaltdcpp')
-    provides=('eiskaltdcpp-core')
-    cd ${srcdir}/${_name}/build
-    make --no-print-directory -C cmake
-    make --no-print-directory -C dcpp DESTDIR=${pkgdir} install
-}
-
-package_eiskaltdcpp-data-git() {
-    arch=('any')
-    depends=('sh' 'bash' 'hicolor-icon-theme')
-    optdepends=('php: needed for some optional scripts')
-    conflicts=('eiskaltdcpp-data' 'eiskaltdcpp')
-    provides=('eiskaltdcpp-data')
-    install=${_name}.install
-    pkgdesc="EiskaltDC++ Data files"
-    cd ${srcdir}/${_name}/build
-    make --no-print-directory -C data DESTDIR=${pkgdir} install clean
-}
-pkgdesc="DC and ADC client based on dcpp core"
-depends=('qt4' 'libnotify' 'zlib' 'bzip2' 'pcre' 'lua' 'libidn' 'gtk2')
-makedepends=('gcc' 'git' 'pkg-config' 'cmake' 'sed')
