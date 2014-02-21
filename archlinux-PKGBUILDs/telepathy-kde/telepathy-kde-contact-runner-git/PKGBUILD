@@ -2,7 +2,7 @@
 
 pkgname=telepathy-kde-contact-runner-git
 _pkgname=ktp-contact-runner
-pkgver=0.7.r146.6a29e5c
+pkgver=0.7.r170.d74ed41
 pkgrel=1
 pkgdesc="KRunner plugin for KDE Telepathy"
 arch=('i686' 'x86_64')

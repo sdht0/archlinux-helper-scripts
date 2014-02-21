@@ -50,8 +50,8 @@ Variables:
 Example usage:
 
 * `./custombuild.sh telepathy` : Builds using ccm after creating a new chroot
-* `./custombuild.sh kf5 "-sif --noconfirm" usemakepkg` : Builds using makepkg using given arguments
-* `./custombuild.sh telepathy "continue" useccm nonewchroot` : Builds using ccm without creating a new chroot first, and also retain previous chroot state for the first package
+* `./custombuild.sh kf5 usemakepkg "-sif --noconfirm"` : Builds using makepkg using given arguments
+* `./custombuild.sh telepathy useccm "continue" nonewchroot` : Builds using ccm without creating a new chroot first, and also retain previous chroot state for the first package
 
 Requirements
 ------------

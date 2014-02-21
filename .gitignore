@@ -11,4 +11,5 @@ archlinux-chroot/
 archlinux-pkgfiles/
 archlinux-sources/
 __pycache__/
-arch-install-scripts/guides/
+archlinux-install-scripts/guides/
+archlinux-install-scripts/.zshrc

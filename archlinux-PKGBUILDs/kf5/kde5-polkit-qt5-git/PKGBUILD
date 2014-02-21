@@ -1,6 +1,6 @@
 # Maintainer: Andrea Scarpino <andrea@archlinux.org>
 
-pkgname=kde5-polkit-qt-git
+pkgname=kde5-polkit-qt5-git
 pkgver=v0.103.0.7.g3a5f879
 pkgrel=1
 pkgdesc="Qt5 wrapper around polkit-1 client libraries, used by kdelibs to provide the polkit-1 kauth backend and by KDE's polkit client"
