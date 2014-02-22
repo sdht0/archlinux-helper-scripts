@@ -1,7 +1,7 @@
 randpw(){ < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-16};echo;}
 echo "Installing packages..." && \
 pacman -S --needed \
-            firefox tomboy flashplugin tsocks chromium vlc gimp linuxdcpp virtualbox virtualbox-guest-iso \
+            firefox tomboy flashplugin tsocks chromium vlc gimp linuxdcpp virtualbox virtualbox-guest-iso gparted \
             googlecl s3cmd imagemagick graphviz wireshark-gtk skype pidgin \
             libreoffice libreoffice-extension-pdfimport libreoffice-extension-presenter-screen libreoffice-extension-presentation-minimizer \
             aspell aspell-en hunspell hunspell-en hyphen hyphen-en artwiz-fonts \
@@ -13,8 +13,6 @@ echo "Setting up ntp..." &&
 systemctl enable ntpd && \
 systemctl start ntpd && \
 echo "Setting up git..." &&
-git config --global user.name "Siddhartha Sahu" && \
-git config --global user.email "sh.siddhartha@gmail.com" && \
 echo "Adding sdh to wireshark" &&
 gpasswd -a sdh wireshark && \
 echo "Adding sdh to vboxusers" &&
@@ -25,14 +23,17 @@ server = 127.0.0.1
 server_port = 9999
 server_type = 5
 " > /etc/tsocks.conf && \
+serverroot=/home/lfiles/www && \
+home=/home/sdh && \
 echo "Setting flat-volumes=no..." && \
 sed -i "s/^; flat-volumes = yes/flat-volumes = no/" /etc/pulse/daemon.conf && \
 echo "Editing kmixrc..." && \
-grep "VolumePercentageStep" ~/.kde4/share/config/kmixrc > /dev/null && sed -i "s/VolumePercentageStep.*/VolumePercentageStep=3/" ~/.kde4/share/config/kmixrc || sed -i \
+grep "VolumePercentageStep" $home/.kde4/share/config/kmixrc > /dev/null && \
+sed -i "s/VolumePercentageStep.*/VolumePercentageStep=3/" $home/.kde4/share/config/kmixrc || \
+sed -i \
     -e "/VolumeFeedback.*$/a\
-VolumePercentageStep=3" ~/.kde4/share/config/kmixrc && \
+VolumePercentageStep=3" $home/.kde4/share/config/kmixrc && \
 echo "Setting up LAMP..." && \
-serverroot=/home/lfiles/www && \
 systemctl enable httpd && \
 systemctl enable mysqld && \
 systemctl start httpd && \
@@ -40,7 +41,6 @@ systemctl start mysqld && \
 mysql_secure_installation && \
 echo "Editing httpd.conf..." && \
 sed -i \
-    -e "s|^ServerAdmin.*|ServerAdmin sh.siddhartha@gmail.com|" \
     -e 's|^DocumentRoot.*|DocumentRoot "'"$serverroot"'"|' \
     -e 's|<Directory "/srv/http">|<Directory "'"$serverroot"'">|' \
     -e 's|^Include conf/extra/httpd-autoindex.conf|#Include conf/extra/httpd-autoindex.conf|' \

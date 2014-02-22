@@ -9,9 +9,8 @@ url="http://github.com/falconindy/cower"
 license=('MIT')
 depends=('curl' 'yajl' 'pacman')
 makedepends=('bash-completion' 'perl')
-source=("http://code.falconindy.com/archive/$pkgname/$pkgname-$pkgver.tar.gz"{,.sig})
-md5sums=('12e2410ea8dc6b3c0b289c6fed16c76f'
-         'SKIP')
+source=("http://code.falconindy.com/archive/$pkgname/$pkgname-$pkgver.tar.gz")
+md5sums=('12e2410ea8dc6b3c0b289c6fed16c76f')
 
 build() {
   make -C "$pkgname-$pkgver"

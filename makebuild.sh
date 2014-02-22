@@ -14,13 +14,13 @@ if [ "$2" != "-" -a "$2" != "" ];then
     folder="$2/"
 fi
 
+# indicate 'usemakepkg' to build using makepkg, anything else uses ccm
+usemakepkg="$3"
+
 # used to indicate options
 # On using makepkg, options to makepkg can be sent, eg "-si --needed --noconfirm"
 # On using ccm, "noclean" can be indicated to not clean chroot before building the package
-uoptions="$3"
-
-# indicate 'usemakepkg' to build using makepkg, anything else uses ccm
-usemakepkg="$4"
+uoptions="$4"
 
 BASEDIR=/home/lfiles/dev
 

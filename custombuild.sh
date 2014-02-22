@@ -80,12 +80,7 @@ case "$pkggroup" in
         ;;
     rest)
         folder="-"
-        packages=('cower' 'google-talkplugin' 'eiskaltdcpp-qt')
-        cd $PKGBUILDSDIR
-        for ((i=1;i<=${#packages[@]};i++));do
-            cower -df ${packages[$i]}
-        done
-        packages=($packages[@] 'guayadeque-svn')
+        packages=('clean-chroot-manager-git' 'cower' 'eiskaltdcpp-qt-git' 'google-talkplugin' 'guayadeque-svn' 'kdeplasma-applets-nextwallpaper')
         ;;
     *)  printf "kf5\nkte\ntelepathy\nactive\nrest\n";
         exit 1
@@ -109,10 +104,10 @@ fi
 opt="" && [[ "$uoptions" = "continue" ]] && opt="noclean"
 for ((i=1;i<=${#packages[@]};i++));do
     if [[ "$usemakepkg" = "usemakepkg" ]];then
-        /usr/bin/bash $BASEDIR/makebuild.sh ${packages[$i]} $folder $uoptions usemakepkg || exit 1
+        /usr/bin/bash $BASEDIR/makebuild.sh ${packages[$i]} $folder usemakepkg $uoptions || exit 1
     else
         [[ "$uoptions" = "noclean" ]] && opt="noclean"
-        /usr/bin/bash $BASEDIR/makebuild.sh ${packages[$i]} $folder "$opt"  || exit 1
+        /usr/bin/bash $BASEDIR/makebuild.sh ${packages[$i]} $folder useccm "$opt"  || exit 1
         [[ "$uoptions" = "initialclean" ]] && opt="noclean"
         [[ "$uoptions" = "continue" ]] && opt=""
     fi
