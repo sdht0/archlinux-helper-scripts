@@ -34,12 +34,12 @@ case "$pkggroup" in
                 # tier 1
                 'kf5-attica-git' 'kf5-kitemmodels-git' 'kf5-kitemviews-git' 'kf5-karchive-git' 'kf5-kcodecs-git' 'kf5-kconfig-git'
                 'kf5-kcoreaddons-git' 'kf5-kdbusaddons-git' 'kf5-kglobalaccel-git' 'kf5-kguiaddons-git' 'kf5-kidletime-git'
-                'kf5-kimageformats-git' 'kf5-kjs-git' 'kf5-kplotting-git' 'kf5-kwidgetsaddons-git' 'kf5-kwindowsystem-git'
+                'kf5-ki18n-git' 'kf5-kimageformats-git' 'kf5-kjs-git' 'kf5-kplotting-git' 'kf5-kwidgetsaddons-git' 'kf5-kwindowsystem-git'
                 'kf5-solid-git' 'kf5-sonnet-git' 'kf5-threadweaver-git' 'kf5-kf5umbrella-git'
 
                 # tier 2
                 'kf5-kauth-git' 'kf5-kcompletion-git' 'kf5-kcrash-git' 'kf5-kdoctools-git' 'kf5-kdnssd-framework-git'
-                'kf5-ki18n-git' 'kf5-kjobwidgets-git' 'kf5-knotifications-git'
+                'kf5-kjobwidgets-git' 'kf5-knotifications-git'
 
                 # tier 3
                 'kf5-kconfigwidgets-git' 'kf5-kiconthemes-git' 'kf5-kservice-git' 'kf5-ktextwidgets-git' 'kf5-kxmlgui-git'
@@ -49,8 +49,7 @@ case "$pkggroup" in
                 'kf5-kunitconversion-git' 'kf5-knewstuff-git' 'kf5-knotifyconfig-git' 'kf5-kwallet-framework-git'
 
                 # tier 4
-                # 'kf5-kapidox-git' [currently not buildable]
-                'kf5-frameworkintegration-git' 'kf5-kde4support-git' 'kf5-kfileaudiopreview-git' 'kf5-khtml-git'
+                'kf5-frameworkintegration-git' 'kf5-kapidox-git' 'kf5-kfileaudiopreview-git' 'kf5-khtml-git' 'kf5-kde4support-git'
 
                 # KDE 5
                 'kde5-kactivities-frameworks-git' 'kde5-plasma-framework-git' 'kde5-runtime-git' 'kde5-workspace-git'

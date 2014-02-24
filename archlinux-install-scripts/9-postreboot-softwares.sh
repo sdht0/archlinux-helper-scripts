@@ -15,8 +15,9 @@ systemctl start ntpd && \
 echo "Setting up git..." &&
 echo "Adding sdh to wireshark" &&
 gpasswd -a sdh wireshark && \
-echo "Adding sdh to vboxusers" &&
+echo "Setting up virtualbox..." &&
 gpasswd -a sdh vboxusers && \
+echo "vboxdrv\nvboxnetadp\nvboxnetflt\nvboxpci" > /etc/modules-load.d/virtualbox.conf && \
 echo "Setting up tsocks..." && \
 echo "
 server = 127.0.0.1

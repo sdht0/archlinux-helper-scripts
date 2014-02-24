@@ -46,5 +46,4 @@ echo "Install grub..." && \
 pacman -S grub os-prober ntfs-3g dosfstools && \
 grub-install --target=i386-pc --recheck /dev/sda && \
 grub-mkconfig -o /boot/grub/grub.cfg && \
-echo "Done."
 echo "Time to reboot!"
