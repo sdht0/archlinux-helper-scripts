@@ -7,12 +7,13 @@ pacman -S --needed \
             aspell aspell-en hunspell hunspell-en hyphen hyphen-en artwiz-fonts \
             qt5 qt5-doc python python-beautifulsoup4 python2-beautifulsoup4 python2-pyqt mysql-python qtcreator \
             kdevelop kdevelop-python kdevelop-php racket ghc cabal-install jre7-openjdk jdk7-openjdk \
-            devtools ccache cmake gdb valgrind unrar unzip zip p7zip ntp rsync wget git subversion \
+            devtools ccache cmake gdb valgrind unrar unzip zip p7zip ntp rsync wget git tk subversion \
             openssh nmap apache php php-apache mariadb phpmyadmin php-mcrypt php-gd && \
 echo "Setting up ntp..." &&
 systemctl enable ntpd && \
 systemctl start ntpd && \
 echo "Setting up git..." &&
+git config --global alias.lg "log --color --graph --pretty=format:'%C(auto)%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit" && \
 echo "Adding sdh to wireshark" &&
 gpasswd -a sdh wireshark && \
 echo "Setting up virtualbox..." &&
@@ -42,25 +43,17 @@ systemctl start mysqld && \
 mysql_secure_installation && \
 echo "Editing httpd.conf..." && \
 sed -i \
+    -e '\|^Include conf/extra/httpd-autoindex.conf| s,^,#,' \
+    -e '\|^Include conf/extra/httpd-userdir.conf| s,^,#,' \
+    -e "/^#MIMEMagicFile/ s,#,," \
     -e 's|^DocumentRoot.*|DocumentRoot "'"$serverroot"'"|' \
-    -e 's|<Directory "/srv/http">|<Directory "'"$serverroot"'">|' \
-    -e 's|^Include conf/extra/httpd-autoindex.conf|#Include conf/extra/httpd-autoindex.conf|' \
-    -e 's|^Include conf/extra/httpd-userdir.conf|#Include conf/extra/httpd-userdir.conf|' \
-    -e "/^#MIMEMagicFile/ s,#,," /etc/httpd/conf/httpd.conf && \
-sed -i -e '/^<Directory "'"$(echo $serverroot | sed "s|/|\\\/|g")"'">/b br
-     b
-     : br
-     s|^\(<Directory "'"$serverroot"'">.*\)Options Indexes FollowSymLinks|\1Options -Indexes FollowSymLinks MultiViews|
-     t
-     N
-     b br' /etc/httpd/conf/httpd.conf && \
-sed -i -e '/^<Directory "'"$(echo $serverroot | sed "s|/|\\\/|g")"'">/b br
-     b
-     : br
-     s|^\(<Directory "'"$serverroot"'">.*\)AllowOverride None|\1AllowOverride All|
-     t
-     N
-     b br' /etc/httpd/conf/httpd.conf && \
+    -e '\|^<Directory "/srv/http">|b br
+        b
+        : br
+        s|^<Directory "/srv/http">\(.*\)Options Indexes FollowSymLinks\(.*\)AllowOverride None|<Directory "'"$serverroot"'">\1Options -Indexes +FollowSymLinks +MultiViews\2AllowOverride All|
+        t
+        N
+        b br' /etc/httpd/conf/httpd.conf && \
 echo "Editing httpd-default.conf..." && \
 sed -i \
     -e "/^ServerTokens/ s,Full,Prod," \
@@ -86,7 +79,7 @@ Include conf/extra/php5_module.conf
 # phpMyAdmin configuration
 Include conf/extra/httpd-phpmyadmin.conf
 " >> /etc/httpd/conf/httpd.conf && \
-echo "Setting up phpmyadmin..." && \
+echo "Setting up phpmyadmin... Needs mysql root password" && \
 pmapasswd=$(randpw 20) && \
 echo "CREATE USER 'pma'@'localhost' IDENTIFIED BY '$pmapasswd';
 GRANT USAGE ON mysql.* TO 'pma'@'localhost' IDENTIFIED BY '$pmapasswd';
@@ -101,8 +94,8 @@ GRANT SELECT ON mysql.db TO 'pma'@'localhost';
 GRANT SELECT ON mysql.host TO 'pma'@'localhost';
 GRANT SELECT (Host, Db, User, Table_name, Table_priv, Column_priv)
     ON mysql.tables_priv TO 'pma'@'localhost';
-GRANT SELECT, INSERT, UPDATE, DELETE ON phpmyadmin.* TO 'pma'@'localhost';" | mysql -u root -p && \
-mysql -u root -p < /usr/share/webapps/phpMyAdmin/examples/create_tables.sql && \
+GRANT SELECT, INSERT, UPDATE, DELETE ON phpmyadmin.* TO 'pma'@'localhost';
+$(cat /usr/share/webapps/phpMyAdmin/examples/create_tables.sql)" | mysql -u root -p && \
 sed -i \
     -e "s|^\(\$cfg\['blowfish_secret'\] =\).*|\1 '$(randpw 37)';|" \
     -e "/^\/\/ \$cfg\['Servers'\]\[\$i\]/ s,// ,,"  \
