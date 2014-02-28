@@ -42,6 +42,8 @@ echo "Set sdh password..." && \
 passwd sdh && \
 echo "Disable PC beep..." && \
 echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf && \
+echo "Enable sysrq..." && \
+echo "kernel.sysrq = 1" >> /etc/sysctl.d/99-sysctl.conf && \
 echo "Install grub..." && \
 pacman -S grub os-prober ntfs-3g dosfstools && \
 grub-install --target=i386-pc --recheck /dev/sda && \
