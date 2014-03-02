@@ -2,14 +2,16 @@ import subprocess
 import copy
 
 def findDependencies():
-    data=open("dependency-data-kf5-qt5","r").readlines()
+    data=open("/home/lfiles/dev/sources/kde5/kde-build-metadata/dependency-data-kf5-qt5","r").readlines()
     directdependencies={}
     reversedependencies={}
     for line in data:
         line=line.strip(" \n").replace(" ","")
-        if line.find("frameworks/")==0:
-            line=line.replace("frameworks/","")
+        if line.find("frameworks/")==0 or line.find("playground/libs/plasma-framework")==0 or line.find("kde/kdelibs/kactivities")==0:
+            line=line.replace("frameworks/","").replace("playground/libs/","").replace("kde/kdelibs/","").replace("kdesupport/","").replace("#testdependency","")
             parts=line.split(":")
+            if parts[1][0]=="-" or "phonon" in line:
+                continue
             if parts[0] not in directdependencies:
                 directdependencies[parts[0]]=set()
             directdependencies[parts[0]].add(parts[1])
@@ -17,7 +19,7 @@ def findDependencies():
                 reversedependencies[parts[1]]=set()
             reversedependencies[parts[1]].add(parts[0])
 
-    fl=open("fdata1","w")
+    fl=open("alldependencies.txt","w")
     text="digraph A {"
     for d in directdependencies:
         fl.write(d+"\n")
@@ -25,7 +27,7 @@ def findDependencies():
         for dn in directdependencies[d]:
             text+='"%s"->"%s";\n' % (dn,d)
     text+="}"
-    f = open("h1.txt","w")
+    f = open("alldependencies.dot","w")
     f.write(text)
     f.close()
     fl.close()
@@ -52,7 +54,7 @@ def findDependencies():
             searchDependencies(framework, framework)
 
 
-    fl=open("fdata2","w")
+    fl=open("minimiseddependencies.txt","w")
     text="digraph A {"
     for d in directdependencies:
         fl.write(d+"\n")
@@ -61,11 +63,13 @@ def findDependencies():
         for dn in directdependencies[d]:
             text+='"%s"->"%s";\n' % (dn,d)
     text+="}"
-    f = open("h2.txt","w")
+    f = open("minimiseddependencies.dot","w")
     f.write(text)
     f.close()
     fl.close()
     return directdependencies
 
 if __name__ == '__main__':
-    findDependencies()
+    x=findDependencies()
+    for i in x:
+        print(i,x[i])

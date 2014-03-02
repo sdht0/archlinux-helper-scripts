@@ -1,18 +1,18 @@
 
-pkgname=kf5-kprintutils-git
-_pkgname=kprintutils
-pkgver=9.01fbcaa
+pkgname=kf5-ktexteditor-git
+_pkgname=ktexteditor
+pkgver=1
 pkgrel=1
-pkgdesc="KPrintUtils"
+pkgdesc="KTextEditor Framework"
 arch=('i686' 'x86_64')
-url="http://projects.kde.org/projects/frameworks/kprintutils"
+url="http://projects.kde.org/projects/frameworks/ktexteditor"
 license=('LGPL')
-depends=('kf5-kparts-git')
+depends=('qt5-base')
 makedepends=('extra-cmake-modules-git' 'git')
 group=("kf5")
 conflicts=("${_pkgname}-git")
 provides=("${_pkgname}-git")
-source=("git://anongit.kde.org/kprintutils")
+source=("git://anongit.kde.org/ktexteditor")
 md5sums=('SKIP')
 
 pkgver() {

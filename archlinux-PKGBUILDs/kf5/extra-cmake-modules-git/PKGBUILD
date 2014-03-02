@@ -2,7 +2,7 @@
 
 pkgname=extra-cmake-modules-git
 _pkgname=extra-cmake-modules
-pkgver=2461.9da6566
+pkgver=0.0.10.r2500.9287c5b
 pkgrel=1
 pkgdesc='Extra CMake modules'
 arch=('any')
@@ -15,7 +15,7 @@ md5sums=('SKIP')
 
 pkgver() {
   cd "$_pkgname"
-  echo "0.0.10.r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+  echo "0.0.11.r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
 }
 
 prepare() {

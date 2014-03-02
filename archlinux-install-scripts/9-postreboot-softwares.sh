@@ -1,18 +1,19 @@
 randpw(){ < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-16};echo;}
 echo "Installing packages..." && \
 pacman -S --needed \
-            firefox tomboy flashplugin tsocks chromium vlc gimp linuxdcpp virtualbox virtualbox-guest-iso gparted \
-            googlecl s3cmd imagemagick graphviz wireshark-gtk skype pidgin \
+            firefox tomboy flashplugin tsocks chromium vlc gimp linuxdcpp virtualbox virtualbox-guest-iso gparted mkisolinux \
+            googlecl s3cmd imagemagick wireshark-gtk skype pidgin telepathy \
             libreoffice libreoffice-extension-pdfimport libreoffice-extension-presenter-screen libreoffice-extension-presentation-minimizer \
             aspell aspell-en hunspell hunspell-en hyphen hyphen-en artwiz-fonts \
-            qt5 qt5-doc python python-beautifulsoup4 python2-beautifulsoup4 python2-pyqt mysql-python qtcreator \
+            qt5 qt5-doc python python-beautifulsoup4 python2-beautifulsoup4 python2-pyqt mysql-python qtcreator graphviz \
             kdevelop kdevelop-python kdevelop-php racket ghc cabal-install jre7-openjdk jdk7-openjdk \
-            devtools ccache cmake gdb valgrind unrar unzip zip p7zip ntp rsync wget git tk subversion \
-            openssh nmap apache php php-apache mariadb phpmyadmin php-mcrypt php-gd && \
+            devtools ccache cmake gdb valgrind unrar unzip zip p7zip rsync wget git tk bzr subversion \
+            openssh ntp nmap dnsutils mtr apache php php-apache mariadb phpmyadmin php-mcrypt php-gd && \
 echo "Setting up ntp..." &&
 systemctl enable ntpd && \
 systemctl start ntpd && \
 echo "Setting up git..." &&
+git config --global help.autocorrect 1 && \
 git config --global alias.lg "log --color --graph --pretty=format:'%C(auto)%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit" && \
 echo "Adding sdh to wireshark" &&
 gpasswd -a sdh wireshark && \
@@ -38,7 +39,9 @@ VolumePercentageStep=3" $home/.kde4/share/config/kmixrc && \
 echo "Setting up LAMP..." && \
 systemctl enable httpd && \
 systemctl enable mysqld && \
+echo "Starting httpd..." && \
 systemctl start httpd && \
+echo "Starting mysqld..." && \
 systemctl start mysqld && \
 mysql_secure_installation && \
 echo "Editing httpd.conf..." && \

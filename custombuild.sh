@@ -22,37 +22,41 @@ nonewchroot="$4"
 case "$pkggroup" in
     kf5)
         folder="kf5"
-        prepackages=("shared-mime-info" "qt5-base" "git")
+        prepackages=("shared-mime-info" "qt5-base" "git" "bzr")
         packages=(
                 # buid system
-                'cmake-git'
-                'extra-cmake-modules-git'
+#                 'cmake-git'
+#                 'extra-cmake-modules-git'
 
                 # dependencies
-                'kde5-libdbusmenu-qt5-bzr' 'kde5-akonadi-git' 'kde5-polkit-qt5-git' 'kde5-strigi-git' 'kde5-phonon-qt5-git'
+#                 'kde5-libdbusmenu-qt5-bzr' 'kde5-phonon-qt5-git' 'kde5-polkit-qt5-git'
 
                 # tier 1
-                'kf5-attica-git' 'kf5-kitemmodels-git' 'kf5-kitemviews-git' 'kf5-karchive-git' 'kf5-kcodecs-git' 'kf5-kconfig-git'
-                'kf5-kcoreaddons-git' 'kf5-kdbusaddons-git' 'kf5-kglobalaccel-git' 'kf5-kguiaddons-git' 'kf5-kidletime-git'
-                'kf5-ki18n-git' 'kf5-kimageformats-git' 'kf5-kjs-git' 'kf5-kplotting-git' 'kf5-kwidgetsaddons-git' 'kf5-kwindowsystem-git'
-                'kf5-solid-git' 'kf5-sonnet-git' 'kf5-threadweaver-git' 'kf5-kf5umbrella-git'
+#                 'kf5-karchive-git' 'kf5-attica-git' 'kf5-kcodecs-git' 'kf5-kconfig-git' 'kf5-kcoreaddons-git' 'kf5-kdbusaddons-git'
+#                 'kf5-kglobalaccel-git' 'kf5-kguiaddons-git'
+                'kf5-ki18n-git' 'kf5-kidletime-git'
+                'kf5-kimageformats-git' 'kf5-kitemmodels-git' 'kf5-kitemviews-git' 'kf5-kjs-git' 'kf5-kplotting-git'
+                'kf5-kwidgetsaddons-git' 'kf5-kwindowsystem-git' 'kf5-solid-git' 'kf5-sonnet-git' 'kf5-threadweaver-git'
 
                 # tier 2
-                'kf5-kauth-git' 'kf5-kcompletion-git' 'kf5-kcrash-git' 'kf5-kdoctools-git' 'kf5-kdnssd-framework-git'
-                'kf5-kjobwidgets-git' 'kf5-knotifications-git'
+                'kf5-kauth-git' 'kf5-kcompletion-git' 'kf5-kcrash-git' 'kf5-kdnssd-framework-git' 'kf5-kdoctools-git'
+                'kf5-kjobwidgets-git' 'kf5-kjsembed-git' 'kf5-knotifications-git' 'kf5-kunitconversion-git' 'kf5-kpty-git'
 
                 # tier 3
                 'kf5-kconfigwidgets-git' 'kf5-kiconthemes-git' 'kf5-kservice-git' 'kf5-ktextwidgets-git' 'kf5-kxmlgui-git'
                 'kf5-kbookmarks-git' 'kf5-kcmutils-git' 'kf5-kio-git' 'kf5-kdeclarative-git' 'kf5-kinit-git' 'kf5-kded-git'
-                'kf5-kpty-git' 'kf5-kdesu-git' 'kf5-kparts-git' 'kf5-kdewebkit-git' 'kf5-kdesignerplugin-git'
-                'kf5-kemoticons-git'  'kf5-kjsembed-git' 'kf5-kmediaplayer-git' 'kf5-kprintutils-git' 'kf5-kross-git'
-                'kf5-kunitconversion-git' 'kf5-knewstuff-git' 'kf5-knotifyconfig-git' 'kf5-kwallet-framework-git'
+                'kf5-kdesu-git' 'kf5-kparts-git' 'kf5-kdewebkit-git' 'kf5-kdesignerplugin-git' 'kf5-kemoticons-git'
+                'kf5-kmediaplayer-git' 'kf5-kprintutils-git' 'kf5-kross-git' 'kf5-knewstuff-git' 'kf5-knotifyconfig-git'
+                'kf5-kwallet-git' 'kf5-ktexteditor-git' 'kf5-kactivities-git' 'kf5-plasma-git' 'kf5-krunner-git'
 
                 # tier 4
                 'kf5-frameworkintegration-git' 'kf5-kapidox-git' 'kf5-kfileaudiopreview-git' 'kf5-khtml-git' 'kf5-kde4support-git'
 
+                #all
+                'kf5-kf5umbrella-git'
+
                 # KDE 5
-                'kde5-kactivities-frameworks-git' 'kde5-plasma-framework-git' 'kde5-runtime-git' 'kde5-workspace-git'
+                'kde5-akonadi-git' 'kde5-runtime-git' 'kde5-workspace-git' # 'kde5-strigi-git'?
                 )
         ;;
     telepathy)

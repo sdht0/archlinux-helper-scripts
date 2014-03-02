@@ -1,18 +1,18 @@
 
-pkgname=kf5-kdbusaddons-git
-_pkgname=kdbusaddons
-pkgver=40.afdac76
+pkgname=kf5-krunner-git
+_pkgname=krunner
+pkgver=1
 pkgrel=1
-pkgdesc="KDBusAddons"
+pkgdesc="Framework for providing different actions given a string query."
 arch=('i686' 'x86_64')
-url="http://projects.kde.org/projects/frameworks/kdbusaddons"
+url="http://projects.kde.org/projects/frameworks/krunner"
 license=('LGPL')
-depends=('qt5-base')
+depends=('kf5-plasma-framework-git')
 makedepends=('extra-cmake-modules-git' 'git')
 group=("kf5")
 conflicts=("${_pkgname}-git")
 provides=("${_pkgname}-git")
-source=("git://anongit.kde.org/kdbusaddons")
+source=("git://anongit.kde.org/krunner")
 md5sums=('SKIP')
 
 pkgver() {

@@ -7,7 +7,7 @@ pkgdesc='Provides the interface and basic tools for the KDE workspace'
 arch=('i686' 'x86_64')
 url='https://projects.kde.org/projects/kde/kde-workspace'
 license=('LGPL')
-depends=('kde5-plasma-framework-git' 'qimageblitz' 'libxkbfile' 'libxcursor' 'lm_sensors'
+depends=('kf5-plasma-git' 'qimageblitz' 'libxkbfile' 'libxcursor' 'lm_sensors'
          'libraw1394' 'libusb-compat' 'pciutils' 'libbsd' 'kde5-akonadi-git' 'qt5-webkit' 'qt5-tools')
 makedepends=('extra-cmake-modules-git' 'git' 'kf5-kdoctools-git' 'boost')
 conflicts=('kde-workspace')

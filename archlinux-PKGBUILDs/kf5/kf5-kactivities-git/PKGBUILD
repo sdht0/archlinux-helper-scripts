@@ -1,16 +1,16 @@
 # $Id
 # Maintainer: Andrea Scarpino <andrea@archlinux.org>
 
-pkgname=kde5-kactivities-frameworks-git
+pkgname=kf5-kactivities-git
 pkgver=586.acfce06
 pkgrel=1
 pkgdesc="Core components for the KDE's Activities"
 arch=('i686' 'x86_64')
 url='https://projects.kde.org/projects/kde/kdelibs/kactivities'
 license=('LGPL')
-depends=('qt5-declarative' 'boost-libs' 'kf5-kf5umbrella-git')
+depends=('qt5-declarative' 'boost-libs' 'kf5-kservice-git' 'kf5-kwindowsystem-git')
 makedepends=('extra-cmake-modules-git' 'git' 'boost')
-source=('git://anongit.kde.org/kactivities.git#branch=frameworks')
+source=('git://anongit.kde.org/kactivities.git')
 md5sums=('SKIP')
 
 pkgver() {
