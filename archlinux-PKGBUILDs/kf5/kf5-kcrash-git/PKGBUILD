@@ -1,13 +1,13 @@
 
 pkgname=kf5-kcrash-git
 _pkgname=kcrash
-pkgver=9.222e80b
+pkgver=1
 pkgrel=1
 pkgdesc="KCrash"
 arch=('i686' 'x86_64')
 url="http://projects.kde.org/projects/frameworks/kcrash"
 license=('LGPL')
-depends=('kf5-kwindowsystem-git' 'kf5-kcoreaddons-git')
+depends=('kf5-kcoreaddons-git' 'kf5-kwindowsystem-git')
 makedepends=('extra-cmake-modules-git' 'git')
 group=("kf5")
 conflicts=("${_pkgname}-git")

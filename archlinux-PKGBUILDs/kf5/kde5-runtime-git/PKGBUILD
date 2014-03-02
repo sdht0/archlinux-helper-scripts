@@ -1,14 +1,13 @@
 # Maintainer: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kde5-runtime-git
-pkgver=plasma2tp.r6.g3b84c6c
+pkgver=plasma2tp.r28.g7959fc0
 pkgrel=1
 pkgdesc='Plugins and applications necessary for the running of KDE applications'
 arch=('i686' 'x86_64')
 url='https://projects.kde.org/projects/kde/kde-runtime'
 license=('LGPL')
-depends=('qt5-x11extras' 'qt5-svg' 'openexr' 'exiv2' 'smbclient'
-         'kf5-plasma-git')
+depends=('qt5-x11extras' 'qt5-svg' 'openexr' 'exiv2' 'smbclient' 'kf5-kf5umbrella-git')
 makedepends=('extra-cmake-modules-git' 'git' 'openslp')
 source=('git://anongit.kde.org/kde-runtime.git#branch=frameworks')
 md5sums=('SKIP')

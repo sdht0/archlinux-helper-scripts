@@ -1,8 +1,8 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
-pkgname=kf5-plasma-git
+pkgname=kf5-plasma-framework-git
 _pkgname=plasma-framework
-pkgver=12127.db3dd7a
+pkgver=12472.4f78433
 pkgrel=1
 pkgdesc='Plasma library and runtime components based upon KF5 and Qt5'
 arch=('i686' 'x86_64')
@@ -10,7 +10,10 @@ url='https://projects.kde.org/projects/playground/libs/plasma-framework'
 license=('LGPL')
 depends=('qt5-quick1' 'kf5-kdnssd-framework-git' 'kf5-kdeclarative-git' 'kf5-kross-git' 'kf5-threadweaver-git' 'kf5-kidletime-git' 'kf5-kunitconversion-git' 'kf5-kactivities-git' 'kf5-kwallet-git' 'kf5-kitemmodels-git' 'kf5-ktexteditor-git')
 makedepends=('extra-cmake-modules-git' 'git' 'qt5-tools' 'kf5-kdoctools-git')
-source=('git://anongit.kde.org/plasma-framework')
+group=("kf5")
+conflicts=("${_pkgname}-git")
+provides=("${_pkgname}-git")
+source=("git://anongit.kde.org/plasma-framework")
 md5sums=('SKIP')
 
 pkgver() {

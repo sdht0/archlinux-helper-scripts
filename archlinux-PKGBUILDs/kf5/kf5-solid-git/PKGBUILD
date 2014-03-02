@@ -1,7 +1,7 @@
 
 pkgname=kf5-solid-git
 _pkgname=solid
-pkgver=12.0e9590f
+pkgver=1
 pkgrel=1
 pkgdesc="Solid"
 arch=('i686' 'x86_64')

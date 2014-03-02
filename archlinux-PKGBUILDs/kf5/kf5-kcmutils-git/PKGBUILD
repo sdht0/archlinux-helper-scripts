@@ -1,7 +1,7 @@
 
 pkgname=kf5-kcmutils-git
 _pkgname=kcmutils
-pkgver=9.6110a87
+pkgver=1
 pkgrel=1
 pkgdesc="Utilities for interacting with KCModules"
 arch=('i686' 'x86_64')

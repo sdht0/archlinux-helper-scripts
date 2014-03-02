@@ -2,7 +2,7 @@
 # Contributor: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=kde5-akonadi-git
-pkgver=v1.11.0.81.g1894a32
+pkgver=v1.11.80.1.g6c7f816
 pkgrel=1
 arch=('i686' 'x86_64')
 url='http://community.kde.org/KDE_PIM/Akonadi'

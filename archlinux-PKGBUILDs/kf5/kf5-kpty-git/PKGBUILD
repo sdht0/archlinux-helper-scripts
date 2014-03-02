@@ -1,13 +1,13 @@
 
 pkgname=kf5-kpty-git
 _pkgname=kpty
-pkgver=9.84fcbce
+pkgver=1
 pkgrel=1
 pkgdesc="KPty"
 arch=('i686' 'x86_64')
 url="http://projects.kde.org/projects/frameworks/kpty"
 license=('LGPL')
-depends=('kf5-ki18n-git' 'kf5-kcoreaddons-git' 'libutempter')
+depends=('kf5-kcoreaddons-git' 'kf5-ki18n-git' 'libutempter')
 makedepends=('extra-cmake-modules-git' 'git')
 group=("kf5")
 conflicts=("${_pkgname}-git")

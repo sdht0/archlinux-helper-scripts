@@ -1,7 +1,7 @@
 
 pkgname=kf5-kplotting-git
 _pkgname=kplotting
-pkgver=10.bad1f4a
+pkgver=1
 pkgrel=1
 pkgdesc="KPlotting"
 arch=('i686' 'x86_64')

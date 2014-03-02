@@ -12,8 +12,7 @@ for i in components:
         itemlist = i.findall('module')
 
 allitems=[]
-extradependencies={"frameworkintegration":"'kf5-attica-git'",
-                   "kauth":"'kde5-polkit-qt-git'",
+extradependencies={"kauth":"'kde5-polkit-qt5-git'",
                    "kdewebkit":"'qt5-webkit'",
                    "kde4support":"'qt5-tools'",
                    "kdnssd-framework":"'avahi'",
@@ -30,7 +29,6 @@ extradependencies={"frameworkintegration":"'kf5-attica-git'",
                    "kpty":"'libutempter'",
                    "kross":"'qt5-tools'",
                    "kwindowsystem":"'libxfixes'",
-                   "kxmlgui":"'kf5-attica-git'",
                    "solid":"'media-player-info' 'upower' 'udisks2'",
                    "sonnet":"'enchant'",
                    "knotifyconfig":"'kde5-phonon-qt5-git'"}
@@ -46,10 +44,12 @@ for item in itemlist:
         data['depend']="'qt5-x11extras'"
     elif name in ["solid"]:
         data['depend']="'qt5-declarative'"
+    elif name in ["ki18n"]:
+        data['depend']="'qt5-script'"
     elif name in ["krunner"]:
         data['depend']="'kf5-plasma-framework-git'"
     if name in directdependencies:
-        data['depend']="kf5-'%s'-git" % ("kf5-' '-git".join(list(directdependencies[name])))
+        data['depend']="'kf5-%s-git'" % ("-git' 'kf5-".join(sorted(list(directdependencies[name]))))
     data['depend']+=" "+extradependencies[name] if name in extradependencies else ""
     data['depend']=data['depend'].replace("kf5-kdesupport/attica","kde5-attica").replace("kf5-kdesupport/phonon/phonon","kde5-phonon-qt5")
     if name in ['kdoctools']:

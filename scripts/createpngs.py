@@ -1,7 +1,7 @@
 import os,glob,re
 
 data={}
-fl=open("/home/lfiles/dev/d","r")
+fl=open("/home/lfiles/dev/scripts/minimiseddependencies.dot","r")
 for l in fl.readlines():
     x=l.split(":")
     data[x[0].strip()]=x[1].strip(" \n").split()

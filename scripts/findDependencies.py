@@ -10,7 +10,7 @@ def findDependencies():
         if line.find("frameworks/")==0 or line.find("playground/libs/plasma-framework")==0 or line.find("kde/kdelibs/kactivities")==0:
             line=line.replace("frameworks/","").replace("playground/libs/","").replace("kde/kdelibs/","").replace("kdesupport/","").replace("#testdependency","")
             parts=line.split(":")
-            if parts[1][0]=="-" or "phonon" in line:
+            if parts[1][0]=="-" or "phonon" in line or parts[0]=="ki18n" or "printutils" in line:
                 continue
             if parts[0] not in directdependencies:
                 directdependencies[parts[0]]=set()
@@ -19,18 +19,14 @@ def findDependencies():
                 reversedependencies[parts[1]]=set()
             reversedependencies[parts[1]].add(parts[0])
 
-    fl=open("alldependencies.txt","w")
     text="digraph A {"
     for d in directdependencies:
-        fl.write(d+"\n")
-        fl.write(",".join(list(directdependencies[d]))+"\n\n")
         for dn in directdependencies[d]:
             text+='"%s"->"%s";\n' % (dn,d)
     text+="}"
     f = open("alldependencies.dot","w")
     f.write(text)
     f.close()
-    fl.close()
 
     bk=copy.deepcopy(directdependencies)
 
@@ -54,12 +50,12 @@ def findDependencies():
             searchDependencies(framework, framework)
 
 
-    fl=open("minimiseddependencies.txt","w")
+    fl=open("dependencies.txt","w")
     text="digraph A {"
     for d in directdependencies:
         fl.write(d+"\n")
-        fl.write(",".join(list(bk[d]))+"\n")
-        fl.write(",".join(list(directdependencies[d]))+"\n\n")
+        fl.write(",".join(sorted(list(bk[d])))+"\n")
+        fl.write(",".join(sorted(list(directdependencies[d])))+"\n\n")
         for dn in directdependencies[d]:
             text+='"%s"->"%s";\n' % (dn,d)
     text+="}"
@@ -72,4 +68,4 @@ def findDependencies():
 if __name__ == '__main__':
     x=findDependencies()
     for i in x:
-        print(i,x[i])
+        print(i,sorted(list(x[i])))

@@ -1,13 +1,13 @@
 
 pkgname=kf5-kservice-git
 _pkgname=kservice
-pkgver=21.abf1662
+pkgver=1
 pkgrel=1
 pkgdesc="KService"
 arch=('i686' 'x86_64')
 url="http://projects.kde.org/projects/frameworks/kservice"
 license=('LGPL')
-depends=('kf5-kconfig-git' 'kf5-ki18n-git' 'kf5-kdoctools-git' 'kf5-kcrash-git' 'kf5-kdbusaddons-git')
+depends=('kf5-kconfig-git' 'kf5-kcrash-git' 'kf5-kdbusaddons-git' 'kf5-kdoctools-git' 'kf5-ki18n-git')
 makedepends=('extra-cmake-modules-git' 'git')
 group=("kf5")
 conflicts=("${_pkgname}-git")

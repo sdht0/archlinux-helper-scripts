@@ -1,13 +1,13 @@
 
 pkgname=kf5-ktexteditor-git
 _pkgname=ktexteditor
-pkgver=1
+pkgver=260.8c83507
 pkgrel=1
 pkgdesc="KTextEditor Framework"
 arch=('i686' 'x86_64')
 url="http://projects.kde.org/projects/frameworks/ktexteditor"
 license=('LGPL')
-depends=('qt5-base')
+depends=('kf5-kparts-git')
 makedepends=('extra-cmake-modules-git' 'git')
 group=("kf5")
 conflicts=("${_pkgname}-git")

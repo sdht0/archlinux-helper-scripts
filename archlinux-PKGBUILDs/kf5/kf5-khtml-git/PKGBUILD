@@ -1,13 +1,13 @@
 
 pkgname=kf5-khtml-git
 _pkgname=khtml
-pkgver=16.11d9a6c
+pkgver=37.3c5c4e6
 pkgrel=1
 pkgdesc="KHtml"
 arch=('i686' 'x86_64')
 url="http://projects.kde.org/projects/frameworks/khtml"
 license=('LGPL')
-depends=('kf5-kparts-git' 'kf5-kinit-git' 'kde5-phonon-qt5-git' 'kf5-kwallet-git' 'kde5-phonon-qt5-git' 'giflib')
+depends=('kf5-kinit-git' 'kf5-kjs-git' 'kf5-kparts-git' 'kf5-kwallet-git' 'kde5-phonon-qt5-git' 'giflib')
 makedepends=('extra-cmake-modules-git' 'git')
 group=("kf5")
 conflicts=("${_pkgname}-git")

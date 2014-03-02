@@ -1,13 +1,13 @@
 
 pkgname=kf5-kfileaudiopreview-git
 _pkgname=kfileaudiopreview
-pkgver=6.f841303
+pkgver=10.820f744
 pkgrel=1
 pkgdesc="KFile Audio Preview"
 arch=('i686' 'x86_64')
 url="http://projects.kde.org/projects/frameworks/kfileaudiopreview"
 license=('LGPL')
-depends=('kf5-kio-git' 'kde5-phonon-qt5-git' 'kde5-phonon-qt5-git')
+depends=('kf5-kio-git' 'kde5-phonon-qt5-git')
 makedepends=('extra-cmake-modules-git' 'git')
 group=("kf5")
 conflicts=("${_pkgname}-git")

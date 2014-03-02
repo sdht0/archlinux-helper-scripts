@@ -2,7 +2,7 @@
 # Maintainer: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kf5-kactivities-git
-pkgver=586.acfce06
+pkgver=631.eeae461
 pkgrel=1
 pkgdesc="Core components for the KDE's Activities"
 arch=('i686' 'x86_64')

@@ -7,13 +7,13 @@ pkgdesc='Provides the interface and basic tools for the KDE workspace'
 arch=('i686' 'x86_64')
 url='https://projects.kde.org/projects/kde/kde-workspace'
 license=('LGPL')
-depends=('kf5-plasma-git' 'qimageblitz' 'libxkbfile' 'libxcursor' 'lm_sensors'
-         'libraw1394' 'libusb-compat' 'pciutils' 'libbsd' 'kde5-akonadi-git' 'qt5-webkit' 'qt5-tools')
-makedepends=('extra-cmake-modules-git' 'git' 'kf5-kdoctools-git' 'boost')
-conflicts=('kde-workspace')
-provides=('kde-workspace')
-source=('git://anongit.kde.org/kde-workspace.git' 'd.diff')
-md5sums=('SKIP' 'SKIP')
+depends=('kf5-kf5umbrella-git' 'kf5-krunner-git' 'kde5-akonadi-git' 'qimageblitz' 'libxkbfile' 'libxcursor' 'lm_sensors'
+         'libraw1394' 'libusb-compat' 'pciutils' 'libbsd' 'qt5-webkit' 'qt5-tools')
+makedepends=('extra-cmake-modules-git' 'git' 'boost')
+conflicts=('kde-workspace-git')
+provides=('kde-workspace-git')
+source=('git://anongit.kde.org/kde-workspace.git')
+md5sums=('SKIP')
 
 pkgver() {
     cd kde-workspace
@@ -22,8 +22,6 @@ pkgver() {
 
 prepare() {
     mkdir -p build
-    cd kde-workspace
-    patch -Np1 -i "$srcdir/d.diff"
 }
 
 build() {

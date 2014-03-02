@@ -27,9 +27,7 @@ build() {
   /opt/kf5/bin/cmake ../attica \
     -DCMAKE_BUILD_TYPE=Debug \
     -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
-    -DATTICA_ENABLE_TESTS=OFF \
-    -DQT4_BUILD=OFF \
-    -DLIB_DESTINATION=lib
+    -DLIB_INSTALL_DIR=lib
   make
 }
 

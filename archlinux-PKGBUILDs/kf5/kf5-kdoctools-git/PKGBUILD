@@ -1,7 +1,7 @@
 
 pkgname=kf5-kdoctools-git
 _pkgname=kdoctools
-pkgver=21.6555208
+pkgver=1
 pkgrel=1
 pkgdesc="KDocTools"
 arch=('i686' 'x86_64')

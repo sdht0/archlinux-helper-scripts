@@ -1,16 +1,13 @@
 
 pkgname=kf5-kf5umbrella-git
 _pkgname=kf5umbrella
-pkgver=10.5b56308
+pkgver=15.bd04a55
 pkgrel=1
 pkgdesc="KF5 Umbrella"
 arch=('i686' 'x86_64')
 url="http://projects.kde.org/projects/frameworks/kf5umbrella"
 license=('LGPL')
-depends=('kf5-kidletime-git' 'kf5-kdesu-git' 'kf5-frameworkintegration-git' 'kf5-kded-git'
-        'kf5-kprintutils-git' 'kf5-kdnssd-framework-git' 'kf5-knewstuff-git' 'kf5-knotifyconfig-git'
-        'kf5-kitemmodels-git' 'kf5-kcmutils-git' 'kf5-khtml-git' 'kf5-threadweaver-git' 'kf5-kross-git'
-        'kf5-kdeclarative-git' 'kf5-kde4support-git' 'kf5-kemoticons-git' 'kf5-kjsembed-git')
+depends=('kf5-frameworkintegration-git' 'kf5-kcmutils-git' 'kf5-kde4support-git' 'kf5-kded-git' 'kf5-kdesu-git' 'kf5-kemoticons-git' 'kf5-khtml-git' 'kf5-kjsembed-git' 'kf5-knewstuff-git' 'kf5-knotifyconfig-git' 'kf5-krunner-git')
 makedepends=('extra-cmake-modules-git' 'git')
 group=("kf5")
 conflicts=("${_pkgname}-git")

@@ -1,18 +1,18 @@
 
-pkgname=kf5-kio-git
-_pkgname=kio
+pkgname=kf5-kprintutils-git
+_pkgname=kprintutils
 pkgver=1
 pkgrel=1
-pkgdesc="KIO"
+pkgdesc="KPrintUtils"
 arch=('i686' 'x86_64')
-url="http://projects.kde.org/projects/frameworks/kio"
+url="http://projects.kde.org/projects/frameworks/kprintutils"
 license=('LGPL')
-depends=('kf5-kbookmarks-git' 'kf5-kjobwidgets-git' 'kf5-knotifications-git' 'kf5-solid-git' 'krb5' 'qt5-script')
+depends=('qt5-base')
 makedepends=('extra-cmake-modules-git' 'git')
 group=("kf5")
 conflicts=("${_pkgname}-git")
 provides=("${_pkgname}-git")
-source=("git://anongit.kde.org/kio")
+source=("git://anongit.kde.org/kprintutils")
 md5sums=('SKIP')
 
 pkgver() {
@@ -25,8 +25,6 @@ prepare() {
 }
 
 build() {
-    export XDG_DATA_DIRS="/opt/kf5/share:$XDG_DATA_DIRS"
-
     cd build
     /opt/kf5/bin/cmake ../"${_pkgname}" \
         -DCMAKE_INSTALL_PREFIX=/opt/kf5 \

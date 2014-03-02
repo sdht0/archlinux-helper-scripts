@@ -1,13 +1,13 @@
 
 pkgname=kf5-kiconthemes-git
 _pkgname=kiconthemes
-pkgver=11.c4f1c8c
+pkgver=1
 pkgrel=1
 pkgdesc="KIconThemes"
 arch=('i686' 'x86_64')
 url="http://projects.kde.org/projects/frameworks/kiconthemes"
 license=('LGPL')
-depends=('kf5-kitemviews-git' 'kf5-kconfigwidgets-git' 'qt5-svg')
+depends=('kf5-kconfigwidgets-git' 'kf5-kitemviews-git' 'qt5-svg')
 makedepends=('extra-cmake-modules-git' 'git')
 group=("kf5")
 conflicts=("${_pkgname}-git")

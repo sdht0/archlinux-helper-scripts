@@ -14,6 +14,7 @@ systemctl enable ntpd && \
 systemctl start ntpd && \
 echo "Setting up git..." &&
 git config --global help.autocorrect 1 && \
+git config --global remote.origin.fetch "+refs/heads/*:refs/heads/*" && \
 git config --global alias.lg "log --color --graph --pretty=format:'%C(auto)%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit" && \
 echo "Adding sdh to wireshark" &&
 gpasswd -a sdh wireshark && \

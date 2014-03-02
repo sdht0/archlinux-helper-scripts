@@ -1,7 +1,7 @@
 
 pkgname=kf5-knotifyconfig-git
 _pkgname=knotifyconfig
-pkgver=9.ca887ed
+pkgver=1
 pkgrel=1
 pkgdesc="KNotifyConfig"
 arch=('i686' 'x86_64')

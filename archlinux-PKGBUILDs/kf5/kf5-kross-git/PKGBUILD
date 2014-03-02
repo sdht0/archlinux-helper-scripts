@@ -1,7 +1,7 @@
 
 pkgname=kf5-kross-git
 _pkgname=kross
-pkgver=9.f5a7778
+pkgver=1
 pkgrel=1
 pkgdesc="Kross"
 arch=('i686' 'x86_64')
