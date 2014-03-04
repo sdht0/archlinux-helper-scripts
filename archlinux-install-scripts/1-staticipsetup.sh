@@ -5,16 +5,16 @@ nameserver=192.168.5.20
 
 echo "Stopping dhcpd service..."
 systemctl stop dhcpcd@$devname
-echo "Setting link up..." && \
+echo "Setting link=$devname up..." && \
 ip link set $devname up && \
-echo "Adding ip..." && \
+echo "Adding ip=$ip..." && \
 ip addr flush dev $devname && \
 ip addr add $ip dev $devname && \
-echo "Adding gateway..." && \
+echo "Adding gateway=$gateway..." && \
 ip route flush dev $devname && \
 ip route add $gateway dev $devname && \
 ip route add default via $gateway dev $devname && \
-echo "Adding nameserver..." && \
+echo "Adding nameserver=$nameserver..." && \
 echo "nameserver $nameserver" > /etc/resolv.conf && \
 echo "Done." && \
-ping -c3 $gateway
+ping -c2 $gateway

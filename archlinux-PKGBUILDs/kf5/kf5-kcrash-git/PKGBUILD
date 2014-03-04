@@ -1,7 +1,7 @@
 
 pkgname=kf5-kcrash-git
 _pkgname=kcrash
-pkgver=1
+pkgver=26.f9b1055
 pkgrel=1
 pkgdesc="KCrash"
 arch=('i686' 'x86_64')

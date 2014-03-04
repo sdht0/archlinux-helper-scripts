@@ -1,7 +1,7 @@
 
 pkgname=kf5-kinit-git
 _pkgname=kinit
-pkgver=1
+pkgver=33.7745f1a
 pkgrel=1
 pkgdesc="KInit"
 arch=('i686' 'x86_64')

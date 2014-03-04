@@ -1,7 +1,7 @@
 
 pkgname=kf5-kitemmodels-git
 _pkgname=kitemmodels
-pkgver=1
+pkgver=21.d14669d
 pkgrel=1
 pkgdesc="KItemModels"
 arch=('i686' 'x86_64')

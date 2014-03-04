@@ -1,7 +1,7 @@
 
 pkgname=kf5-kjobwidgets-git
 _pkgname=kjobwidgets
-pkgver=1
+pkgver=20.0363e50
 pkgrel=1
 pkgdesc="KJobWidgets"
 arch=('i686' 'x86_64')

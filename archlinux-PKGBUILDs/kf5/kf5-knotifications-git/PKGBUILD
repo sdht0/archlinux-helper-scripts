@@ -1,7 +1,7 @@
 
 pkgname=kf5-knotifications-git
 _pkgname=knotifications
-pkgver=1
+pkgver=49.188ff5e
 pkgrel=1
 pkgdesc="KNotifications"
 arch=('i686' 'x86_64')
