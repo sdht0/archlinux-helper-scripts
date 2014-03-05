@@ -21,13 +21,15 @@ sed -i \
 echo "Edit pacman mirrors..." && \
 nano /etc/pacman.d/mirrorlist && \
 echo "Updating pacman..." && \
-pacman -Syu bash-completion  && \
+pacman -Syu --noconfirm bash-completion  && \
 echo "Set root password..." && \
 passwd && \
 echo "Changing default shell..." && \
 usermod -s /usr/bin/zsh root && \
 echo "Adding user sdh..." && \
 useradd -m -g users -G wheel -s /usr/bin/zsh sdh && \
+echo "Enabling paswordless sudo..." && \
+sed -i "/# %wheel ALL=(ALL) NOPASSWD: ALL/ s,# ,," /etc/sudoers && \
 echo "Generating zsh config..." && \
 echo "
 . /home/lfiles/.zshrc
@@ -45,7 +47,8 @@ echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf && \
 echo "Enable sysrq..." && \
 echo "kernel.sysrq = 1" >> /etc/sysctl.d/99-sysctl.conf && \
 echo "Install grub..." && \
-pacman -S grub os-prober ntfs-3g dosfstools && \
+pacman -S --noconfirm grub os-prober ntfs-3g dosfstools && \
 grub-install --target=i386-pc --recheck /dev/sda && \
+chmod -x /etc/grub.d/10_archlinux && \
 grub-mkconfig -o /boot/grub/grub.cfg && \
 echo "Time to reboot!"

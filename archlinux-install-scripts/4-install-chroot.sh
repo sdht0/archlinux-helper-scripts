@@ -4,7 +4,7 @@ sed -i \
     -e "/^#TotalDownload/ s,#,," \
     -e "/^#VerbosePkgLists/ s,#,," /etc/pacman.conf && \
 echo "Adding local repo address..." && \
-sed -i '1s|^|Server = http://172.16.32.222/repo/archlinux_x86-64/$repo/os/$arch\n\n|' /etc/pacman.d/mirrorlist && \
+grep '172.16.32.222' /etc/pacman.d/mirrorlist || sed -i '1s|^|Server = http://172.16.32.222/repo/archlinux_x86-64/$repo/os/$arch\n\n|' /etc/pacman.d/mirrorlist && \
 echo "Installing packages..." && \
 pacstrap /mnt base base-devel zsh && \
 echo "Generating fstab..." && \
@@ -28,11 +28,5 @@ echo "Generating bash config..." && \
 echo "
 PS1='\W$ '
 . /home/lfiles/.bashrc
-" > /mnt/root/.bashrc && \
-windowsdev=/dev/sda4 && \
-if [ -n "$windowsdev" ];then
-    echo "Mounting xfiles from $windowsdev..."
-    mkdir -p /mnt/{windows,xfiles}
-    mount -t ntfs -o ro,noatime $windowsdev /mnt/xfiles
-fi
+" > /mnt/root/.bashrc
 echo "Done."
