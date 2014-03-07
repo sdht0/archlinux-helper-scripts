@@ -28,17 +28,17 @@ echo "Changing default shell..." && \
 usermod -s /usr/bin/zsh root && \
 echo "Adding user sdh..." && \
 useradd -m -g users -G wheel -s /usr/bin/zsh sdh && \
-echo "Enabling paswordless sudo..." && \
+echo "Enabling passwordless sudo..." && \
 sed -i "/# %wheel ALL=(ALL) NOPASSWD: ALL/ s,# ,," /etc/sudoers && \
 echo "Generating zsh config..." && \
 echo "
-. /home/lfiles/.zshrc
-. /home/lfiles/.bashrc
+. /home/lfiles/config/.zshrc
+. /home/lfiles/config/.bashrc
 " > /home/sdh/.zshrc && \
 echo "Generating bash config..." && \
-echo "#
+echo "
 PS1='\W$ '
-. /home/lfiles/.bashrc
+. /home/lfiles/config/.bashrc
 " > /home/sdh/.bashrc && \
 echo "Set sdh password..." && \
 passwd sdh && \

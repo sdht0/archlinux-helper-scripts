@@ -21,12 +21,12 @@ UUID=1019B40C17D4A684                           /home/lfiles/sdh-hdd    ntfs-3g 
 " >> /mnt/etc/fstab && \
 echo "Generating zsh config..." && \
 echo "
-. /home/lfiles/.zshrc
-. /home/lfiles/.bashrc
+. /home/lfiles/config/.zshrc
+. /home/lfiles/config/.bashrc
 " > /mnt/root/.zshrc && \
 echo "Generating bash config..." && \
 echo "
 PS1='\W$ '
-. /home/lfiles/.bashrc
+. /home/lfiles/config/.bashrc
 " > /mnt/root/.bashrc
 echo "Done."

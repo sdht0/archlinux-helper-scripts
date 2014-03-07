@@ -11,8 +11,8 @@ pkgbase=${pkgname}
 pkgname+=("${pkgbase}-headers" "${pkgbase}-docs")
 
 _srcname=linux
-pkgver=3.14.rc5.r43.g0c0bd34
-pkgrel=2
+pkgver=3.14.rc5.r185.gc3bebc7
+pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
@@ -24,12 +24,14 @@ source=('git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git'
         # standard config files for mkinitcpio ramdisk
         'linux-git.preset'
         'change-default-console-loglevel.patch'
+        '0001-Update-EXTRAVERSION-as-required-by-task-03-3e7d95abd.patch'
         )
 md5sums=('SKIP'
          'adb67b457193db1a32c07166679e384c'
          '8c1166f480da198046df9bbdc06c4e87'
          'ddfc10f687c3aaa029626ade9ed4e307'
-         '98beb36f9b8cf16e58de2483ea9985e3')
+         '98beb36f9b8cf16e58de2483ea9985e3'
+         'SKIP')
 
 _kernelname=${pkgbase#linux}
 
@@ -45,6 +47,7 @@ prepare() {
   # remove this when a Kconfig knob is made available by upstream
   # (relevant patch sent upstream: https://lkml.org/lkml/2011/7/26/227)
   patch -p1 -i "${srcdir}/change-default-console-loglevel.patch"
+  patch -p1 -i "${srcdir}/0001-Update-EXTRAVERSION-as-required-by-task-03-3e7d95abd.patch"
 
   # Use saved config if it exists
   if [ "${CARCH}" = "x86_64" ]; then

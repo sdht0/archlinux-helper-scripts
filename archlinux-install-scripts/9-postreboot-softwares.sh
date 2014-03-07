@@ -7,7 +7,7 @@ pacman -S --needed \
             aspell aspell-en hunspell hunspell-en hyphen hyphen-en artwiz-fonts \
             qt5 qt5-doc python python-beautifulsoup4 python2-beautifulsoup4 python2-pyqt mysql-python qtcreator graphviz \
             kdevelop kdevelop-python kdevelop-php racket ghc cabal-install jre7-openjdk jdk7-openjdk \
-            devtools ccache cmake gdb valgrind unrar unzip zip p7zip rsync wget git tk bzr subversion \
+            devtools ccache cmake gdb valgrind unrar unzip zip p7zip rsync wget git perl-net-smtp-ssl perl-mime-tools perl-authen-sasl tk bzr subversion \
             openssh ntp nmap dnsutils mtr apache php php-apache mariadb phpmyadmin php-mcrypt php-gd && \
 echo "Setting up ntp..." &&
 systemctl enable ntpd && \
