@@ -1,7 +1,7 @@
 
 pkgname=kf5-kguiaddons-git
 _pkgname=kguiaddons
-pkgver=23.7ef4775
+pkgver=1
 pkgrel=1
 pkgdesc="KGuiAddons"
 arch=('i686' 'x86_64')

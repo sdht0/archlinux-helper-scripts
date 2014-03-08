@@ -1,7 +1,7 @@
 
 pkgname=kf5-kdnssd-framework-git
 _pkgname=kdnssd-framework
-pkgver=23.d7024e7
+pkgver=1
 pkgrel=1
 pkgdesc="KDNSSD Framework"
 arch=('i686' 'x86_64')

@@ -39,11 +39,11 @@ case "$pkggroup" in
 
                 # tier 2
                 'kf5-kauth-git' 'kf5-kcompletion-git' 'kf5-kcrash-git' 'kf5-kdnssd-framework-git' 'kf5-kdoctools-git'
-                'kf5-kjobwidgets-git' 'kf5-knotifications-git' 'kf5-kpty-git' 'kf5-kunitconversion-git'
+                'kf5-kjobwidgets-git' 'kf5-kpty-git' 'kf5-kunitconversion-git'
 
                 # tier 3
-                'kf5-kjsembed-git' 'kf5-kconfigwidgets-git' 'kf5-kiconthemes-git' 'kf5-kservice-git' 'kf5-ktextwidgets-git' 'kf5-kxmlgui-git'
-                'kf5-kbookmarks-git' 'kf5-kcmutils-git' 'kf5-kio-git' 'kf5-kdeclarative-git' 'kf5-kinit-git' 'kf5-kded-git'
+                'kf5-kjsembed-git' 'kf5-kconfigwidgets-git' 'kf5-kiconthemes-git' 'kf5-kservice-git' 'kf5-knotifications-git' 'kf5-ktextwidgets-git'
+                'kf5-kxmlgui-git' 'kf5-kbookmarks-git' 'kf5-kcmutils-git' 'kf5-kio-git' 'kf5-kdeclarative-git' 'kf5-kinit-git' 'kf5-kded-git'
                 'kf5-kdesu-git' 'kf5-kparts-git' 'kf5-kwallet-git' 'kf5-kdewebkit-git' 'kf5-kdesignerplugin-git' 'kf5-kemoticons-git'
                 'kf5-kmediaplayer-git' 'kf5-kross-git' 'kf5-knewstuff-git' 'kf5-knotifyconfig-git' 'kf5-ktexteditor-git' 'kf5-kactivities-git'
                 'kf5-plasma-framework-git' 'kf5-krunner-git'

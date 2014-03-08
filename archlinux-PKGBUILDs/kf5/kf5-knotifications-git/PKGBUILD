@@ -1,13 +1,13 @@
 
 pkgname=kf5-knotifications-git
 _pkgname=knotifications
-pkgver=49.188ff5e
+pkgver=1
 pkgrel=1
 pkgdesc="KNotifications"
 arch=('i686' 'x86_64')
 url="http://projects.kde.org/projects/frameworks/knotifications"
 license=('LGPL')
-depends=('kf5-kwindowsystem-git' 'kde5-libdbusmenu-qt5-bzr')
+depends=('kf5-kiconthemes-git' 'kf5-kservice-git' 'kde5-libdbusmenu-qt5-bzr' 'kde5-phonon-qt5-git')
 makedepends=('extra-cmake-modules-git' 'git')
 group=("kf5")
 conflicts=("${_pkgname}-git")

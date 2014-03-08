@@ -1,7 +1,7 @@
 
 pkgname=kf5-kapidox-git
 _pkgname=kapidox
-pkgver=137.d266354
+pkgver=1
 pkgrel=1
 pkgdesc="Frameworks API Documentation Tools"
 arch=('i686' 'x86_64')

@@ -1,7 +1,7 @@
 
 pkgname=kf5-kf5umbrella-git
 _pkgname=kf5umbrella
-pkgver=15.bd04a55
+pkgver=1
 pkgrel=1
 pkgdesc="KF5 Umbrella"
 arch=('i686' 'x86_64')

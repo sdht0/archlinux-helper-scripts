@@ -1,7 +1,7 @@
 
 pkgname=kf5-kfileaudiopreview-git
 _pkgname=kfileaudiopreview
-pkgver=10.820f744
+pkgver=1
 pkgrel=1
 pkgdesc="KFile Audio Preview"
 arch=('i686' 'x86_64')
