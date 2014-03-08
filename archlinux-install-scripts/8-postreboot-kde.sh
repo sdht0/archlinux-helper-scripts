@@ -16,7 +16,8 @@ gpasswd -a sdh printadmin && \
 gpasswd -a sdh lp && \
 sed -i "s|^SystemGroup.*|SystemGroup printadmin|" /etc/cups/cups-files.conf && \
 sed -i \
-    -e "s|^Listen.*631$|Listen 127.0.0.1:631|" \
-    -e "\|</Location>| s,^,Allow from 127.0.0.1\n," /etc/cups/cupsd.conf && \
-sed -i '/Option "TapButton3" "3"/aOption "VertEdgeScroll" "on"\nOption "VertTwoFingerScroll" "on"\nOption "HorizEdgeScroll" "on"' /etc/X11/xorg.conf.d/10-synaptics.conf && \
+    -e "/Listen.*631/ cListen 127.0.0.1:631" \
+    -e "\|</Location>| iAllow from 127.0.0.1" /etc/cups/cupsd.conf && \
+sed -i "/^#Out/ cOut /xfiles/my-downloads" /etc/cups/cups-pdf.conf && \
+sed -i '/Option "TapButton3" "3"/ aOption "VertEdgeScroll" "on"\nOption "VertTwoFingerScroll" "on"\nOption "HorizEdgeScroll" "on"' /etc/X11/xorg.conf.d/10-synaptics.conf && \
 echo "Done."

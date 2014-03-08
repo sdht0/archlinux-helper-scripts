@@ -14,6 +14,7 @@ systemctl enable ntpd && \
 systemctl start ntpd && \
 echo "Setting up git..." &&
 git config --global help.autocorrect 1 && \
+git config --global color.ui true && \
 git config --global alias.lg "log --color --graph --pretty=format:'%C(auto)%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit" && \
 echo "Adding sdh to wireshark" &&
 gpasswd -a sdh wireshark && \
@@ -66,9 +67,7 @@ sed -i \
     -e "/^ServerTokens/ s,Full,Prod," \
     -e "/^ServerSignature/ s,On,Off," /etc/httpd/conf/extra/httpd-default.conf && \
 echo "Editing mime.types..." && \
-sed -i \
-    -e "/atomsvc$/a\
-    application/x-httpd-php       php    php5" /etc/httpd/conf/mime.types && \
+sed -i "/atomsvc$/ a application/x-httpd-php                         php php5" /etc/httpd/conf/mime.types && \
 echo "Editing php.ini..." && \
 sed -i \
     -e "s|^open_basedir =.*|open_basedir = $serverroot/:/tmp/:/usr/share/pear/:/usr/share/webapps/|" \
@@ -84,8 +83,7 @@ LoadModule php5_module modules/libphp5.so
 Include conf/extra/php5_module.conf
 
 # phpMyAdmin configuration
-Include conf/extra/httpd-phpmyadmin.conf
-" >> /etc/httpd/conf/httpd.conf && \
+Include conf/extra/httpd-phpmyadmin.conf" >> /etc/httpd/conf/httpd.conf && \
 echo "Setting up phpmyadmin... Needs mysql root password" && \
 pmapasswd=$(randpw 20) && \
 echo "CREATE USER 'pma'@'localhost' IDENTIFIED BY '$pmapasswd';
