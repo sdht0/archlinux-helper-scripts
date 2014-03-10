@@ -1,7 +1,7 @@
 
 pkgname=kf5-kdesignerplugin-git
 _pkgname=kdesignerplugin
-pkgver=1
+pkgver=31.2277b37
 pkgrel=1
 pkgdesc="KDesignerPlugin"
 arch=('i686' 'x86_64')

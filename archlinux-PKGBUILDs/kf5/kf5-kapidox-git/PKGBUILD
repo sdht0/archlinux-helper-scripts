@@ -1,14 +1,14 @@
 
 pkgname=kf5-kapidox-git
 _pkgname=kapidox
-pkgver=1
+pkgver=138.79d91af
 pkgrel=1
 pkgdesc="Frameworks API Documentation Tools"
 arch=('i686' 'x86_64')
 url="http://projects.kde.org/projects/frameworks/kapidox"
 license=('LGPL')
 depends=('qt5-base')
-makedepends=('extra-cmake-modules-git' 'git')
+makedepends=('extra-cmake-modules-git' 'git' 'python2')
 group=("kf5")
 conflicts=("${_pkgname}-git")
 provides=("${_pkgname}-git")

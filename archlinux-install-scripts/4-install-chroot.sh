@@ -19,6 +19,7 @@ UUID=B6EE2ABEEE2A7731                           /windows                ntfs-3g 
 # /dev/sdb LABEL=sdh
 UUID=1019B40C17D4A684                           /home/lfiles/sdh-hdd    ntfs-3g         uid=1000,gid=100,umask=003,nofail       0 0
 " >> /mnt/etc/fstab && \
+nano /mnt/etc/fstab && \
 echo "Generating zsh config..." && \
 echo "
 . /home/lfiles/config/.zshrc

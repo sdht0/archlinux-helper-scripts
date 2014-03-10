@@ -22,7 +22,7 @@ nonewchroot="$4"
 case "$pkggroup" in
     kf5)
         folder="kf5"
-        prepackages=("shared-mime-info" "qt5-base")
+        prepackages=('shared-mime-info' 'qt5-base' 'git')
         packages=(
                 # buid system
                 'cmake-git'

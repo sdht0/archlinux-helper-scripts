@@ -19,5 +19,5 @@ sed -i \
     -e "/Listen.*631/ cListen 127.0.0.1:631" \
     -e "\|</Location>| iAllow from 127.0.0.1" /etc/cups/cupsd.conf && \
 sed -i "/^#Out/ cOut /xfiles/my-downloads" /etc/cups/cups-pdf.conf && \
-sed -i '/Option "TapButton3" "3"/ aOption "VertEdgeScroll" "on"\nOption "VertTwoFingerScroll" "on"\nOption "HorizEdgeScroll" "on"' /etc/X11/xorg.conf.d/10-synaptics.conf && \
+grep "VertEdgeScroll" /etc/X11/xorg.conf.d/10-synaptics.conf || sed -i '/Option "TapButton3" "3"/ aOption "VertEdgeScroll" "on"\nOption "VertTwoFingerScroll" "on"\nOption "HorizEdgeScroll" "on"' /etc/X11/xorg.conf.d/10-synaptics.conf && \
 echo "Done."

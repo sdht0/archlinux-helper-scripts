@@ -1,7 +1,7 @@
 
 pkgname=kf5-kglobalaccel-git
 _pkgname=kglobalaccel
-pkgver=1
+pkgver=22.14b4c79
 pkgrel=1
 pkgdesc="KGlobalAccel"
 arch=('i686' 'x86_64')

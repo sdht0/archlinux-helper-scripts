@@ -1,7 +1,7 @@
 
 pkgname=kf5-threadweaver-git
 _pkgname=threadweaver
-pkgver=1
+pkgver=47.237f4ab
 pkgrel=1
 pkgdesc="ThreadWeaver"
 arch=('i686' 'x86_64')

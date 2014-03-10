@@ -1,13 +1,13 @@
 # Maintainer: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kde5-workspace-git
-pkgver=plasma2tp.r268.ge94d8a0
+pkgver=plasma2tp.r857.g26e263d
 pkgrel=1
 pkgdesc='Provides the interface and basic tools for the KDE workspace'
 arch=('i686' 'x86_64')
 url='https://projects.kde.org/projects/kde/kde-workspace'
 license=('LGPL')
-depends=('kf5-kf5umbrella-git' 'kde5-akonadi-git' 'qimageblitz' 'libxkbfile' 'libxcursor' 'lm_sensors'
+depends=('kf5-kf5umbrella-git' 'qimageblitz' 'libxkbfile' 'libxcursor' 'lm_sensors'
          'libraw1394' 'libusb-compat' 'pciutils' 'libbsd' 'qt5-webkit' 'qt5-tools')
 makedepends=('extra-cmake-modules-git' 'git' 'boost')
 conflicts=('kde-workspace-git')

@@ -1,7 +1,7 @@
 
 pkgname=kf5-ktexteditor-git
 _pkgname=ktexteditor
-pkgver=1
+pkgver=277.8c4ef11
 pkgrel=1
 pkgdesc="KTextEditor Framework"
 arch=('i686' 'x86_64')

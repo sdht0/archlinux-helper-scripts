@@ -12,7 +12,8 @@ for i in components:
         itemlist = i.findall('module')
 
 allitems=[]
-extradependencies={"kauth":"'kde5-polkit-qt5-git'",
+extradependencies={"kapidox":"'python2'",
+		   "kauth":"'kde5-polkit-qt5-git'",
                    "kdewebkit":"'qt5-webkit'",
                    "kde4support":"'qt5-tools'",
                    "kdnssd-framework":"'avahi'",

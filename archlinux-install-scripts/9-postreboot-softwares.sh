@@ -53,8 +53,9 @@ echo "Editing httpd.conf..." && \
 sed -i \
     -e '\|^Include conf/extra/httpd-autoindex.conf| s,^,#,' \
     -e '\|^Include conf/extra/httpd-userdir.conf| s,^,#,' \
-    -e "/^#MIMEMagicFile/ s,#,," \
+    -e '/unique_id_module/ s,#,,' \
     -e 's|^DocumentRoot.*|DocumentRoot "'"$serverroot"'"|' \
+    -e '/mpm_event_module/ s,event,prefork,g' \
     -e '\|^<Directory "/srv/http">|b br
         b
         : br
@@ -66,8 +67,6 @@ echo "Editing httpd-default.conf..." && \
 sed -i \
     -e "/^ServerTokens/ s,Full,Prod," \
     -e "/^ServerSignature/ s,On,Off," /etc/httpd/conf/extra/httpd-default.conf && \
-echo "Editing mime.types..." && \
-sed -i "/atomsvc$/ a application/x-httpd-php                         php php5" /etc/httpd/conf/mime.types && \
 echo "Editing php.ini..." && \
 sed -i \
     -e "s|^open_basedir =.*|open_basedir = $serverroot/:/tmp/:/usr/share/pear/:/usr/share/webapps/|" \
@@ -76,15 +75,21 @@ sed -i \
     -e "/^;extension=mcrypt.so/ s,;,,"  \
     -e "/^;extension=pdo_mysql.so/ s,;,,"  \
     -e "/^;extension=mysqli.so/ s,;,," /etc/php/php.ini && \
-cp /etc/webapps/phpmyadmin/apache.example.conf /etc/httpd/conf/extra/httpd-phpmyadmin.conf && \
 echo "
-
+# PHP configuration
 LoadModule php5_module modules/libphp5.so
-Include conf/extra/php5_module.conf
-
+Include conf/extra/php5_module.conf" >> /etc/httpd/conf/httpd.conf && \
+echo "Setting up phpmyadmin... Needs mysql root password" && \
+echo 'Alias /phpmyadmin "/usr/share/webapps/phpMyAdmin"
+<Directory "/usr/share/webapps/phpMyAdmin">
+    DirectoryIndex index.html index.php
+    AllowOverride All
+    Options FollowSymlinks
+    Require all granted
+</Directory>' > /etc/httpd/conf/extra/httpd-phpmyadmin.conf && \
+echo "
 # phpMyAdmin configuration
 Include conf/extra/httpd-phpmyadmin.conf" >> /etc/httpd/conf/httpd.conf && \
-echo "Setting up phpmyadmin... Needs mysql root password" && \
 pmapasswd=$(randpw 20) && \
 echo "CREATE USER 'pma'@'localhost' IDENTIFIED BY '$pmapasswd';
 GRANT USAGE ON mysql.* TO 'pma'@'localhost' IDENTIFIED BY '$pmapasswd';

@@ -1,7 +1,7 @@
 
 pkgname=kf5-kdewebkit-git
 _pkgname=kdewebkit
-pkgver=1
+pkgver=22.beb64d3
 pkgrel=1
 pkgdesc="KDE Webkit"
 arch=('i686' 'x86_64')

@@ -2,7 +2,7 @@
 
 _pkgname=eiskaltdcpp
 pkgname=${_pkgname}-qt-git
-pkgver=2.3.r4561.a78ea33
+pkgver=2.3.r4564.5035fab
 pkgrel=1
 license=('GPL3')
 arch=('i686' 'x86_64')

@@ -1,7 +1,7 @@
 
 pkgname=kf5-kde4support-git
 _pkgname=kde4support
-pkgver=1
+pkgver=132.8e122ee
 pkgrel=1
 pkgdesc="KDE 4 Support"
 arch=('i686' 'x86_64')

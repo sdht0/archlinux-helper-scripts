@@ -1,7 +1,7 @@
 
 pkgname=kf5-ktextwidgets-git
 _pkgname=ktextwidgets
-pkgver=1
+pkgver=21.f71b3f4
 pkgrel=1
 pkgdesc="KTextWidgets"
 arch=('i686' 'x86_64')

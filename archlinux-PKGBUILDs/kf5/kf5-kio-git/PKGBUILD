@@ -1,7 +1,7 @@
 
 pkgname=kf5-kio-git
 _pkgname=kio
-pkgver=1
+pkgver=101.1a62860
 pkgrel=1
 pkgdesc="KIO"
 arch=('i686' 'x86_64')

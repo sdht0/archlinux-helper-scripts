@@ -12,7 +12,7 @@ ip addr flush dev $devname && \
 ip addr add $ip dev $devname && \
 echo "Adding gateway=$gateway..." && \
 ip route flush dev $devname && \
-#ip route add $gateway dev $devname && \
+ip route add $gateway dev $devname && \
 ip route add default via $gateway dev $devname && \
 echo "Adding nameserver=$nameserver..." && \
 echo "nameserver $nameserver" > /etc/resolv.conf && \
