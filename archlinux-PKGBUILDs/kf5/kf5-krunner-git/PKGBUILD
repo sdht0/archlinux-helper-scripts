@@ -1,7 +1,7 @@
 
 pkgname=kf5-krunner-git
 _pkgname=krunner
-pkgver=33.2da78b2
+pkgver=35.289a841
 pkgrel=1
 pkgdesc="Framework for providing different actions given a string query."
 arch=('i686' 'x86_64')

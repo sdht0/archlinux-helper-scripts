@@ -10,9 +10,9 @@ export KDE_SESSION_VERSION=5
 
 export XDG_DATA_DIRS=$KF5/share
 export XDG_CONFIG_DIRS=$KF5/etc/xdg
-export XDG_DATA_HOME=$HOME/.kde5/.local5
-export XDG_CONFIG_HOME=$HOME/.kde5/.config5
-export XDG_CACHE_HOME=$HOME/.kde5/.cache5
+export XDG_DATA_HOME=$HOME/.kde5/local
+export XDG_CONFIG_HOME=$HOME/.kde5/config
+export XDG_CACHE_HOME=$HOME/.kde5/cache
 
 # export KDE_FULL_SESSION=true
 # cat > ~/.xinitrc << EOF

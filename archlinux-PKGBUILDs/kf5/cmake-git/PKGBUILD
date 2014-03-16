@@ -4,7 +4,7 @@
 
 pkgname=cmake-git
 _pkgname=cmake
-pkgver=2.8.r22829.9f7c2bd
+pkgver=3.0.r23585.c4c6427
 pkgrel=1
 pkgdesc="A cross-platform open-source make system"
 arch=('i686' 'x86_64')

@@ -1,7 +1,7 @@
 # Maintainer: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kde5-workspace-git
-pkgver=plasma2tp.r857.g26e263d
+pkgver=plasma2tp.r935.g0a5ca15
 pkgrel=1
 pkgdesc='Provides the interface and basic tools for the KDE workspace'
 arch=('i686' 'x86_64')

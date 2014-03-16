@@ -9,6 +9,7 @@ echo "Installing packages..." && \
 pacstrap /mnt base base-devel zsh && \
 echo "Generating fstab..." && \
 genfstab -U -p /mnt >> /mnt/etc/fstab && \
+mkdir -p /mnt/{windows,xfiles} && \
 echo "Generating extra entries in fstab..." && \
 echo "# /dev/sda4 LABEL=xfiles
 UUID=C878F05278F040AC                           /xfiles                 ntfs-3g         uid=1000,gid=100,umask=003              0 0
