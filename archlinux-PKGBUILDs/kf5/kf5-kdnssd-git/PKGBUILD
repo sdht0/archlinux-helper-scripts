@@ -1,18 +1,18 @@
 
-pkgname=kf5-kdnssd-framework-git
-_pkgname=kdnssd-framework
-pkgver=23.d7024e7
+pkgname=kf5-kdnssd-git
+_pkgname=kdnssd
+pkgver=27.9b5caff
 pkgrel=1
 pkgdesc="KDNSSD Framework"
 arch=('i686' 'x86_64')
-url="http://projects.kde.org/projects/frameworks/kdnssd-framework"
+url="http://projects.kde.org/projects/frameworks/kdnssd"
 license=('LGPL')
-depends=('kf5-kconfig-git' 'avahi')
+depends=('kf5-kconfig-git')
 makedepends=('extra-cmake-modules-git' 'git')
 group=("kf5")
 conflicts=("${_pkgname}-git")
 provides=("${_pkgname}-git")
-source=("git://anongit.kde.org/kdnssd-framework")
+source=("git://anongit.kde.org/kdnssd")
 md5sums=('SKIP')
 
 pkgver() {

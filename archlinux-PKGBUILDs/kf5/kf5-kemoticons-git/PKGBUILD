@@ -1,7 +1,7 @@
 
 pkgname=kf5-kemoticons-git
 _pkgname=kemoticons
-pkgver=24.7c51266
+pkgver=26.17f7505
 pkgrel=1
 pkgdesc="KEmoticons"
 arch=('i686' 'x86_64')

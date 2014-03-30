@@ -1,0 +1,47 @@
+# $Id$
+# Maintainer: Lukas Fleischer <archlinux at cryptocrack dot de>
+# Contributor: Mateusz Herych <heniekk@gmail.com>
+# Contributor: Thomas Mader <thezema@gmail.com>
+# Contributor: Vinay S Shastry <vinayshastry@gmail.com>
+# Contributor: tardo <tardo@nagi-fanboi.net>
+
+_pkgname=astyle
+pkgname=astyle-patched
+pkgver=2.04
+pkgrel=1
+pkgdesc='A free, fast and small automatic formatter for C, C++, C#, and Java source code.'
+arch=('i686' 'x86_64')
+url='http://sourceforge.net/projects/astyle/'
+license=('LGPL')
+depends=('gcc-libs')
+conflicts=('astyle')
+provides=('astyle')
+source=("http://downloads.sourceforge.net/sourceforge/astyle/${_pkgname}_${pkgver}_linux.tar.gz"
+        'astyle_comma.diff'
+        'astyle_qt.diff')
+md5sums=('30b1193a758b0909d06e7ee8dd9627f6'
+        'a8702d1f4b5770c7d34cfc414ab3202c'
+        '3f5005275a1b083d9ff07e64fa7fa9cf')
+
+prepare() {
+    cd "$srcdir/$_pkgname"
+    patch -Np1 -i "$srcdir/astyle_comma.diff"
+    patch -Np1 -i "$srcdir/astyle_qt.diff"
+}
+
+build() {
+  cd "$srcdir/$_pkgname/build/gcc"
+  make
+}
+
+package() {
+  cd "$srcdir/$_pkgname/build/gcc"
+
+  install -Dm0755 bin/astyle "$pkgdir/usr/bin/astyle"
+
+  # install documentation (implements FS#23290)
+  install -d "$pkgdir/usr/share/doc/$_pkgname/"
+  for f in ../../doc/*.html; do
+    install -m0644 "$f" "$pkgdir/usr/share/doc/$_pkgname/"
+  done
+}

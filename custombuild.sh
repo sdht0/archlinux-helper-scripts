@@ -32,13 +32,13 @@ case "$pkggroup" in
                 'kde5-libdbusmenu-qt5-bzr' 'kde5-phonon-qt5-git' 'kde5-polkit-qt5-git'
 
                 # tier 1
-                'kf5-karchive-git' 'kf5-attica-git' 'kf5-kcodecs-git' 'kf5-kconfig-git' 'kf5-kcoreaddons-git' 'kf5-kdbusaddons-git'
+                'kf5-attica-git' 'kf5-karchive-git' 'kf5-kcodecs-git' 'kf5-kconfig-git' 'kf5-kcoreaddons-git' 'kf5-kdbusaddons-git'
                 'kf5-kglobalaccel-git' 'kf5-kguiaddons-git'  'kf5-ki18n-git' 'kf5-kidletime-git' 'kf5-kimageformats-git'
                 'kf5-kitemmodels-git' 'kf5-kitemviews-git' 'kf5-kjs-git' 'kf5-kplotting-git' 'kf5-kwidgetsaddons-git'
                 'kf5-kwindowsystem-git' 'kf5-solid-git' 'kf5-sonnet-git' 'kf5-threadweaver-git'
 
                 # tier 2
-                'kf5-kauth-git' 'kf5-kcompletion-git' 'kf5-kcrash-git' 'kf5-kdnssd-framework-git' 'kf5-kdoctools-git'
+                'kf5-kauth-git' 'kf5-kcompletion-git' 'kf5-kcrash-git' 'kf5-kdnssd-git' 'kf5-kdoctools-git'
                 'kf5-kjobwidgets-git' 'kf5-kpty-git' 'kf5-kunitconversion-git'
 
                 # tier 3
@@ -46,16 +46,18 @@ case "$pkggroup" in
                 'kf5-kxmlgui-git' 'kf5-kbookmarks-git' 'kf5-kcmutils-git' 'kf5-kio-git' 'kf5-kdeclarative-git' 'kf5-kinit-git' 'kf5-kded-git'
                 'kf5-kdesu-git' 'kf5-kparts-git' 'kf5-kwallet-git' 'kf5-kdewebkit-git' 'kf5-kdesignerplugin-git' 'kf5-kemoticons-git'
                 'kf5-kmediaplayer-git' 'kf5-kross-git' 'kf5-knewstuff-git' 'kf5-knotifyconfig-git' 'kf5-ktexteditor-git' 'kf5-kactivities-git'
-                'kf5-plasma-framework-git' 'kf5-krunner-git'
+                'kf5-plasma-framework-git'
 
                 # tier 4
-                'kf5-frameworkintegration-git' 'kf5-kapidox-git' 'kf5-kfileaudiopreview-git' 'kf5-khtml-git' 'kf5-kde4support-git'
+                'kf5-frameworkintegration-git' 'kf5-krunner-git' 'kf5-kapidox-git' 'kf5-kfileaudiopreview-git' 'kf5-khtml-git' 'kf5-kde4support-git'
 
                 # all
                 'kf5-kf5umbrella-git'
 
                 # KDE 5
-                'kde5-akonadi-git' 'kde5-phonon-gstreamer-git' 'kde5-runtime-git' 'kde5-workspace-git' # 'kde5-strigi-git'?
+                'kde5-akonadi-git' 'kde5-phonon-gstreamer-git'
+'kde5-runtime-git'
+                'kde5-workspace-git' # 'kde5-strigi-git'?
                 )
         ;;
     telepathy)
@@ -91,7 +93,7 @@ esac
 
 if [[ "$usemakepkg" = "usemakepkg" ]];then
     echo -n "Cleaning build dir..." && \
-    rm -rf $BASEDIR/build/makepkg/* && \
+    sudo rm -rf $BASEDIR/build/makepkg/* && \
     find $PKGBUILDSDIR -name '*.xz' -exec rm -rf {} \; && \
     echo "done"
 else

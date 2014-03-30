@@ -1,7 +1,7 @@
 
 pkgname=kf5-sonnet-git
 _pkgname=sonnet
-pkgver=96.2561286
+pkgver=98.652617e
 pkgrel=1
 pkgdesc="Spelling framework for Qt, plugin-based."
 arch=('i686' 'x86_64')

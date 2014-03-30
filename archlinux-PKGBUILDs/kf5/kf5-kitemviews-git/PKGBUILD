@@ -1,7 +1,7 @@
 
 pkgname=kf5-kitemviews-git
 _pkgname=kitemviews
-pkgver=20.b7e5ffa
+pkgver=22.fa8bb6f
 pkgrel=1
 pkgdesc="KItemViews"
 arch=('i686' 'x86_64')

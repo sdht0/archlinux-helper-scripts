@@ -10,11 +10,13 @@ def findDependencies():
         if line.find("frameworks/")==0 or line.find("playground/libs/plasma-framework")==0 or line.find("kde/kdelibs/kactivities")==0:
             line=line.replace("frameworks/","").replace("playground/libs/","").replace("kde/kdelibs/","").replace("kdesupport/","").replace("#testdependency","")
             parts=line.split(":")
-            if parts[1][0]=="-" or "phonon" in line or parts[0]=="ki18n" or "printutils" in line:
+            if parts[1][0]=="-" or "phonon" in line:
                 continue
             if parts[0] not in directdependencies:
                 directdependencies[parts[0]]=set()
             directdependencies[parts[0]].add(parts[1])
+            if parts[0]=="kf5umbrella":
+                directdependencies[parts[0]].add("plasma-framework")
             if parts[1] not in reversedependencies:
                 reversedependencies[parts[1]]=set()
             reversedependencies[parts[1]].add(parts[0])

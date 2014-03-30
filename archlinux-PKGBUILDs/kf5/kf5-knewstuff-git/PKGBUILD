@@ -1,7 +1,7 @@
 
 pkgname=kf5-knewstuff-git
 _pkgname=knewstuff
-pkgver=24.f5d882b
+pkgver=25.64e14b3
 pkgrel=1
 pkgdesc="KNewStuff"
 arch=('i686' 'x86_64')

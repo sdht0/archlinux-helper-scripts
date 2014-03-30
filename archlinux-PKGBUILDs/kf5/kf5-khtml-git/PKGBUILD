@@ -1,7 +1,7 @@
 
 pkgname=kf5-khtml-git
 _pkgname=khtml
-pkgver=39.6c4f7f8
+pkgver=55.1175509
 pkgrel=1
 pkgdesc="KHtml"
 arch=('i686' 'x86_64')

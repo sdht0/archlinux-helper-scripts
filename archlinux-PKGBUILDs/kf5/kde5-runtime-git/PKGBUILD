@@ -1,7 +1,7 @@
 # Maintainer: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kde5-runtime-git
-pkgver=plasma2tp.r64.g2ed6e48
+pkgver=plasma2tp.r183.g61f2918
 pkgrel=1
 pkgdesc='Plugins and applications necessary for the running of KDE applications'
 arch=('i686' 'x86_64')

@@ -1,7 +1,7 @@
 
 pkgname=kf5-kcodecs-git
 _pkgname=kcodecs
-pkgver=21.3d5e163
+pkgver=24.1c1bd25
 pkgrel=1
 pkgdesc="Plugins allowing Qt applications to access further types of images"
 arch=('i686' 'x86_64')

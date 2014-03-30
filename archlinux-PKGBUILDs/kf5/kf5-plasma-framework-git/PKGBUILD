@@ -2,13 +2,15 @@
 
 pkgname=kf5-plasma-framework-git
 _pkgname=plasma-framework
-pkgver=12522.b36ba7c
+pkgver=12585.7968400
 pkgrel=1
 pkgdesc='Plasma library and runtime components based upon KF5 and Qt5'
 arch=('i686' 'x86_64')
 url='https://projects.kde.org/projects/playground/libs/plasma-framework'
 license=('LGPL')
-depends=('qt5-quick1' 'kf5-kdnssd-framework-git' 'kf5-kdeclarative-git' 'kf5-kross-git' 'kf5-threadweaver-git' 'kf5-kidletime-git' 'kf5-kunitconversion-git' 'kf5-kactivities-git' 'kf5-kwallet-git' 'kf5-kitemmodels-git' 'kf5-ktexteditor-git')
+depends=('qt5-quick1' 'kf5-kactivities-git' 'kf5-kdeclarative-git' 'kf5-kdnssd-git'
+        'kf5-kidletime-git' 'kf5-kitemmodels-git' 'kf5-kjs-git' 'kf5-kross-git' 'kf5-ktexteditor-git'
+        'kf5-kunitconversion-git' 'kf5-kwallet-git' 'kf5-threadweaver-git')
 makedepends=('extra-cmake-modules-git' 'git')
 source=('git://anongit.kde.org/plasma-framework')
 md5sums=('SKIP')

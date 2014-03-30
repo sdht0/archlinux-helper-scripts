@@ -3,7 +3,7 @@ echo "Installing packages..." && \
 pacman -S --needed \
             firefox tomboy flashplugin tsocks chromium vlc gimp linuxdcpp virtualbox virtualbox-guest-iso gparted mkisolinux \
             googlecl s3cmd imagemagick wireshark-gtk skype pidgin telepathy \
-            libreoffice libreoffice-extension-pdfimport libreoffice-extension-presenter-screen libreoffice-extension-presentation-minimizer \
+            libreoffice libreoffice-extension-pdfimport libreoffice-extension-presenter-screen \
             aspell aspell-en hunspell hunspell-en hyphen hyphen-en artwiz-fonts \
             qt5 qt5-doc python python-beautifulsoup4 python2-beautifulsoup4 python2-pyqt mysql-python qtcreator graphviz \
             kdevelop kdevelop-python kdevelop-php racket ghc cabal-install jre7-openjdk jdk7-openjdk \
@@ -53,6 +53,7 @@ echo "Editing httpd.conf..." && \
 sed -i \
     -e '\|^Include conf/extra/httpd-autoindex.conf| s,^,#,' \
     -e '\|^Include conf/extra/httpd-userdir.conf| s,^,#,' \
+    -e '\|^LoadModule rewrite_module modules/mod_rewrite.so| s,^,#,' \
     -e '/unique_id_module/ s,#,,' \
     -e 's|^DocumentRoot.*|DocumentRoot "'"$serverroot"'"|' \
     -e '/mpm_event_module/ s,event,prefork,g' \
