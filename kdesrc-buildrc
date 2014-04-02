@@ -1,0 +1,28 @@
+# Adjust all these settings at will
+
+global
+
+  qtdir /usr
+  source-dir /home/lfiles/kde5/sources
+  build-dir /home/lfiles/kde5/kdesrc/build
+  kdedir /home/lfiles/kde5/kdesrc/install
+
+  git-repository-base kde-projects kde:
+
+  # KDE4_BUILD_TESTS kept for now, for old kde4_add_unit_test stuff to be enabled
+  cmake-options -DCMAKE_BUILD_TYPE:STRING=debug -DLIB_INSTALL_DIR=lib -DKDE4_BUILD_TESTS=true
+
+  cxxflags -pipe -DQT_STRICT_ITERATORS -DQURL_NO_CAST_FROM_STRING -DQT_NO_HTTP -DQT_NO_FTP -Wformat -Werror=format-security -Werror=return-type -Wno-variadic-macros -Wlogical-op -Wmissing-include-dirs
+
+  make-options -j4
+  #install-session-driver true
+
+  branch-group kf5-qt5
+
+end global
+
+include extragear/utils/kdesrc-build/kf5-qt5-build-include
+
+options phonon
+    cmake-options -DCMAKE_BUILD_TYPE:STRING=debug -DPHONON_BUILD_PHONON4QT5=ON -DCMAKE_INSTALL_LIBDIR=lib
+end options
