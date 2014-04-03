@@ -23,5 +23,6 @@ Xephyr -ac -br -noreset -screen 1280x720 :1 &
 DISPLAY=:1
 
 eval `dbus-launch`
-kdeinit5
-plasma-shell
+#kdeinit5
+#plasma-shell
+startkde

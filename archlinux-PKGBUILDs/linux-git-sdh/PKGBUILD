@@ -12,21 +12,22 @@ url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git')
 options=('!strip')
-source=('git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=v3.12'
+source=(
         # the main kernel config files
         'config' 'config.x86_64'
         # standard config files for mkinitcpio ramdisk
         'linux-git.preset'
         'change-default-console-loglevel.patch'
         )
-sha256sums=('SKIP' 'SKIP'
-            '00da25459826be1dced644c2215dfe2a6da53168d92aea79467c490aec4cbcae'
+sha256sums=('SKIP'
+            'SKIP'
             'df801f0d66d545908950cc26d75b22f93c7a132ebd0890c85d1ce52a9cd93556'
             'faced4eb4c47c4eb1a9ee8a5bf8a7c4b49d6b4d78efbe426e410730e6267d182')
 
 _kernelname=${pkgbase#linux}
 
 pkgver() {
+  ln -sf /home/lfiles/dev/build/linux "${srcdir}/${_srcname}"
   cd "${srcdir}/${_srcname}"
   git describe --long | sed -E 's/^v//;s/([^-]*-g)/r\1/;s/-/./g'
 }

@@ -10,10 +10,10 @@ Server = http://70.239.162.206/catalyst-mirror/repo/catalyst-hd234k/$arch\
 Server = http://mirror.rts-informatique.fr/archlinux-catalyst/repo/catalyst-hd234k/$arch\n\
 \1|' /etc/pacman.conf && \
 echo "Adding catalyst repo keys..." && \
-pacman-key --keyserver pgp.mit.edu --recv-keys 0xabed422d653c3094 && \
+pacman-key --recv-keys 0xabed422d653c3094 && \
 pacman-key --lsign-key 0xabed422d653c3094 && \
 echo "Install xorg with catalyst..." && \
-pacman -Rc --noconfirm xf86-input-evdev && \
+pacman -Rc --noconfirm xf86-input-evdev || true && \
 pacman -Syu --needed --noconfirm \
             xorg-server xorg-xinit xorg-server-utils mesa xf86-input-synaptics \
             catalyst-hook catalyst-utils catalyst-libgl opencl-catalyst lib32-catalyst-libgl lib32-opencl-catalyst lib32-catalyst-utils opencl-headers \
