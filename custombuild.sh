@@ -55,8 +55,7 @@ case "$pkggroup" in
                 'kf5-kf5umbrella-git'
 
                 # KDE 5
-                'kde5-akonadi-git' 'kde5-phonon-gstreamer-git'
-'kde5-runtime-git'
+                'kde5-akonadi-git' 'kde5-phonon-gstreamer-git' 'kde5-runtime-git'
                 'kde5-workspace-git' # 'kde5-strigi-git'?
                 )
         ;;

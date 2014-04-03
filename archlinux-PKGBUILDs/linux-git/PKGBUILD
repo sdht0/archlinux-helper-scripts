@@ -1,37 +1,29 @@
 # Maintainer: Boohbah <boohbah at gmail.com>
-# Contributor: Det <nimetonmaili at gmail a-dot com>
 # Contributor: Tobias Powalowski <tpowa@archlinux.org>
 # Contributor: Thomas Baechler <thomas@archlinux.org>
 
-pkgname=linux-git
-pkgbase=${pkgname}
-
-# Work around AUR parser
-# https://bugs.archlinux.org/task/16394
-pkgname+=("${pkgbase}-headers" "${pkgbase}-docs")
-
+pkgbase=linux-git
+pkgname=('linux-git' 'linux-git-headers' 'linux-git-docs')
 _srcname=linux
-pkgver=3.14.rc5.r185.gc3bebc7
+pkgver=3.14.r0.g455c6fd
 pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git')
 options=('!strip')
-source=('git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git'
+source=('git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=v3.14'
         # the main kernel config files
         'config' 'config.x86_64'
         # standard config files for mkinitcpio ramdisk
         'linux-git.preset'
         'change-default-console-loglevel.patch'
-        '0001-Update-EXTRAVERSION-as-required-by-task-03-3e7d95abd.patch'
         )
-md5sums=('SKIP'
-         'adb67b457193db1a32c07166679e384c'
-         '8c1166f480da198046df9bbdc06c4e87'
-         'ddfc10f687c3aaa029626ade9ed4e307'
-         '98beb36f9b8cf16e58de2483ea9985e3'
-         'SKIP')
+sha256sums=('SKIP'
+            '8f487d8775e4928fb280588047b915f57f8d51542fc4fc704b1684a8bffd2903'
+            '00da25459826be1dced644c2215dfe2a6da53168d92aea79467c490aec4cbcae'
+            'df801f0d66d545908950cc26d75b22f93c7a132ebd0890c85d1ce52a9cd93556'
+            'faced4eb4c47c4eb1a9ee8a5bf8a7c4b49d6b4d78efbe426e410730e6267d182')
 
 _kernelname=${pkgbase#linux}
 
@@ -47,29 +39,20 @@ prepare() {
   # remove this when a Kconfig knob is made available by upstream
   # (relevant patch sent upstream: https://lkml.org/lkml/2011/7/26/227)
   patch -p1 -i "${srcdir}/change-default-console-loglevel.patch"
-  patch -p1 -i "${srcdir}/0001-Update-EXTRAVERSION-as-required-by-task-03-3e7d95abd.patch"
 
-  # Use saved config if it exists
   if [ "${CARCH}" = "x86_64" ]; then
-    if [ -r "${startdir}/config.x86_64.last" ]; then
-      msg "Using saved config ${startdir}/config.x86_64.last"
-      cat "${startdir}/config.x86_64.last" > ./.config
-    else
-      msg "Using default config ${srcdir}/config.x86_64"
-      cat "${srcdir}/config.x86_64" > ./.config
-    fi
-  elif [ -r "${startdir}/config.last" ]; then
-    msg "Using saved config ${startdir}/config.last"
-    cat "${startdir}/config.last" > ./.config
+    cat "${srcdir}/config.x86_64" > ./.config
   else
-    msg "Using default config ${srcdir}/config"
     cat "${srcdir}/config" > ./.config
   fi
 
   if [ "${_kernelname}" != "" ]; then
     sed -i "s|CONFIG_LOCALVERSION=.*|CONFIG_LOCALVERSION=\"${_kernelname}\"|g" ./.config
-    sed -i "s|CONFIG_LOCALVERSION_AUTO=.*|CONFIG_LOCALVERSION_AUTO=y|" ./.config
+    sed -i "s|CONFIG_LOCALVERSION_AUTO=.*|CONFIG_LOCALVERSION_AUTO=n|" ./.config
   fi
+
+  # set extraversion to pkgrel
+  sed -ri "s|^(EXTRAVERSION =).*|\1 -${pkgrel}|" Makefile
 
   # don't run depmod on 'make install'. We'll do this ourselves in packaging
   sed -i '2iexit 0' scripts/depmod.sh
@@ -87,13 +70,6 @@ prepare() {
 
   # rewrite configuration
   yes "" | make config >/dev/null
-
-  # save configuration for later reuse
-  if [ "${CARCH}" = "x86_64" ]; then
-    cat .config > "${startdir}/config.x86_64.last"
-  else
-    cat .config > "${startdir}/config.last"
-  fi
 }
 
 build() {
@@ -111,7 +87,7 @@ package_linux-git() {
   conflicts=("kernel26${_kernelname}")
   replaces=("kernel26${_kernelname}")
   backup=("etc/mkinitcpio.d/${pkgbase}.preset")
-  install=linux-git.install
+  install=${pkgbase}.install
 
   cd "${srcdir}/${_srcname}"
 
@@ -135,7 +111,7 @@ package_linux-git() {
     -i "${startdir}/${install}"
 
   # install mkinitcpio preset file for kernel
-  install -D -m644 "${srcdir}/linux-git.preset" "${pkgdir}/etc/mkinitcpio.d/${pkgbase}.preset"
+  install -D -m644 "${srcdir}//${pkgbase}.preset" "${pkgdir}/etc/mkinitcpio.d/${pkgbase}.preset"
   sed \
     -e "1s|'linux.*'|'${pkgbase}'|" \
     -e "s|ALL_kver=.*|ALL_kver=\"/boot/vmlinuz-${pkgbase}\"|" \
@@ -211,28 +187,6 @@ package_linux-git-headers() {
 
   cp arch/${KARCH}/kernel/asm-offsets.s "${pkgdir}/usr/lib/modules/${_kernver}/build/arch/${KARCH}/kernel/"
 
-  # add headers for lirc package
-  # pci
-  for i in bt8xx cx88 saa7134; do
-    mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/pci/${i}"
-    cp -a drivers/media/pci/${i}/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/pci/${i}"
-  done
-  ## usb
-  for i in cpia2 em28xx pwc; do
-    mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/usb/${i}"
-    cp -a drivers/media/usb/${i}/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/usb/${i}"
-  done
-  ## sn9c102
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/staging/media/sn9c102"
-  cp -a drivers/staging/media/sn9c102/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/staging/media/sn9c102"
-  ## i2c
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/i2c"
-  cp drivers/media/i2c/*.h  "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/i2c/"
-  for i in cx25840; do
-    mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/i2c/${i}"
-    cp -a drivers/media/i2c/${i}/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/i2c/${i}"
-  done
-
   # add docbook makefile
   install -D -m644 Documentation/DocBook/Makefile \
     "${pkgdir}/usr/lib/modules/${_kernver}/build/Documentation/DocBook/Makefile"
@@ -254,8 +208,8 @@ package_linux-git-headers() {
   # http://bugs.archlinux.org/task/9912
   mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/dvb-core"
   cp drivers/media/dvb-core/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/dvb-core/"
-  ## and...
-  ## http://bugs.archlinux.org/task/11194
+  # and...
+  # http://bugs.archlinux.org/task/11194
   mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/include/config/dvb/"
   cp include/config/dvb/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/include/config/dvb/"
 
@@ -264,6 +218,7 @@ package_linux-git-headers() {
   # http://bugs.archlinux.org/task/13146
   mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/dvb-frontends/"
   cp drivers/media/dvb-frontends/lgdt330x.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/dvb-frontends/"
+  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/i2c/"
   cp drivers/media/i2c/msp3400-driver.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/i2c/"
 
   # add dvb headers
@@ -276,7 +231,7 @@ package_linux-git-headers() {
   mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/tuners"
   cp drivers/media/tuners/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/tuners/"
 
-  ## add xfs and shmem for aufs building
+  # add xfs and shmem for aufs building
   mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/fs/xfs"
   mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/mm"
   cp fs/xfs/xfs_sb.h "${pkgdir}/usr/lib/modules/${_kernver}/build/fs/xfs/xfs_sb.h"
@@ -323,7 +278,8 @@ package_linux-git-docs() {
   rm -f "${pkgdir}/usr/lib/modules/${_kernver}/build/Documentation/DocBook/Makefile"
 }
 
-# Set pkgdesc again to work around AUR parser
+# workaround for AUR not accepting split packages
+pkgname=${pkgbase}
 pkgdesc="The Linux kernel and modules (git version)"
 
 # vim:set ts=8 sts=2 sw=2 et:
