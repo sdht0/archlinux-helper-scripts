@@ -17,7 +17,7 @@ optdepends=('gstreamer0.10-plugins: all Gstreamer plugins to play all kind of mu
 provides=($_pkgname)
 conflicts=($_pkgname)
 install=$_pkgname.install
-source=("$_pkgname::svn+https://$_pkgname.svn.sourceforge.net/svnroot/$_pkgname/Trunk")
+source=("$_pkgname::svn+http://svn.code.sf.net/p/$_pkgname/code/")
 md5sums=('SKIP')
 
 pkgver() {
