@@ -1,6 +1,6 @@
 _pkgname=plasmate
 pkgname=plasmate-git
-pkgver=945.452b82e
+pkgver=950.8108d7b
 pkgrel=1
 pkgdesc='A small IDE taylored for development of Plasma components, such as Widgets, Runners, Dataengines.'
 arch=('i686' 'x86_64')

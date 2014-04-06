@@ -12,10 +12,6 @@ pacman -S --needed \
 echo "Setting up ntp..." &&
 systemctl enable ntpd && \
 systemctl start ntpd && \
-echo "Setting up git..." &&
-git config --global help.autocorrect 1 && \
-git config --global color.ui true && \
-git config --global alias.lg "log --color --graph --pretty=format:'%C(auto)%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit" && \
 echo "Adding sdh to wireshark" &&
 gpasswd -a sdh wireshark && \
 echo "Setting up virtualbox..." &&
@@ -81,7 +77,7 @@ echo "
 LoadModule php5_module modules/libphp5.so
 Include conf/extra/php5_module.conf" >> /etc/httpd/conf/httpd.conf && \
 echo "Setting up phpmyadmin... Needs mysql root password" && \
-echo 'Alias /phpmyadmin "/usr/share/webapps/phpMyAdmin"
+echo 'Alias /dbp "/usr/share/webapps/phpMyAdmin"
 <Directory "/usr/share/webapps/phpMyAdmin">
     DirectoryIndex index.html index.php
     AllowOverride All
@@ -112,4 +108,6 @@ sed -i \
     -e "/^\/\/ \$cfg\['Servers'\]\[\$i\]/ s,// ,,"  \
     -e "s/^\(\$cfg\['Servers'\]\[\$i\]\['auth_swekey_config'\]\)/\/\/ \1/"  \
     -e "s/\(\['controlpass'\] =\).*/\1 '$pmapasswd';/" /etc/webapps/phpmyadmin/config.inc.php && \
+echo "Restarting httpd..." && \
+systemctl restart httpd && \
 echo "Done."

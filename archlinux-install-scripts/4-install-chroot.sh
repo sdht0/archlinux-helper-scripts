@@ -15,7 +15,7 @@ echo "# /dev/sda4 LABEL=xfiles
 UUID=C878F05278F040AC                           /xfiles                 ntfs-3g         uid=1000,gid=100,umask=003              0 0
 
 # /dev/sda2 LABEL=windows
-UUID=B6EE2ABEEE2A7731                           /windows                ntfs-3g         uid=1000,gid=100,umask=003              0 0
+UUID=D2106E7E106E6A05                           /windows                ntfs-3g         uid=1000,gid=100,umask=003              0 0
 
 # /dev/sdb LABEL=sdh
 UUID=1019B40C17D4A684                           /home/lfiles/sdh-hdd    ntfs-3g         uid=1000,gid=100,umask=003,nofail       0 0

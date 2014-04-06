@@ -19,10 +19,10 @@ export XDG_DATA_HOME=/home/lfiles/kde5/.kde5/local
 export XDG_CONFIG_HOME=/home/lfiles/kde5/.kde5/config
 export XDG_CACHE_HOME=/home/lfiles/kde5/.kde5/cache
 
-Xephyr -ac -br -noreset -screen 1280x720 :1 &
-DISPLAY=:1
+#Xephyr -ac -br -noreset -screen 1280x720 :1 &
+#DISPLAY=:1
 
 eval `dbus-launch`
-#kdeinit5
-#plasma-shell
-startkde
+kdeinit5
+plasma-shell
+#startkde

@@ -5,11 +5,11 @@ pacman -S --noconfirm --needed alsa-utils alsa-plugins pulseaudio pulseaudio-als
                     appmenu-qt oxygen-gtk3 oxygen-gtk2 kde-gtk-config ktorrent konversation ksshaskpass \
                     networkmanager dnsmasq kdeplasma-applets-plasma-nm usb_modeswitch wvdial mobile-broadband-provider-info \
                     bluez bluez-utils bluez-hid2hci bluedevil \
-                    cups libcups hplip gutenprint cups-pdf kdeutils-print-manager && \
+                    cups libcups hplip gutenprint cups-pdf kdeutils-print-manager \
+                    ttf-dejavu ttf-freefont ttf-liberation ttf-ubuntu-font-family ttf-droid gsfonts && \
 systemctl enable kdm && \
 systemctl enable NetworkManager && \
 systemctl enable ModemManager && \
-systemctl enable bluetooth && \
 systemctl enable cups && \
 groupadd printadmin && \
 gpasswd -a sdh printadmin && \

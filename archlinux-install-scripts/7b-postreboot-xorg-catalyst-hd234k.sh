@@ -10,21 +10,23 @@ Server = http://70.239.162.206/catalyst-mirror/repo/catalyst-hd234k/$arch\
 Server = http://mirror.rts-informatique.fr/archlinux-catalyst/repo/catalyst-hd234k/$arch\n\
 \1|' /etc/pacman.conf && \
 echo "Adding catalyst repo keys..." && \
-pacman-key --recv-keys 0xabed422d653c3094 && \
-pacman-key --lsign-key 0xabed422d653c3094 && \
+pacman-key --recv-keys 653c3094 && \
+pacman-key --lsign-key 653c3094 && \
+echo "Remove any previous installation..." && \
+pacman -Rdd xf86-input-evdev xorg-server xorg-xinit xorg-server-utils \
+            mesa xf86-video-ati lib32-ati-dri xf86-input-synaptics glamor-egl mesa-libgl lib32-mesa-libgl \
+            xorg-twm xorg-xclock xterm || true && \
 echo "Install xorg with catalyst..." && \
-pacman -Rc --noconfirm xf86-input-evdev || true && \
 pacman -Syu --needed --noconfirm \
             xorg-server xorg-xinit xorg-server-utils mesa xf86-input-synaptics \
             catalyst-hook catalyst-utils catalyst-libgl opencl-catalyst lib32-catalyst-libgl lib32-opencl-catalyst lib32-catalyst-utils opencl-headers \
-            xorg-twm xorg-xclock xterm \
-            ttf-dejavu ttf-freefont ttf-liberation ttf-ubuntu-font-family ttf-droid gsfonts && \
+            xorg-twm xorg-xclock xterm && \
 echo "Configuring ati..." && \
 aticonfig --initial && \
+systemctl enable catalyst-hook && \
+cat /etc/modules-load.d/catalyst.conf && echo && \
 echo "Blacklisting radeon..." && \
 echo "blacklist radeon" > /etc/modprobe.d/blacklist-radeon.conf && \
 echo "Adding nomodeset to kernel parameters..." && \
-sed -i "s/GRUB_CMDLINE_LINUX=\"\(.*\)\"/GRUB_CMDLINE_LINUX=\"nomodeset \1\"/" /etc/default/grub && \
-echo "Creating new grub config..." && \
-grub-mkconfig -o /boot/grub/grub.cfg && \
+grep "nomodeset" /boot/grub/grub.cfg || sed -i "s/quiet/quiet nomodeset/" /boot/grub/grub.cfg && \
 echo "Done. Execute 'startx' [after rebooting if in chroot] to test."
