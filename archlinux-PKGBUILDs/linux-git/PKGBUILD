@@ -5,24 +5,42 @@
 pkgbase=linux-git
 pkgname=('linux-git' 'linux-git-headers' 'linux-git-docs')
 _srcname=linux
-pkgver=3.10.r0.g8bb495e
+pkgver=3.14.r0.g455c6fd
 pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
 license=('GPL2')
 makedepends=('xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc' 'git')
 options=('!strip')
-source=('git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=v3.12'
+source=('git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=v3.14'
+        #"https://www.kernel.org/pub/linux/kernel/v3.x/patch-${pkgver}.xz"
         # the main kernel config files
         'config' 'config.x86_64'
         # standard config files for mkinitcpio ramdisk
         'linux-git.preset'
         'change-default-console-loglevel.patch'
+        '0001-Bluetooth-allocate-static-minor-for-vhci.patch'
+        '0002-module-allow-multiple-calls-to-MODULE_DEVICE_TABLE-p.patch'
+        '0003-module-remove-MODULE_GENERIC_TABLE.patch'
+        '0004-fs-Don-t-return-0-from-get_anon_bdev.patch'
+        '0005-Revert-Bluetooth-Enable-autosuspend-for-Intel-Blueto.patch'
+        '0006-genksyms-fix-typeof-handling.patch'
+        '0007-Fix-the-use-of-code32_start-in-the-EFI-boot-stub.patch'
+        'attachment.patch'
         )
-sha256sums=('SKIP' 'SKIP'
-            '00da25459826be1dced644c2215dfe2a6da53168d92aea79467c490aec4cbcae'
-            'df801f0d66d545908950cc26d75b22f93c7a132ebd0890c85d1ce52a9cd93556'
-            'faced4eb4c47c4eb1a9ee8a5bf8a7c4b49d6b4d78efbe426e410730e6267d182')
+sha256sums=('SKIP'
+            'f2131f0f5a20a6cc65a987cf5363d08c343041c859686ceb4bb93d2d2a3d6b34'
+            '3545e2754c2f55f04818bc17461ddcabaf0760c35a0fec5d1d70f75c2ac93dbe'
+            'SKIP'
+            'faced4eb4c47c4eb1a9ee8a5bf8a7c4b49d6b4d78efbe426e410730e6267d182'
+            'aa17aa9a5c663552ea047b9d2a9a916207bed361bd387418c122f6611ee576a6'
+            '48c459a2a14e8f161b79943e9ea405c4e98cd5abdab62749c4e9d65e5735382a'
+            'f15a6831736e4c0b8b355fd7887445e770500d439cb851623ea300cc50ba4d97'
+            '4b9aed8d0b7c2389d9413caa2152e6591200630c19dda8224d43eae7d863a0d6'
+            'e0666f75eabc2bbfa668cb35ee72dfbad48e5963828a444fbb50388048a8cd3c'
+            'd2c449d346ae52724d36c3224bd06fcae7775b0698a9096eb89eeaa6dbc092e5'
+            '5a175c698cfdbf942f712afeda2a6af3f4e63a742ec6b6dc3a64bc6a7fb685bb'
+            'SKIP')
 
 _kernelname=${pkgbase#linux}
 
@@ -37,7 +55,33 @@ prepare() {
   # set DEFAULT_CONSOLE_LOGLEVEL to 4 (same value as the 'quiet' kernel param)
   # remove this when a Kconfig knob is made available by upstream
   # (relevant patch sent upstream: https://lkml.org/lkml/2011/7/26/227)
- # patch -p1 -i "${srcdir}/change-default-console-loglevel.patch"
+  patch -p1 -i "${srcdir}/change-default-console-loglevel.patch"
+
+  # Fix vhci warning in kmod (to restore every kernel maintainer's sanity)
+  patch -p1 -i "${srcdir}/0001-Bluetooth-allocate-static-minor-for-vhci.patch"
+
+  # Fix atkbd aliases
+  patch -p1 -i "${srcdir}/0002-module-allow-multiple-calls-to-MODULE_DEVICE_TABLE-p.patch"
+  patch -p1 -i "${srcdir}/0003-module-remove-MODULE_GENERIC_TABLE.patch"
+
+  # Fix various bugs caused by rootfs having FSID 0
+  # See http://www.spinics.net/lists/kernel/msg1716924.html
+  patch -p1 -i "${srcdir}/0004-fs-Don-t-return-0-from-get_anon_bdev.patch"
+
+  # Disable usb autosuspend for intel btusb
+  # See http://www.spinics.net/lists/kernel/msg1716461.html
+  # Until a solution is found, make sure the driver leaves autosuspend alone
+  patch -p1 -i "${srcdir}/0005-Revert-Bluetooth-Enable-autosuspend-for-Intel-Blueto.patch"
+
+  # Fix generation of symbol CRCs
+  # http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?id=dc53324060f324e8af6867f57bf4891c13c6ef18
+  patch -p1 -i "${srcdir}/0006-genksyms-fix-typeof-handling.patch"
+
+  # Fix the use of code32_start in the EFI boot stub
+  # http://permalink.gmane.org/gmane.linux.kernel/1679881
+  patch -p1 -i "${srcdir}/0007-Fix-the-use-of-code32_start-in-the-EFI-boot-stub.patch"
+
+  patch -p1 -i "${srcdir}/attachment.patch"
 
   if [ "${CARCH}" = "x86_64" ]; then
     cat "${srcdir}/config.x86_64" > ./.config
@@ -74,7 +118,7 @@ prepare() {
 build() {
   cd "${srcdir}/${_srcname}"
 
-  make ${MAKEFLAGS} LOCALVERSION= bzImage modules
+  time make ${MAKEFLAGS} LOCALVERSION= bzImage modules
 }
 
 package_linux-git() {

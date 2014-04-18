@@ -1,10 +1,12 @@
 echo "Adding additional repos..." && \
-grep 'xorg112' /etc/pacman.conf || sed -i 's|\(#\[testing\].*\)|[xorg112]\
+grep 'xorg112' /etc/pacman.conf > /dev/null || sed -i 's|\(#\[testing\].*\)|[xorg112]\
+Server = http://172.16.32.222/repo/archlinux_x86-64/xorg112\
 Server = http://catalyst.wirephire.com/repo/xorg112/$arch\
 Server = http://70.239.162.206/catalyst-mirror/repo/xorg112/$arch\
 Server = http://mirror.rts-informatique.fr/archlinux-catalyst/repo/xorg112/$arch\
 \
 [catalyst-hd234k]\
+Server = http://172.16.32.222/repo/archlinux_x86-64/catalyst-hd234k\
 Server = http://catalyst.wirephire.com/repo/catalyst-hd234k/$arch\
 Server = http://70.239.162.206/catalyst-mirror/repo/catalyst-hd234k/$arch\
 Server = http://mirror.rts-informatique.fr/archlinux-catalyst/repo/catalyst-hd234k/$arch\n\
@@ -14,13 +16,13 @@ pacman-key --recv-keys 653c3094 && \
 pacman-key --lsign-key 653c3094 && \
 echo "Remove any previous installation..." && \
 pacman -Rdd xf86-input-evdev xorg-server xorg-xinit xorg-server-utils \
-            mesa xf86-video-ati lib32-ati-dri xf86-input-synaptics glamor-egl mesa-libgl lib32-mesa-libgl \
+            mesa xf86-video-ati ati-dri lib32-ati-dri xf86-input-synaptics glamor-egl mesa-libgl lib32-mesa-libgl \
             xorg-twm xorg-xclock xterm || true && \
 echo "Install xorg with catalyst..." && \
 pacman -Syu --needed --noconfirm \
-            xorg-server xorg-xinit xorg-server-utils mesa xf86-input-synaptics \
-            catalyst-hook catalyst-utils catalyst-libgl opencl-catalyst lib32-catalyst-libgl lib32-opencl-catalyst lib32-catalyst-utils opencl-headers \
-            xorg-twm xorg-xclock xterm && \
+            xorg-server xorg-server-utils xf86-input-synaptics \
+            mesa catalyst-hook catalyst-utils catalyst-libgl opencl-catalyst lib32-catalyst-libgl lib32-opencl-catalyst lib32-catalyst-utils opencl-headers \
+            xorg-xinit xorg-twm xorg-xclock xterm && \
 echo "Configuring ati..." && \
 aticonfig --initial && \
 systemctl enable catalyst-hook && \

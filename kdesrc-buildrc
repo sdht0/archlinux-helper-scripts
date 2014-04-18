@@ -6,6 +6,7 @@ global
     source-dir /home/lfiles/kde5/sources
     build-dir /home/lfiles/kde5/kdesrc/build
     kdedir /home/lfiles/kde5/kdesrc/install
+    log-dir /home/lfiles/kde5/kdesrc/logs
 
     git-repository-base kde-projects kde:
 
@@ -26,5 +27,21 @@ end global
 include kf5-qt5-build-include
 
 options phonon
-    cmake-options -DCMAKE_BUILD_TYPE:STRING=debug -DPHONON_BUILD_PHONON4QT5=ON -DCMAKE_INSTALL_LIBDIR=lib
+    cmake-options -DPHONON_BUILD_PHONON4QT5=ON -DCMAKE_INSTALL_LIBDIR=lib
+end options
+
+options phonon-vlc
+    cmake-options -DPHONON_BUILD_PHONON4QT5=ON -DCMAKE_INSTALL_LIBDIR=lib
+end options
+
+options phonon-gstreamer
+    cmake-options -DPHONON_BUILD_PHONON4QT5=ON -DCMAKE_INSTALL_LIBDIR=lib
+end options
+
+options libdbusmenu-qt
+    cmake-options -DCMAKE_INSTALL_LIBDIR=lib
+end options
+
+options libnm-qt
+    cmake-options -DCMAKE_INSTALL_LIBDIR=lib
 end options

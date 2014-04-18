@@ -1,0 +1,19 @@
+@@ -, +, @@ 
+---
+ drivers/gpu/drm/radeon/uvd_v1_0.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+--- a/drivers/gpu/drm/radeon/uvd_v1_0.c	
++++ a/drivers/gpu/drm/radeon/uvd_v1_0.c	
+@@ -83,7 +83,10 @@ int uvd_v1_0_init(struct radeon_device *rdev)
+ 	int r;
+ 
+ 	/* raise clocks while booting up the VCPU */
+-	radeon_set_uvd_clocks(rdev, 53300, 40000);
++	if (rdev->family < CHIP_RV740)
++		radeon_set_uvd_clocks(rdev, 10000, 10000);
++	else
++		radeon_set_uvd_clocks(rdev, 53300, 40000);
+ 
+ 	r = uvd_v1_0_start(rdev);
+ 	if (r)
+-- 

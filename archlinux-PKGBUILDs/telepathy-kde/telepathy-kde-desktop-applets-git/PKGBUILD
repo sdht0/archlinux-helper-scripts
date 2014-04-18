@@ -2,7 +2,7 @@
 
 pkgname=telepathy-kde-desktop-applets-git
 _pkgname=ktp-desktop-applets
-pkgver=0.8.r772.728cfc7
+pkgver=0.8.r781.ffc5001
 pkgrel=1
 pkgdesc="The KDE-Telepathy Plasma desktop applets"
 arch=('i686' 'x86_64')

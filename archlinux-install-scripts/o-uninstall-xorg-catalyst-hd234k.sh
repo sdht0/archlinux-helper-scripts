@@ -18,6 +18,6 @@ echo "Removing module config..." && \
 rm -f /etc/modprobe.d/blacklist-radeon.conf && \
 rm -f /etc/modules-load.d/catalyst.conf && \
 echo "Removing nomodeset from kernel parameters..." && \
-sed -i "s/[ ]*nomodeset[ ]*//" /boot/grub/grub.cfg && \
+sed -i "s/[ ]*nomodeset[ ]*/ /" /boot/grub/grub.cfg && \
 grep "quiet" /boot/grub/grub.cfg && \
 echo "Done."
