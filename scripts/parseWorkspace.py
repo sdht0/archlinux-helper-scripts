@@ -5,14 +5,17 @@ directdependencies=findDependencies.findDependencies()
 import xml.etree.ElementTree as ElementTree
 import os,sys
 
-basepath = "/home/lfiles/dev/archlinux-logs/a"
+basepath = "/home/lfiles/dev/archlinux-logs/b"
 
 tree = ElementTree.parse('/home/lfiles/kde5/sources/kde_projects.xml')
 root = tree.getroot()
 components = root.findall('component')
 for i in components:
-    if i.attrib['identifier']=="frameworks":
-        itemlist = i.findall('module')
+    if i.attrib['identifier']=="kde":
+        x = i.findall('module')
+        for j in x:
+            if j.attrib['identifier']=="workspace":
+                itemlist = j.findall('project')
 
 allitems=[]
 extradependencies={"kapidox":"'python2'",
@@ -53,10 +56,10 @@ for item in itemlist:
         data['depend']="'qt5-script'"
     elif name in ["krunner"]:
         data['depend']="'kf5-plasma-framework-git'"
-    if "kf5-%s-git" % name in directdependencies:
-        data['depend']="'%s'" % ("' '".join(sorted(list(directdependencies["kf5-%s-git" % name]))))
+    if "kde5-%s-git" % name in directdependencies:
+        data['depend']="'%s'" % ("' '".join(sorted(list(directdependencies["kde5-%s-git" % name]))))
     data['depend']+=" "+extradependencies[name] if name in extradependencies else ""
-    data['depend']=data['depend'].replace("kf5-kdesupport/phonon/phonon","kde5-phonon-qt5")
+    data['depend']=data['depend'].replace("kf5-kdesupport/attica","kde5-attica").replace("kf5-kdesupport/phonon/phonon","kde5-phonon-qt5")
     if name in ['kdoctools']:
         data['extra']="\noptions=('staticlibs')"
     data['setpath']=""
@@ -68,7 +71,7 @@ for item in itemlist:
     allitems.append(data)
 
 base='''
-pkgname=kf5-[name]-git
+pkgname=kde5-[name]-git
 _pkgname=[name]
 pkgver=1
 pkgrel=1
@@ -78,7 +81,7 @@ url="[web]"
 license=('LGPL')
 depends=([depend])
 makedepends=('extra-cmake-modules-git' 'git')
-group=("kf5")
+group=("kde5")
 conflicts=("${_pkgname}-git")
 provides=("${_pkgname}-git")
 source=("[url]")
@@ -109,11 +112,11 @@ package() {
 '''
 
 for i in allitems:
-    print("'kf5-%s-git'"%i['name'],end=' ')
+    print("'kde5-%s-git'"%i['name'],end=' ')
     text = base
     for data in i:
         text = text.replace("[%s]" % data,i[data])
-    path=basepath+"/kf5-%s-git" % i['name']
+    path=basepath+"/kde5-%s-git" % i['name']
     if not os.path.exists(path):
         os.mkdir(path)
     f=open(path+"/PKGBUILD","w")

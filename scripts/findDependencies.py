@@ -2,21 +2,24 @@ import subprocess
 import copy
 
 def findDependencies():
-    data=open("/home/lfiles/dev/sources/kde5/kde-build-metadata/dependency-data-kf5-qt5","r").readlines()
+    data=open("/home/lfiles/kde5/sources/kde-build-metadata/dependency-data-kf5-qt5","r").readlines()
     directdependencies={}
     reversedependencies={}
     for line in data:
         line=line.strip(" \n").replace(" ","")
-        if line.find("frameworks/")==0 or line.find("playground/libs/plasma-framework")==0 or line.find("kde/kdelibs/kactivities")==0:
-            line=line.replace("frameworks/","").replace("playground/libs/","").replace("kde/kdelibs/","").replace("kdesupport/","").replace("#testdependency","")
+        if line.find("frameworks/")==0 or line.find("kde/workspace/")==0:
+            line=line.replace("#KDecorations","").replace("kdesupport/","").replace("#testdependency","")
             parts=line.split(":")
-            if parts[1][0]=="-" or "phonon" in line:
+            if parts[1][0]=="-" or "phonon" in line or "milou" in line or "powerdevil" in line:
                 continue
+            for i in range(2):
+                if "frameworks/" in parts[i]:
+                    parts[i]="kf5-%s-git" % parts[i].replace("frameworks/","")
+                if "kde/workspace/" in parts[i]:
+                    parts[i]="kde5-%s-git" % parts[i].replace("kde/workspace/","")
             if parts[0] not in directdependencies:
                 directdependencies[parts[0]]=set()
             directdependencies[parts[0]].add(parts[1])
-            if parts[0]=="kf5umbrella":
-                directdependencies[parts[0]].add("plasma-framework")
             if parts[1] not in reversedependencies:
                 reversedependencies[parts[1]]=set()
             reversedependencies[parts[1]].add(parts[0])
