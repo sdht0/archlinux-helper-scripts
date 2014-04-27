@@ -1,0 +1,14 @@
+diff --git a/drivers/gpu/drm/radeon/rv770.c b/drivers/gpu/drm/radeon/rv770.c
+index fef3107..2fbc787 100644
+--- a/drivers/gpu/drm/radeon/rv770.c
++++ b/drivers/gpu/drm/radeon/rv770.c
+@@ -67,6 +67,9 @@ int rv770_set_uvd_clocks(struct radeon_device *rdev, u32 vclk, u32 dclk)
+ 	r = radeon_uvd_calc_upll_dividers(rdev, vclk, dclk, 50000, 160000,
+ 					  43663, 0x03FFFFFE, 1, 30, ~0,
+ 					  &fb_div, &vclk_div, &dclk_div);
++
++    pr_notice("*****SDH: %d %d %d",fb_div,vclk_div,dclk_div);
++
+ 	if (r)
+ 		return r;
+ 

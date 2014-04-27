@@ -3,7 +3,7 @@
 
 pkgname=telepathy-kde-accounts-kcm-git
 _pkgname=ktp-accounts-kcm
-pkgver=0.8.r942.cea4734
+pkgver=0.8.r961.9d36ea3
 pkgrel=1
 pkgdesc="KCM Module for configuring Telepathy Instant Messaging Accounts. Now includes protocol-specific UI's"
 url="https://projects.kde.org/projects/kdereview/ktp-accounts-kcm"

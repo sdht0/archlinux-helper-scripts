@@ -2,7 +2,7 @@
 
 pkgname=telepathy-kde-send-file-git
 _pkgname=ktp-send-file
-pkgver=0.8.r164.6e08b58
+pkgver=0.8.r170.9bb8ac1
 pkgrel=1
 pkgdesc="A File manager plugin to launch a file transfer job with a specified contact"
 arch=('i686' 'x86_64')
