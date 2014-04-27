@@ -1,7 +1,7 @@
 # Maintainer: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kde5-phonon-qt5-git
-pkgver=v0.7.1.15.g48417ed
+pkgver=v4.7.1.7.g2adbd9d
 pkgrel=1
 pkgdesc='The multimedia framework for KDE'
 arch=('i686' 'x86_64')

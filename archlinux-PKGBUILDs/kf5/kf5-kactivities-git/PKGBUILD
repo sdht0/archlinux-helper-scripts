@@ -1,38 +1,47 @@
-# $Id
-# Maintainer: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kf5-kactivities-git
-pkgver=639.0b6cc52
+_pkgname=kactivities
+pkgver=1
 pkgrel=1
-pkgdesc="Core components for the KDE's Activities"
+pkgdesc="Core components for the KDE's Activities
+
+* Activity Manager
+  System service to manage user's activities, track the usage patterns etc.
+* KActivities library
+  API for using and interacting with the Activity Manager as a consumer,
+  application adding information to them or as an activity manager.
+* Workspace
+  Plugins for KDE workspace to easier integrate activities (KIO, etc.)"
 arch=('i686' 'x86_64')
-url='https://projects.kde.org/projects/kde/kdelibs/kactivities'
+url="http://projects.kde.org/projects/frameworks/kactivities"
 license=('LGPL')
-depends=('qt5-declarative' 'boost-libs' 'kf5-kservice-git')
-makedepends=('extra-cmake-modules-git' 'git' 'boost')
-source=('git://anongit.kde.org/kactivities.git')
+depends=('kf5-kservice-git')
+makedepends=('extra-cmake-modules-git' 'git')
+group=("kf5")
+conflicts=("${_pkgname}-git")
+provides=("${_pkgname}-git")
+source=("git://anongit.kde.org/kactivities")
 md5sums=('SKIP')
 
 pkgver() {
-  cd kactivities
-  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+    cd "${_pkgname}"
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
 }
 
 prepare() {
-  mkdir -p build
+    mkdir -p build
 }
 
 build() {
-  cd build
-  /opt/kf5/bin/cmake ../kactivities \
-    -DCMAKE_BUILD_TYPE=Debug \
-    -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
-    -DLIB_INSTALL_DIR=lib \
-    -DBUILD_TESTING=OFF
-  make
+    cd build
+    /opt/kf5/bin/cmake ../"${_pkgname}" \
+        -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+        -DCMAKE_BUILD_TYPE=Debug \
+        -DLIB_INSTALL_DIR=lib
+    make
 }
 
 package() {
-  cd build
-  make DESTDIR="${pkgdir}" install
+    cd build
+    make DESTDIR="${pkgdir}" install
 }

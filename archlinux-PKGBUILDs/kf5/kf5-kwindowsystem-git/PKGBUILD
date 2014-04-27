@@ -1,7 +1,7 @@
 
 pkgname=kf5-kwindowsystem-git
 _pkgname=kwindowsystem
-pkgver=64.a510af1
+pkgver=1
 pkgrel=1
 pkgdesc="KWindowSystem"
 arch=('i686' 'x86_64')

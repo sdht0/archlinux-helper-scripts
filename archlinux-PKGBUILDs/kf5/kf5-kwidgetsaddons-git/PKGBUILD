@@ -1,7 +1,7 @@
 
 pkgname=kf5-kwidgetsaddons-git
 _pkgname=kwidgetsaddons
-pkgver=38.a412aca
+pkgver=1
 pkgrel=1
 pkgdesc="KWidgetsAddons"
 arch=('i686' 'x86_64')

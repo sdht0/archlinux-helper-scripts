@@ -1,41 +1,39 @@
-# Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kf5-plasma-framework-git
 _pkgname=plasma-framework
-pkgver=12585.7968400
+pkgver=1
 pkgrel=1
-pkgdesc='Plasma library and runtime components based upon KF5 and Qt5'
+pkgdesc="Plasma library and runtime components based upon KF5 and Qt5"
 arch=('i686' 'x86_64')
-url='https://projects.kde.org/projects/playground/libs/plasma-framework'
+url="http://projects.kde.org/projects/frameworks/plasma-framework"
 license=('LGPL')
-depends=('qt5-quick1' 'kf5-kactivities-git' 'kf5-kdeclarative-git' 'kf5-kdnssd-git'
-        'kf5-kidletime-git' 'kf5-kitemmodels-git' 'kf5-kjs-git' 'kf5-kross-git' 'kf5-ktexteditor-git'
-        'kf5-kunitconversion-git' 'kf5-kwallet-git' 'kf5-threadweaver-git')
+depends=('kf5-kactivities-git' 'kf5-kdeclarative-git' 'kf5-kdnssd-git' 'kf5-kidletime-git' 'kf5-kitemmodels-git' 'kf5-kjs-git' 'kf5-kross-git' 'kf5-ktexteditor-git' 'kf5-kunitconversion-git' 'kf5-threadweaver-git')
 makedepends=('extra-cmake-modules-git' 'git')
-source=('git://anongit.kde.org/plasma-framework')
+group=("kf5")
+conflicts=("${_pkgname}-git")
+provides=("${_pkgname}-git")
+source=("git://anongit.kde.org/plasma-framework")
 md5sums=('SKIP')
 
 pkgver() {
-  cd plasma-framework
-  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+    cd "${_pkgname}"
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
 }
 
 prepare() {
-  mkdir -p build
+    mkdir -p build
 }
 
 build() {
-  export CMAKE_PREFIX_PATH="/opt/kf5"
-
-  cd build
-  /opt/kf5/bin/cmake ../plasma-framework \
-    -DCMAKE_BUILD_TYPE=Debug \
-    -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
-    -DLIB_INSTALL_DIR=lib
-  make
+    cd build
+    /opt/kf5/bin/cmake ../"${_pkgname}" \
+        -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+        -DCMAKE_BUILD_TYPE=Debug \
+        -DLIB_INSTALL_DIR=lib
+    make
 }
 
 package() {
-  cd build
-  make DESTDIR=${pkgdir} install
+    cd build
+    make DESTDIR="${pkgdir}" install
 }

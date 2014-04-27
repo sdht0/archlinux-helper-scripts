@@ -1,37 +1,42 @@
-# Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kf5-attica-git
-pkgver=v4.97.0
+_pkgname=attica
+pkgver=1
 pkgrel=1
-pkgdesc='A Qt5 library that implements the Open Collaboration Services API'
+pkgdesc="Attica is a Qt library that implements the Open Collaboration Services API.
+
+Mailing list: http://lists.freedesktop.org/mailman/listinfo/ocs
+Internet Relay Chat: #ocs@freenode"
 arch=('i686' 'x86_64')
-url='https://projects.kde.org/projects/kdesupport/attica'
+url="http://projects.kde.org/projects/frameworks/attica"
 license=('LGPL')
 depends=('qt5-base')
 makedepends=('extra-cmake-modules-git' 'git')
-source=('git://anongit.kde.org/attica')
+group=("kf5")
+conflicts=("${_pkgname}-git")
+provides=("${_pkgname}-git")
+source=("git://anongit.kde.org/attica")
 md5sums=('SKIP')
 
 pkgver() {
-  cd attica
-  git describe --always | sed 's|-|.|g'
+    cd "${_pkgname}"
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
 }
 
 prepare() {
-  mkdir -p build
+    mkdir -p build
 }
 
 build() {
-
-  cd build
-  /opt/kf5/bin/cmake ../attica \
-    -DCMAKE_BUILD_TYPE=Debug \
-    -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
-    -DLIB_INSTALL_DIR=lib
-  make
+    cd build
+    /opt/kf5/bin/cmake ../"${_pkgname}" \
+        -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+        -DCMAKE_BUILD_TYPE=Debug \
+        -DLIB_INSTALL_DIR=lib
+    make
 }
 
 package() {
-  cd build
-  make DESTDIR="${pkgdir}" install
+    cd build
+    make DESTDIR="${pkgdir}" install
 }

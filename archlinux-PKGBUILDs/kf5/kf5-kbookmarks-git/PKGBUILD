@@ -1,7 +1,7 @@
 
 pkgname=kf5-kbookmarks-git
 _pkgname=kbookmarks
-pkgver=30.9672978
+pkgver=1
 pkgrel=1
 pkgdesc="KBookmarks"
 arch=('i686' 'x86_64')

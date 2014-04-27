@@ -1,7 +1,7 @@
 
 pkgname=kf5-kjsembed-git
 _pkgname=kjsembed
-pkgver=25.5e99ba0
+pkgver=1
 pkgrel=1
 pkgdesc="KJSEmbed"
 arch=('i686' 'x86_64')

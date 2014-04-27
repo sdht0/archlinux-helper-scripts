@@ -1,13 +1,13 @@
 
 pkgname=kf5-kdewebkit-git
 _pkgname=kdewebkit
-pkgver=22.beb64d3
+pkgver=1
 pkgrel=1
 pkgdesc="KDE Webkit"
 arch=('i686' 'x86_64')
 url="http://projects.kde.org/projects/frameworks/kdewebkit"
 license=('LGPL')
-depends=('kf5-kparts-git' 'kf5-kwallet-git' 'qt5-webkit')
+depends=('kf5-kparts-git' 'qt5-webkit')
 makedepends=('extra-cmake-modules-git' 'git')
 group=("kf5")
 conflicts=("${_pkgname}-git")

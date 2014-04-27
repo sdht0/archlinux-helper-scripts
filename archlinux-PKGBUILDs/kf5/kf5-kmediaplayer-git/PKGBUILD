@@ -1,7 +1,7 @@
 
 pkgname=kf5-kmediaplayer-git
 _pkgname=kmediaplayer
-pkgver=28.b4908d4
+pkgver=1
 pkgrel=1
 pkgdesc="KMediaPlayer"
 arch=('i686' 'x86_64')

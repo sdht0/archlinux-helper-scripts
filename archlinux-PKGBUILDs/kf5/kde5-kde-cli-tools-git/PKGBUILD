@@ -1,18 +1,18 @@
 
-pkgname=kf5-kprintutils-git
-_pkgname=kprintutils
+pkgname=kde5-kde-cli-tools-git
+_pkgname=kde-cli-tools
 pkgver=1
 pkgrel=1
-pkgdesc="KPrintUtils"
+pkgdesc="Tools based on KDE Frameworks 5 to better interact with the system."
 arch=('i686' 'x86_64')
-url="http://projects.kde.org/projects/frameworks/kprintutils"
+url="http://projects.kde.org/projects/kde/workspace/kde-cli-tools"
 license=('LGPL')
-depends=('qt5-base')
+depends=('kf5-kcmutils-git' 'kf5-kdelibs4support-git' 'kf5-kdesu-git')
 makedepends=('extra-cmake-modules-git' 'git')
-group=("kf5")
+group=("kde5")
 conflicts=("${_pkgname}-git")
 provides=("${_pkgname}-git")
-source=("git://anongit.kde.org/kprintutils")
+source=("git://anongit.kde.org/kde-cli-tools")
 md5sums=('SKIP')
 
 pkgver() {

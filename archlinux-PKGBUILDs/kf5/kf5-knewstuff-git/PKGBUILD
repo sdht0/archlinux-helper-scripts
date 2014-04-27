@@ -1,13 +1,13 @@
 
 pkgname=kf5-knewstuff-git
 _pkgname=knewstuff
-pkgver=25.64e14b3
+pkgver=1
 pkgrel=1
 pkgdesc="KNewStuff"
 arch=('i686' 'x86_64')
 url="http://projects.kde.org/projects/frameworks/knewstuff"
 license=('LGPL')
-depends=('kf5-attica-git' 'kf5-kio-git')
+depends=('kf5-kio-git')
 makedepends=('extra-cmake-modules-git' 'git')
 group=("kf5")
 conflicts=("${_pkgname}-git")

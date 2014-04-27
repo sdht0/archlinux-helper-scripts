@@ -1,7 +1,7 @@
 
 pkgname=kf5-kconfigwidgets-git
 _pkgname=kconfigwidgets
-pkgver=30.3e62961
+pkgver=1
 pkgrel=1
 pkgdesc="Widgets for KConfig"
 arch=('i686' 'x86_64')

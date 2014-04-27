@@ -1,7 +1,7 @@
 
 pkgname=kf5-kparts-git
 _pkgname=kparts
-pkgver=32.2ea7f0c
+pkgver=1
 pkgrel=1
 pkgdesc="KParts"
 arch=('i686' 'x86_64')

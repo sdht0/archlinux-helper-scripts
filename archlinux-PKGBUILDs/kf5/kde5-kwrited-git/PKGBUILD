@@ -1,0 +1,39 @@
+
+pkgname=kde5-kwrited-git
+_pkgname=kwrited
+pkgver=1
+pkgrel=1
+pkgdesc=""
+arch=('i686' 'x86_64')
+url="http://projects.kde.org/projects/kde/workspace/kwrited"
+license=('LGPL')
+depends=('kde5-kwin-git' 'kf5-frameworkintegration-git' 'kf5-kdelibs4support-git')
+makedepends=('extra-cmake-modules-git' 'git')
+group=("kde5")
+conflicts=("${_pkgname}-git")
+provides=("${_pkgname}-git")
+source=("git://anongit.kde.org/kwrited")
+md5sums=('SKIP')
+
+pkgver() {
+    cd "${_pkgname}"
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+    mkdir -p build
+}
+
+build() {
+    cd build
+    /opt/kf5/bin/cmake ../"${_pkgname}" \
+        -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+        -DCMAKE_BUILD_TYPE=Debug \
+        -DLIB_INSTALL_DIR=lib
+    make
+}
+
+package() {
+    cd build
+    make DESTDIR="${pkgdir}" install
+}

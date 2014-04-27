@@ -1,7 +1,7 @@
 
 pkgname=kf5-kdesu-git
 _pkgname=kdesu
-pkgver=25.e0fd6fe
+pkgver=1
 pkgrel=1
 pkgdesc="KDE Su"
 arch=('i686' 'x86_64')

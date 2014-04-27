@@ -1,18 +1,18 @@
 
-pkgname=kf5-kde4support-git
-_pkgname=kde4support
-pkgver=141.706214d
+pkgname=kde5-kwin-git
+_pkgname=kwin
+pkgver=1
 pkgrel=1
-pkgdesc="KDE 4 Support"
+pkgdesc=""
 arch=('i686' 'x86_64')
-url="http://projects.kde.org/projects/frameworks/kde4support"
+url="http://projects.kde.org/projects/kde/workspace/kwin"
 license=('LGPL')
-depends=('kf5-kdesignerplugin-git' 'kf5-kinit-git' 'kf5-kunitconversion-git' 'qt5-tools')
+depends=('kf5-kcmutils-git' 'kf5-knewstuff-git' 'kf5-plasma-framework-git')
 makedepends=('extra-cmake-modules-git' 'git')
-group=("kf5")
+group=("kde5")
 conflicts=("${_pkgname}-git")
 provides=("${_pkgname}-git")
-source=("git://anongit.kde.org/kde4support")
+source=("git://anongit.kde.org/kwin")
 md5sums=('SKIP')
 
 pkgver() {
@@ -25,8 +25,6 @@ prepare() {
 }
 
 build() {
-    export XDG_DATA_DIRS="/opt/kf5/share:$XDG_DATA_DIRS"
-
     cd build
     /opt/kf5/bin/cmake ../"${_pkgname}" \
         -DCMAKE_INSTALL_PREFIX=/opt/kf5 \

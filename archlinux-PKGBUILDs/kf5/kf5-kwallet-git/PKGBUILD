@@ -1,7 +1,7 @@
 
 pkgname=kf5-kwallet-git
 _pkgname=kwallet
-pkgver=505.7bb5b44
+pkgver=1
 pkgrel=1
 pkgdesc=""
 arch=('i686' 'x86_64')

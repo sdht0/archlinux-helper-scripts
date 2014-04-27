@@ -1,7 +1,7 @@
 
 pkgname=kf5-kidletime-git
 _pkgname=kidletime
-pkgver=21.9db2d78
+pkgver=1
 pkgrel=1
 pkgdesc="KIdleTime"
 arch=('i686' 'x86_64')

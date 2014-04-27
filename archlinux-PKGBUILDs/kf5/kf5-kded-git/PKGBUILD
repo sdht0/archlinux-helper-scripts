@@ -1,7 +1,7 @@
 
 pkgname=kf5-kded-git
 _pkgname=kded
-pkgver=30.aae70e4
+pkgver=1
 pkgrel=1
 pkgdesc="KDE Daemon"
 arch=('i686' 'x86_64')

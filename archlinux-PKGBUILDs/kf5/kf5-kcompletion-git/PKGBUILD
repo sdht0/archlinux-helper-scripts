@@ -1,7 +1,7 @@
 
 pkgname=kf5-kcompletion-git
 _pkgname=kcompletion
-pkgver=54.7c603d3
+pkgver=1
 pkgrel=1
 pkgdesc="KCompletion"
 arch=('i686' 'x86_64')
