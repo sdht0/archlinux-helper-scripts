@@ -29,7 +29,7 @@ case "$pkggroup" in
                 'extra-cmake-modules-git'
 
                 # dependencies
-                'kde5-libdbusmenu-qt5-bzr' 'kde5-phonon-qt5-git' 'kde5-polkit-qt5-git'
+                'kde5-libdbusmenu-qt5-bzr' 'kde5-phonon-qt5-git' 'kde5-akonadi-git' 'kde5-phonon-gstreamer-git' 'kde5-polkit-qt5-git'
 
                 # tier 1
                 'kf5-attica-git' 'kf5-karchive-git' 'kf5-kcodecs-git' 'kf5-kconfig-git' 'kf5-kcoreaddons-git' 'kf5-kdbusaddons-git'
@@ -49,14 +49,17 @@ case "$pkggroup" in
                 'kf5-plasma-framework-git'
 
                 # tier 4
-                'kf5-frameworkintegration-git' 'kf5-krunner-git' 'kf5-kapidox-git' 'kf5-kfileaudiopreview-git' 'kf5-khtml-git' 'kf5-kde4support-git'
+                'kf5-frameworkintegration-git' 'kf5-krunner-git' 'kf5-kapidox-git' 'kf5-kfileaudiopreview-git' 'kf5-khtml-git' 'kf5-kdelibs4support-git'
 
                 # all
                 'kf5-kf5umbrella-git'
 
                 # KDE 5
-                'kde5-akonadi-git' 'kde5-phonon-gstreamer-git' 'kde5-runtime-git'
-                'kde5-workspace-git' # 'kde5-strigi-git'?
+                'kde5-systemsettings-git' 'kde5-libksysguard-git' 'kde5-kwin-git'
+                'kde5-khelpcenter-git' 'kde5-kde-cli-tools-git' 'kde5-kio-extras-git' 'kde5-plasma-workspace-git' 'kde5-ksysguard-git'
+                'kde5-oxygen-git' 'kde5-plasma-desktop-git' 'kde5-kmenuedit-git' 'kde5-khotkeys-git' 'kde5-kinfocenter-git' 'kde5-kwrited-git'
+
+                #'kde5-kfilemetadata-git' 'kde5-baloo-git' 'kde5-milou-git'
                 )
         ;;
     telepathy)

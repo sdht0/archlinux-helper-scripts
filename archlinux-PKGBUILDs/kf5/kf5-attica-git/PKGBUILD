@@ -28,8 +28,14 @@ prepare() {
 }
 
 build() {
+    export PATH="/opt/kf5/bin:$PATH"
+    export XDG_DATA_DIRS="/opt/kf5/share:$XDG_DATA_DIRS"
+    export LD_LIBRARY_PATH="/opt/kf5/lib:$LD_LIBRARY_PATH"
+    export PKG_CONFIG_PATH="/opt/kf5/lib/pkgconfig:$PKG_CONFIG_PATH"
+    export KDEDIRS="/opt/kf5"
+
     cd build
-    /opt/kf5/bin/cmake ../"${_pkgname}" \
+    cmake ../"${_pkgname}" \
         -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
         -DCMAKE_BUILD_TYPE=Debug \
         -DLIB_INSTALL_DIR=lib

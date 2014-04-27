@@ -62,9 +62,6 @@ for item in itemlist:
     data['depend']=data['depend'].replace("kf5-kdesupport/attica","kde5-attica").replace("kf5-kdesupport/phonon/phonon","kde5-phonon-qt5")
     if name in ['kdoctools']:
         data['extra']="\noptions=('staticlibs')"
-    data['setpath']=""
-    if name in ['kconfigwidgets', 'kde4support', 'kded', 'kdesignerplugin' ,'kio' ,'kjsembed' ,'kross', 'kservice']:
-        data['setpath']='export XDG_DATA_DIRS="/opt/kf5/share:$XDG_DATA_DIRS"\n\n    '
     data['extraoptions']=""
     if name in ["solid"]:
         data['extraoptions']=" \\\n        -DHUPNP_ENABLED=FALSE"
@@ -97,8 +94,14 @@ prepare() {
 }
 
 build() {
-    [setpath]cd build
-    /opt/kf5/bin/cmake ../"${_pkgname}" \\
+    export PATH="/opt/kf5/bin:$PATH"
+    export XDG_DATA_DIRS="/opt/kf5/share:$XDG_DATA_DIRS"
+    export LD_LIBRARY_PATH="/opt/kf5/lib:$LD_LIBRARY_PATH"
+    export PKG_CONFIG_PATH="/opt/kf5/lib/pkgconfig:$PKG_CONFIG_PATH"
+    export KDEDIRS="/opt/kf5"
+
+    cd build
+    cmake ../"${_pkgname}" \\
         -DCMAKE_INSTALL_PREFIX=/opt/kf5 \\
         -DCMAKE_BUILD_TYPE=Debug \\
         -DLIB_INSTALL_DIR=lib[extraoptions]
