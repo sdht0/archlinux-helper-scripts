@@ -1,18 +1,18 @@
 
-pkgname=kf5-kdnssd-git
-_pkgname=kdnssd
+pkgname=kde5-breeze-git
+_pkgname=breeze
 pkgver=1
 pkgrel=1
-pkgdesc="KDNSSD Framework"
+pkgdesc="Artwork, styles and assets for the Breeze visual style for the Plasma Desktop"
 arch=('i686' 'x86_64')
-url="http://projects.kde.org/projects/frameworks/kdnssd"
+url="http://projects.kde.org/projects/kde/workspace/breeze"
 license=('LGPL')
-depends=('kf5-kconfig-git' 'avahi')
+depends=('qt5-base')
 makedepends=('extra-cmake-modules-git' 'git')
-group=("kf5")
+group=("kde5")
 conflicts=("${_pkgname}-git")
 provides=("${_pkgname}-git")
-source=("git://anongit.kde.org/kdnssd")
+source=("git://anongit.kde.org/breeze")
 md5sums=('SKIP')
 
 pkgver() {

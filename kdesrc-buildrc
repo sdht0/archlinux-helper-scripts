@@ -2,11 +2,11 @@
 
 global
 
-    qtdir /usr
-    source-dir /home/lfiles/kde5/sources
-    build-dir /home/lfiles/kde5/kdesrc/build
-    kdedir /home/lfiles/kde5/kdesrc/install
-    log-dir /home/lfiles/kde5/kdesrc/logs
+    qtdir       /usr
+    source-dir  /home/lfiles/kde5/sources
+    build-dir   /home/lfiles/kde5/kdesrc/build
+    kdedir      /home/lfiles/kde5/kdesrc/install
+    log-dir     /home/lfiles/kde5/kdesrc/logs
 
     git-repository-base kde-projects kde:
 

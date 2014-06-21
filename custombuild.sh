@@ -42,22 +42,24 @@ case "$pkggroup" in
                 'kf5-kjobwidgets-git' 'kf5-kpty-git' 'kf5-kunitconversion-git'
 
                 # tier 3
-                'kf5-kjsembed-git' 'kf5-kconfigwidgets-git' 'kf5-kiconthemes-git' 'kf5-kservice-git' 'kf5-knotifications-git' 'kf5-ktextwidgets-git'
-                'kf5-kxmlgui-git' 'kf5-kbookmarks-git' 'kf5-kcmutils-git' 'kf5-kio-git' 'kf5-kdeclarative-git' 'kf5-kinit-git' 'kf5-kded-git'
-                'kf5-kdesu-git' 'kf5-kparts-git' 'kf5-kwallet-git' 'kf5-kdewebkit-git' 'kf5-kdesignerplugin-git' 'kf5-kemoticons-git'
-                'kf5-kmediaplayer-git' 'kf5-kross-git' 'kf5-knewstuff-git' 'kf5-knotifyconfig-git' 'kf5-ktexteditor-git' 'kf5-kactivities-git'
-                'kf5-plasma-framework-git'
+                'kf5-kjsembed-git' 'kf5-kconfigwidgets-git' 'kf5-kiconthemes-git' 'kf5-kservice-git' 'kf5-knotifications-git'
+                'kf5-ktextwidgets-git' 'kf5-kxmlgui-git' 'kf5-kbookmarks-git' 'kf5-kcmutils-git' 'kf5-kwallet-git' 'kf5-kio-git'
+                'kf5-kdeclarative-git' 'kf5-kinit-git' 'kf5-kded-git' 'kf5-kdesu-git' 'kf5-kparts-git' 'kf5-kdewebkit-git'
+                'kf5-kdesignerplugin-git' 'kf5-kemoticons-git' 'kf5-kmediaplayer-git' 'kf5-kross-git' 'kf5-knewstuff-git'
+                'kf5-knotifyconfig-git' 'kf5-ktexteditor-git' 'kf5-kactivities-git' 'kf5-plasma-framework-git'
 
-                # tier 4
-                'kf5-frameworkintegration-git' 'kf5-krunner-git' 'kf5-kapidox-git' 'kf5-kfileaudiopreview-git' 'kf5-khtml-git' 'kf5-kdelibs4support-git'
+#                 tier 4
+                'kf5-frameworkintegration-git' 'kf5-krunner-git' 'kf5-kapidox-git' 'kf5-kfileaudiopreview-git' 'kf5-khtml-git'
+                'kf5-kdelibs4support-git'
 
                 # all
                 'kf5-kf5umbrella-git'
 
-                # KDE 5
-                'kde5-systemsettings-git' 'kde5-libksysguard-git' 'kde5-kwin-git'
-                'kde5-khelpcenter-git' 'kde5-kde-cli-tools-git' 'kde5-kio-extras-git' 'kde5-plasma-workspace-git' 'kde5-ksysguard-git'
-                'kde5-oxygen-git' 'kde5-plasma-desktop-git' 'kde5-kmenuedit-git' 'kde5-khotkeys-git' 'kde5-kinfocenter-git' 'kde5-kwrited-git'
+#                 KDE 5
+                'kde5-systemsettings-git' 'kde5-libksysguard-git' 'kde5-kwin-git' 'kde5-khelpcenter-git' 'kde5-kde-cli-tools-git'
+                'kde5-kio-extras-git' 'kde5-plasma-workspace-git' 'kde5-ksysguard-git' 'kde5-oxygen-git'
+                'kde5-plasma-desktop-git'
+                'kde5-kmenuedit-git' 'kde5-khotkeys-git' 'kde5-kinfocenter-git' 'kde5-kwrited-git'
 
                 #'kde5-kfilemetadata-git' 'kde5-baloo-git' 'kde5-milou-git'
                 )
@@ -83,6 +85,10 @@ case "$pkggroup" in
     plasma-nm)
         folder="plasma-nm"
         packages=('libnm-qt' 'kdeplasma-applets-plasma-nm-git')
+        ;;
+    android)
+        folder="-"
+        packages=('android-sdk' 'android-sdk-platform-tools' 'android-sdk-build-tools')
         ;;
     rest)
         folder="-"

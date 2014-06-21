@@ -3,7 +3,7 @@
 
 pkgname=telepathy-kde-text-ui-git
 _pkgname=ktp-text-ui
-pkgver=0.8.r1620.fdd8198
+pkgver=0.8.r1629.250e64a
 pkgrel=1
 pkgdesc="Telepathy handler for Text Chats"
 arch=('i686' 'x86_64')

@@ -3,7 +3,7 @@
 
 pkgname=telepathy-kde-contact-list-git
 _pkgname=ktp-contact-list
-pkgver=0.8.r948.109e2f5
+pkgver=0.8.r959.4b3887a
 pkgrel=1
 pkgdesc="KDE Telepathy contact list application"
 arch=('i686' 'x86_64')

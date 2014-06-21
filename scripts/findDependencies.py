@@ -5,6 +5,7 @@ def findDependencies():
     data=open("/home/lfiles/kde5/sources/kde-build-metadata/dependency-data-kf5-qt5","r").readlines()
     directdependencies={}
     reversedependencies={}
+    extra=set()
     for line in data:
         line=line.strip(" \n").replace(" ","")
         if line.find("frameworks/")==0 or line.find("kde/workspace/")==0:
@@ -23,6 +24,11 @@ def findDependencies():
             if parts[1] not in reversedependencies:
                 reversedependencies[parts[1]]=set()
             reversedependencies[parts[1]].add(parts[0])
+            if "kde5" in parts[0]:
+                directdependencies[parts[0]].add('kf5-kf5umbrella-git')
+                if 'kf5-kf5umbrella-git' not in reversedependencies:
+                    reversedependencies['kf5-kf5umbrella-git']=set()
+                reversedependencies['kf5-kf5umbrella-git'].add(parts[0])
 
     text="digraph A {"
     for d in directdependencies:

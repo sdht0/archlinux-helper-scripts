@@ -1,0 +1,21 @@
+
+pkgname=python2-onedrive-git
+_pkgname=python-onedrive
+pkgver=r113.0ae14c2
+pkgrel=1
+arch=('i686' 'x86_64')
+license=('custom')
+url="https://github.com/mk-fg/python-onedrive"
+makedepends=('python2' 'python2-requests' 'python2-yaml' 'python2-chardet' 'python2-setuptools')
+source=(git+https://github.com/mk-fg/python-onedrive.git)
+md5sums=('SKIP')
+
+pkgver() {
+    cd "$srcdir/$_pkgname"
+    echo r$(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+package() {
+    cd "$srcdir/$_pkgname"
+    python2 setup.py install --root="${pkgdir}" --optimize=1
+}

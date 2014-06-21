@@ -18,28 +18,9 @@ for i in components:
                 itemlist = j.findall('project')
 
 allitems=[]
-extradependencies={"kapidox":"'python2'",
-                    "kauth":"'kde5-polkit-qt5-git'",
-                    "kdewebkit":"'qt5-webkit'",
-                    "kde4support":"'qt5-tools'",
-                    "kdnssd-framework":"'avahi'",
-                    "kdoctools":"'docbook-xsl'",
-                    "kfileaudiopreview":"'kde5-phonon-qt5-git'",
-                    "khtml":"'kde5-phonon-qt5-git' 'giflib'",
-                    "kiconthemes":"'qt5-svg'",
-                    "kidletime":"'libxss'",
-                    "kimageformats":"'jasper' 'openexr'",
-                    "kio":"'krb5' 'qt5-script'",
-                    "kjobwidgets":"'qt5-x11extras'",
-                    "kjsembed":"'qt5-svg' 'qt5-tools'",
-                    "knotifications":"'kde5-libdbusmenu-qt5-bzr' 'kde5-phonon-qt5-git'",
-                    "kpty":"'libutempter'",
-                    "kwallet":"'gpgme'",
-                    "kross":"'qt5-tools'",
-                    "kwindowsystem":"'libxfixes'",
-                    "solid":"'media-player-info' 'upower' 'udisks2'",
-                    "sonnet":"'enchant'",
-                    "knotifyconfig":"'kde5-phonon-qt5-git'"}
+extradependencies={"kwin":"'libxcursor'",
+                   "plasma-desktop":"'kde5-plasma-workspace-git' 'lomoco' 'libcanberra' 'libxkbfile'",
+                   "kio-extras":"'openslp' 'samba' 'libssh' 'openexr' 'libkexiv2'"}
 for item in itemlist:
     name=item.attrib['identifier']
     data={"name":name}
@@ -48,14 +29,8 @@ for item in itemlist:
     data['url']=item.find('repo').find('url').text.strip()
     data['extra']=""
     data['depend']="'qt5-base'"
-    if name in ["kglobalaccel", "kidletime" ,"kwindowsystem"]:
-        data['depend']="'qt5-x11extras'"
-    elif name in ["solid"]:
-        data['depend']="'qt5-declarative'"
-    elif name in ["ki18n"]:
-        data['depend']="'qt5-script'"
-    elif name in ["krunner"]:
-        data['depend']="'kf5-plasma-framework-git'"
+    if name in ['kio-extras']:
+        data['depend']="'kf5-kf5umbrella-git'"
     if "kde5-%s-git" % name in directdependencies:
         data['depend']="'%s'" % ("' '".join(sorted(list(directdependencies["kde5-%s-git" % name]))))
     data['depend']+=" "+extradependencies[name] if name in extradependencies else ""

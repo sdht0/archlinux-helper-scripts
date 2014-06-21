@@ -1,0 +1,30 @@
+# Maintainer: Ambroz Bizjak <ambrop7@gmail.com>
+
+pkgname=badvpn
+pkgver=1.999.129
+pkgrel=1
+pkgdesc="BadVPN peer-to-peer VPN system, and NCD, a programming language for network interface configuration"
+arch=('i686' 'x86_64')
+url="http://code.google.com/p/badvpn/"
+license=('GPL')
+depends=('nss' 'openssl' 'iproute2')
+makedepends=('cmake')
+source=("badvpn-${pkgver}.tar.gz::https://github.com/ambrop72/badvpn/archive/${pkgver}.tar.gz"
+	'badvpn-ncd.conf.d')
+md5sums=('e42f9c22fcef5a44498e80f23ceee0b3'
+	 '84e8d536246d4423406bc9ca08e42e47')
+
+build() {
+	cd ${srcdir}/${pkgname}-${pkgver}
+	cmake . \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_BUILD_TYPE=Release
+	make
+}
+
+package() {
+	cd ${srcdir}/${pkgname}-${pkgver}
+	make DESTDIR=${pkgdir} install
+
+	install -D -m0644 "$srcdir/badvpn-ncd.conf.d" "$pkgdir/etc/conf.d/badvpn-ncd"
+}

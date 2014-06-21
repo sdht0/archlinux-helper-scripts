@@ -1,12 +1,10 @@
 echo "Adding additional repos..." && \
 grep 'xorg112' /etc/pacman.conf > /dev/null || sed -i 's|\(#\[testing\].*\)|[xorg112]\
-Server = http://172.16.32.222/repo/archlinux_x86-64/xorg112\
 Server = http://catalyst.wirephire.com/repo/xorg112/$arch\
 Server = http://70.239.162.206/catalyst-mirror/repo/xorg112/$arch\
 Server = http://mirror.rts-informatique.fr/archlinux-catalyst/repo/xorg112/$arch\
 \
 [catalyst-hd234k]\
-Server = http://172.16.32.222/repo/archlinux_x86-64/catalyst-hd234k\
 Server = http://catalyst.wirephire.com/repo/catalyst-hd234k/$arch\
 Server = http://70.239.162.206/catalyst-mirror/repo/catalyst-hd234k/$arch\
 Server = http://mirror.rts-informatique.fr/archlinux-catalyst/repo/catalyst-hd234k/$arch\n\

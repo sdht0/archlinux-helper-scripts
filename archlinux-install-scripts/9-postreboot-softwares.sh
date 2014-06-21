@@ -8,7 +8,8 @@ pacman -S --needed \
             qt5 qt5-doc python python-beautifulsoup4 python2-beautifulsoup4 python2-pyqt mysql-python qtcreator graphviz \
             kdevelop kdevelop-python kdevelop-php racket ghc cabal-install jre7-openjdk jdk7-openjdk \
             devtools ccache cmake gdb valgrind unrar unzip zip p7zip rsync wget git perl-net-smtp-ssl perl-mime-tools perl-authen-sasl tk bzr subversion \
-            openssh ntp nmap dnsutils mtr apache php php-apache mariadb phpmyadmin php-mcrypt php-gd && \
+            openssh ntp nmap dnsutils mtr \
+            apache php php-apache mariadb phpmyadmin php-mcrypt php-gd && \
 echo "Setting up ntp..." &&
 systemctl enable ntpd && \
 systemctl start ntpd && \
@@ -50,7 +51,7 @@ sed -i \
     -e '\|^Include conf/extra/httpd-autoindex.conf| s,^,#,' \
     -e '\|^Include conf/extra/httpd-userdir.conf| s,^,#,' \
     -e '\|^LoadModule rewrite_module modules/mod_rewrite.so| s,^,#,' \
-    -e '/unique_id_module/ s,#,,' \
+    -e '/unique_id_module/ s,^,#,' \
     -e 's|^DocumentRoot.*|DocumentRoot "'"$serverroot"'"|' \
     -e '/mpm_event_module/ s,event,prefork,g' \
     -e '\|^<Directory "/srv/http">|b br
