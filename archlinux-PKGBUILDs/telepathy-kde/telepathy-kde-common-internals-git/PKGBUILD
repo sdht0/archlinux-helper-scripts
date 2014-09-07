@@ -3,14 +3,14 @@
 
 pkgname=telepathy-kde-common-internals-git
 _pkgname=ktp-common-internals
-pkgver=0.8.r1508.e24c134
+pkgver=0.8.r1567.95286df
 pkgrel=1
 pkgdesc="Common components for Kde-Telepathy"
 arch=('i686' 'x86_64')
 url="https://projects.kde.org/projects/extragear/network/telepathy/ktp-common-internals"
 license=('LGPL')
-depends=('kdebase-runtime' 'telepathy-logger-qt-git' 'libkpeople-git')
-makedepends=('git' 'cmake' 'automoc4' 'boost')
+depends=('telepathy-logger-qt-git' 'libkpeople-git' 'telepathy-mission-control')
+makedepends=('git' 'cmake' 'automoc4' 'boost' 'doxygen')
 conflicts=('telepathy-kde-common-internals')
 provides=('telepathy-kde-common-internals')
 install=telepathy-kde-common-internals.install

@@ -41,7 +41,3 @@ end options
 options libdbusmenu-qt
     cmake-options -DCMAKE_INSTALL_LIBDIR=lib
 end options
-
-options libnm-qt
-    cmake-options -DCMAKE_INSTALL_LIBDIR=lib
-end options

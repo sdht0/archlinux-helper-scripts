@@ -17,7 +17,7 @@ optdepends=('gstreamer0.10-plugins: all Gstreamer plugins to play all kind of mu
 provides=($_pkgname)
 conflicts=($_pkgname)
 install=$_pkgname.install
-source=("$_pkgname::svn+http://svn.code.sf.net/p/$_pkgname/code/")
+source=("$_pkgname::svn+http://svn.code.sf.net/p/$_pkgname/code#revision=1890")
 md5sums=('SKIP')
 
 pkgver() {
@@ -27,6 +27,9 @@ pkgver() {
 
 build() {
     cd "$srcdir/$_pkgname"
+
+    CXXFLAGS="$CXXFLAGS -Wno-unused-local-typedefs"
+
     cmake . \
         -DCMAKE_BUILD_TYPE='Debug' \
         -DCMAKE_INSTALL_PREFIX='/usr' \

@@ -3,7 +3,7 @@
 
 pkgname=telepathy-logger-qt-git
 _pkgname=telepathy-logger-qt
-pkgver=0.9.r270.fee77b3
+pkgver=0.9.r271.0a621f6
 pkgrel=1
 pkgdesc="Qt bindings for telepathy logger"
 arch=('i686' 'x86_64')

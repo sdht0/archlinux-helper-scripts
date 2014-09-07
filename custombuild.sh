@@ -92,7 +92,7 @@ case "$pkggroup" in
         ;;
     rest)
         folder="-"
-        packages=('clean-chroot-manager-git' 'cower' 'eiskaltdcpp-qt-git' 'google-talkplugin' 'guayadeque-svn' 'kdeplasma-applets-nextwallpaper')
+        packages=('clean-chroot-manager-git' 'cower' 'google-talkplugin' 'guayadeque-svn')
         ;;
     *)  printf "kf5\nkte\ntelepathy\nactive\nrest\n";
         exit 1

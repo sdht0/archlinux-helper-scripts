@@ -1,7 +1,7 @@
 
 pkgname=python2-onedrive-git
 _pkgname=python-onedrive
-pkgver=r113.0ae14c2
+pkgver=r127.9d5f00f
 pkgrel=1
 arch=('i686' 'x86_64')
 license=('custom')
