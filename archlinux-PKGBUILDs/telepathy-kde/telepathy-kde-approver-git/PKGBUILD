@@ -3,7 +3,7 @@
 
 pkgname=telepathy-kde-approver-git
 _pkgname=ktp-approver
-pkgver=0.8.r231.5738645
+pkgver=0.8.r232.cbaea33
 pkgrel=1
 pkgdesc="KDE Channel Approver for Telepathy"
 arch=('i686' 'x86_64')

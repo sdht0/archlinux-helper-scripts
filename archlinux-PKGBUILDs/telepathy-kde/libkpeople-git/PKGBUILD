@@ -3,7 +3,7 @@
 
 pkgname=libkpeople-git
 _pkgname=libkpeople
-pkgver=0.2.r891.95dd800
+pkgver=0.2.r893.66728e6
 pkgrel=1
 pkgdesc="A contact aggregation library for KDE"
 arch=('i686' 'x86_64')

@@ -3,7 +3,7 @@
 
 pkgname=telepathy-kde-filetransfer-handler-git
 _pkgname=ktp-filetransfer-handler
-pkgver=0.8.r175.dd0dc21
+pkgver=0.8.r176.2d2157c
 pkgrel=1
 pkgdesc="KDE Telepathy file transfer handler"
 arch=('i686' 'x86_64')

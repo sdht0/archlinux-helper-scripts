@@ -101,7 +101,7 @@ esac
 
 if [[ "$usemakepkg" = "usemakepkg" ]];then
     echo -n "Cleaning build dir..." && \
-    sudo rm -rf $BASEDIR/build/makepkg/* && \
+    sudo rm -rf $BASEDIR/build/* && \
     find $PKGBUILDSDIR -name '*.xz' -exec rm -rf {} \; && \
     echo "done"
 else
