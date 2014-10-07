@@ -1,0 +1,109 @@
+# Maintainer:  William Giokas <1007380@gmail.com>
+# Contributor: Christoph Vigano <mail at cvigano dot de>
+# Contributor: Marcin Karpezo <sirmacik at gmail dot com>
+# Contributor: Michael Rosset <mrosset@uarch.org>
+# Based on [extra]'s git
+
+pkgname=git-git
+_pkgname=git
+epoch=1
+pkgver=2.0.0.rc4.rv1.g4a28f16
+pkgrel=1
+pkgdesc="The fast distributed version control system - Git version"
+arch=('i686' 'x86_64')
+url="http://git-scm.com/"
+license=('GPL2')
+depends=('curl' 'expat>=2.0' 'perl-error' 'perl>=5.14.0' 'openssl' 'pcre' 'zlib')
+makedepends=('git' 'asciidoc' 'xmlto' 'docbook-xsl' 'python2')
+optdepends=('tk: gitk and git gui'
+            'perl-libwww: git svn'
+            'perl-term-readkey: git svn'
+            'perl-mime-tools: git send-email'
+            'perl-net-smtp-ssl: git send-email TLS support'
+            'perl-authen-sasl: git send-email TLS support'
+            'python2: various helper scripts'
+            'subversion: git svn'
+            'cvsps: git cvsimport'
+            'git-remote-hg: support for using git with mercurial repos')
+provides=('git')
+conflicts=('git')
+install=git.install
+source=('git-daemon@.service'
+        'git-daemon.socket'
+        'git://git.kernel.org/pub/scm/git/git.git#branch=master')
+
+md5sums=('042524f942785772d7bd52a1f02fe5ae'
+         'f67869315c2cc112e076f0c73f248002'
+         'SKIP')
+
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  git describe --tags --long | sed -E 's/([^-]+-g)/rv\1/;s/-/./g;s/^v//g'
+}
+
+build() {
+  cd "$srcdir/"$_pkgname
+
+  export PYTHON_PATH='/usr/bin/python2'
+  make prefix=/usr gitexecdir=/usr/lib/git-core \
+    CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" \
+    USE_LIBPCRE=1 \
+    NO_CROSS_DIRECTORY_HARDLINKS=1 \
+    all man
+}
+
+check() {
+  export PYTHON_PATH='/usr/bin/python2'
+  cd "$srcdir/$_pkgname"
+  local jobs
+  jobs=$(expr "$MAKEFLAGS" : '.*\(-j *[0-9]*\).*')
+  mkdir -p /dev/shm/git-test
+  # We used to use this, but silly git regressions:
+  #GIT_TEST_OPTS="--root=/dev/shm/" \
+  # http://comments.gmane.org/gmane.comp.version-control.git/202020
+  make prefix=/usr gitexecdir=/usr/lib/git-core \
+    CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" \
+    USE_LIBPCRE=1 \
+    NO_CROSS_DIRECTORY_HARDLINKS=1 \
+    NO_SVN_TESTS=y \
+    DEFAULT_TEST_TARGET=prove \
+    GIT_PROVE_OPTS="$jobs -Q" \
+    GIT_TEST_OPTS="--root=/dev/shm/git-test" \
+    test
+}
+
+package() {
+  export PYTHON_PATH='/usr/bin/python2'
+
+  cd "$srcdir/"$_pkgname
+  make prefix=/usr gitexecdir=/usr/lib/git-core \
+    CFLAGS="$CFLAGS" LDFLAGS="$LDFLAGS" \
+    USE_LIBPCRE=1 \
+    NO_CROSS_DIRECTORY_HARDLINKS=1 \
+    INSTALLDIRS=vendor DESTDIR="$pkgdir" install install-man
+
+  # bash completion
+  mkdir -p "$pkgdir"/usr/share/bash-completion/completions/
+  install -m644 ./contrib/completion/git-completion.bash "$pkgdir"/usr/share/bash-completion/completions/git
+  # fancy git prompt
+  mkdir -p "$pkgdir"/usr/share/git/
+  install -m644 ./contrib/completion/git-prompt.sh "$pkgdir"/usr/share/git/git-prompt.sh
+  # more contrib stuff
+  cp -a ./contrib/* "$pkgdir"/usr/share/git/
+  # scripts are for python 2.x
+  sed -i 's|#![ ]*/usr/bin/env python|#!/usr/bin/env python2|' \
+    $(find "$pkgdir" -name '*.py') \
+    "$pkgdir"/usr/share/git/gitview/gitview \
+    "$pkgdir"/usr/lib/git-core/git-p4 \
+    "$pkgdir"/usr/share/git/remote-helpers/git-remote-bzr \
+    "$pkgdir"/usr/share/git/remote-helpers/git-remote-hg
+  sed -i 's|#![ ]*/usr/bin/python|#!/usr/bin/python2|' \
+    "$pkgdir"/usr/share/git/svn-fe/svnrdump_sim.py
+
+  # remove perllocal.pod, .packlist, and empty directories.
+  rm -rf "$pkgdir"/usr/lib/perl5
+
+  # git daemon
+  install -D -m644 "$srcdir"/git-daemon@.service "$pkgdir"/usr/lib/systemd/system/git-daemon@.service
+  install -D -m644 "$srcdir"/git-daemon.socket "$pkgdir"/usr/lib/systemd/system/git-daemon.socket
+}

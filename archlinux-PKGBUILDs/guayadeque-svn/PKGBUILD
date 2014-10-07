@@ -4,7 +4,7 @@
 
 _pkgname=guayadeque
 pkgname=$_pkgname-svn
-pkgver=1890
+pkgver=1893
 pkgrel=1
 pkgdesc="Full Featured Linux media player for large collections"
 arch=('i686' 'x86_64')
@@ -26,10 +26,9 @@ pkgver() {
 }
 
 build() {
-    cd "$srcdir/$_pkgname"
+    cd "$srcdir/$_pkgname/Trunk"
 
     CXXFLAGS="$CXXFLAGS -Wno-unused-local-typedefs"
-
     cmake . \
         -DCMAKE_BUILD_TYPE='Debug' \
         -DCMAKE_INSTALL_PREFIX='/usr' \
@@ -39,6 +38,6 @@ build() {
 }
 
 package() {
-    cd "$srcdir/$_pkgname"
+    cd "$srcdir/$_pkgname/Trunk"
     make DESTDIR="$pkgdir" install
 }

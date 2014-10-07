@@ -1,6 +1,6 @@
 #!/usr/bin/zsh
 
-BASEDIR=/home/lfiles/dev
+BASEDIR=/home/sdh/dev
 PKGBUILDSDIR=$BASEDIR/archlinux-PKGBUILDs
 
 pkggroup="$1"
@@ -64,7 +64,7 @@ case "$pkggroup" in
                 #'kde5-kfilemetadata-git' 'kde5-baloo-git' 'kde5-milou-git'
                 )
         ;;
-    telepathy)
+    ktp)
         folder="telepathy-kde"
         prepackages=('kdebase-runtime' 'cmake' 'git' 'automoc4' 'kdepimlibs')
         packages=(

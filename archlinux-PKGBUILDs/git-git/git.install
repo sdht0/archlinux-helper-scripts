@@ -1,0 +1,35 @@
+moved_contrib() {
+  printf "==> If you would like to have the emacs contrib files, please\n"
+  printf "==> go to \"/usr/share/git/emacs\". There you will find the\n"
+  printf "==> files you are looking for.\n"
+  printf "\n==> The remote helper 'git-remote-hg' has been moved out of the\n"
+  printf "==> Git tree and is maintained separately now as of git 2.0-rc4.\n"
+  printf "==> It is maintained here:\n      https://github.com/felipec/git-remote-hg\n"
+}
+
+_add_user() {
+  if ! getent group git >/dev/null; then
+    groupadd --system git 
+  fi
+  if ! getent passwd git >/dev/null; then
+    useradd --system -c 'git daemon user' -g git -d / -s /bin/bash git 
+  fi
+}
+
+post_install() {
+  _add_user
+  moved_contrib
+}
+
+post_upgrade() {
+  _add_user
+}
+
+post_remove() {
+  if getent passwd git >/dev/null; then
+    userdel git
+  fi
+  if getent group git >/dev/null; then
+    groupdel git
+  fi
+}

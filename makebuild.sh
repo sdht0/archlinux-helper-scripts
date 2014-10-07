@@ -22,7 +22,7 @@ usemakepkg="$3"
 # On using ccm, "noclean" can be indicated to not clean chroot before building the package
 uoptions="$4"
 
-BASEDIR=/home/lfiles/dev
+BASEDIR=/home/sdh/dev
 
 printf "\n****************************Building $pkgname*****************************\n"
 fd=$BASEDIR/archlinux-PKGBUILDs/${folder}$pkgname
