@@ -27,8 +27,8 @@ end global
 
 include kf5-frameworks-build-include
 include kf5-workspace-build-include
-# include kf5-applications-build-include
-# include kf5-kdepim-build-include
+include kf5-applications-build-include
+include kf5-kdepim-build-include
 
 options phonon
     cmake-options -DPHONON_BUILD_PHONON4QT5=ON -DCMAKE_INSTALL_LIBDIR=lib

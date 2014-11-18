@@ -63,6 +63,19 @@ case "$pkggroup" in
 
                 #'kde5-kfilemetadata-git' 'kde5-baloo-git' 'kde5-milou-git'
                 )
+        packages_new=(
+            libdbusmenu-qt extra-cmake-modules attica kconfig ki18n kdbusaddons kwindowsystem kcoreaddons kcrash karchive kdoctools
+            kservice kitemviews kauth kcodecs kguiaddons kwidgetsaddons kconfigwidgets kiconthemes kglobalaccel kcompletion sonnet
+            ktextwidgets kxmlgui kcmutils solid kjobwidgets kbookmarks phonon knotifications kwallet kio kdeclarative kactivities kunitconversion
+            kinit kparts kplotting kdewebkit kdesignerplugin kdelibs4support kded kdnssd kemoticons kjs khtml kidletime kjsembed kitemmodels
+            knewstuff knotifyconfig frameworkintegration kpty kdesu kross ktexteditor threadweaver plasma-framework kdesrc-build
+            phonon-vlc phonon-gstreamer akonadi kapidox krunner kmediaplayer kimageformats libksysguard kwayland kwin kfilemetadata baloo
+            khelpcenter kde-cli-tools kio-extras breeze libkscreen plasma-workspace khotkeys powerdevil kwrited oxygen-fonts kde-gtk-config
+            kmenuedit systemsettings kinfocenter ksysguard oxygen plasma-desktop libmm-qt libnm-qt plasma-nm kdeplasma-addons milou muon
+            libkomparediff2 kdevplatform plasmate libbluedevil bluedevil kwalletmanager baloo-widgets kscreen konsole kate kde-baseapps gwenview
+            okular ksnapshot okteta kdevelop libksane skanlite yakuake ktp-common-internals ktp-desktop-applets konversation kmix prison
+            kdepimlibs libkgapi grantlee kdepim kdepim-runtime
+        )
         ;;
     ktp)
         folder="telepathy-kde"

@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-export KF5=/home/lfiles/kde5/kdesrc/install
+export KF5=/opt/kde5
 export QTDIR=/usr/lib/qt
 
 export PATH=$KF5/bin:$QTDIR/bin:$PATH
@@ -15,9 +15,9 @@ export KDE_FULL_SESSION=true
 export XDG_DATA_DIRS=$KF5/share:$XDG_DATA_DIRS:/usr/share
 export XDG_CONFIG_DIRS=$KF5/etc/xdg:$XDG_CONFIG_DIRS:/etc/xdg
 
-export XDG_DATA_HOME=/home/lfiles/kde5/.kde5/local
-export XDG_CONFIG_HOME=/home/lfiles/kde5/.kde5/config
-export XDG_CACHE_HOME=/home/lfiles/kde5/.kde5/cache
+export XDG_DATA_HOME=/opt/kde5/home/local
+export XDG_CONFIG_HOME=/opt/kde5/home/config
+export XDG_CACHE_HOME=/opt/kde5/home/cache
 
 # Xephyr -ac -br -noreset -screen 1280x720 :1 &
 # DISPLAY=:1
