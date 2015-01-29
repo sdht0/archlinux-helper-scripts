@@ -15,16 +15,16 @@ export KDE_FULL_SESSION=true
 export XDG_DATA_DIRS=$KF5/share:$XDG_DATA_DIRS:/usr/share
 export XDG_CONFIG_DIRS=$KF5/etc/xdg:$XDG_CONFIG_DIRS:/etc/xdg
 
-export XDG_DATA_HOME=/opt/kde5/home/local
-export XDG_CONFIG_HOME=/opt/kde5/home/config
-export XDG_CACHE_HOME=/opt/kde5/home/cache
+export XDG_DATA_HOME=/home/sdh/dev/sources/kde5/kdehome/local
+export XDG_CONFIG_HOME=/home/sdh/dev/sources/kde5/kdehome/config
+export XDG_CACHE_HOME=/home/sdh/dev/sources/kde5/kdehome/cache
 
 # Xephyr -ac -br -noreset -screen 1280x720 :1 &
 # DISPLAY=:1
 #
 # startx
 
-eval `dbus-launch`
-kdeinit5 --kded
-kwin --replace &
-plasmashell
+# eval `dbus-launch`
+# kdeinit5 --kded
+# kwin --replace &
+# plasmashell

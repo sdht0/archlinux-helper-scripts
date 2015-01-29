@@ -1,0 +1,34 @@
+_pkgname=basket
+pkgname=basket-git
+pkgver=1217.43890d6
+pkgrel=1
+pkgdesc="All-purpose notes taker for KDE - git version."
+arch=(i686 x86_64)
+url="http://gitorious.org/basket"
+license=('GPL')
+depends=('kdelibs' 'qimageblitz' 'gpgme')
+makedepends=('cmake>=2.6.2' 'automoc4' 'git')
+optdepends=('python-pyinotify>=0.7.1: for inotify support'
+            'tk: to use the built-in ssh-askpass handler')
+provides=('basket')
+conflicts=('basket')
+
+source=('git+https://github.com/basket-notepads/basket.git')
+sha512sums=('SKIP')
+
+pkgver() {
+    cd "$_pkgname"
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+build() {
+    cd "$_pkgname"
+    cmake . \
+      -DCMAKE_INSTALL_PREFIX=/usr
+    make
+}
+
+package() {
+    cd "$_pkgname"
+    make DESTDIR="$pkgdir" install
+}
