@@ -4,7 +4,7 @@
 
 _pkgname=guayadeque
 pkgname=$_pkgname-svn
-pkgver=1893
+pkgver=1894
 pkgrel=1
 pkgdesc="Full Featured Linux media player for large collections"
 arch=('i686' 'x86_64')
@@ -17,7 +17,7 @@ optdepends=('gstreamer0.10-plugins: all Gstreamer plugins to play all kind of mu
 provides=($_pkgname)
 conflicts=($_pkgname)
 install=$_pkgname.install
-source=("$_pkgname::svn+http://svn.code.sf.net/p/$_pkgname/code#revision=1890")
+source=("$_pkgname::svn+http://svn.code.sf.net/p/$_pkgname/code")
 md5sums=('SKIP')
 
 pkgver() {
