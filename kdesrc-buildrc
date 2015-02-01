@@ -3,7 +3,7 @@
 global
 
     qtdir       /usr
-    source-dir  /home/sdh/dev/sources/kde5
+    source-dir  /run/media/sdh/sdh-hdd3/sources/kde5
     build-dir   /home/sdh/dev/build
     kdedir      /opt/kde5
     log-dir     /home/sdh/dev/build/kdelogs

@@ -3,7 +3,11 @@
 
 pkgname=telepathy-kde-common-internals-git
 _pkgname=ktp-common-internals
+<<<<<<< HEAD
 pkgver=0.9.r1572.6273c1d
+=======
+pkgver=0.7.0.110.g2d5ee9d
+>>>>>>> parent of 987c1c5... Update scripts and PKGBUILDs
 pkgrel=1
 pkgdesc="Common components for Kde-Telepathy"
 arch=('i686' 'x86_64')

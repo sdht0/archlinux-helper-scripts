@@ -17,12 +17,18 @@ optdepends=('gstreamer0.10-plugins: all Gstreamer plugins to play all kind of mu
 provides=($_pkgname)
 conflicts=($_pkgname)
 install=$_pkgname.install
-source=("$_pkgname::svn+http://svn.code.sf.net/p/$_pkgname/code")
-md5sums=('SKIP')
+source=("$_pkgname::svn+http://svn.code.sf.net/p/$_pkgname/code"
+        'CorrectlySetRevision.patch')
+md5sums=('SKIP' 'SKIP')
 
 pkgver() {
     cd "$srcdir/$_pkgname"
     svnversion | tr -d [A-z]
+}
+
+prepare() {
+    cd "$srcdir/$_pkgname"
+    patch -Np1 -i "$srcdir/CorrectlySetRevision.patch"
 }
 
 build() {

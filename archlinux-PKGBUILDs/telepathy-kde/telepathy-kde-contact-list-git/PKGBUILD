@@ -3,7 +3,11 @@
 
 pkgname=telepathy-kde-contact-list-git
 _pkgname=ktp-contact-list
+<<<<<<< HEAD
 pkgver=0.9.r971.4226115
+=======
+pkgver=0.7.0.21.gb444c4c
+>>>>>>> parent of 987c1c5... Update scripts and PKGBUILDs
 pkgrel=1
 pkgdesc="KDE Telepathy contact list application"
 arch=('i686' 'x86_64')
