@@ -25,7 +25,7 @@ export XDG_CACHE_HOME=/home/sdh/.kde5/cache
 # startx
 
 eval `dbus-launch`
-starkde
+exec startkde
 # kdeinit5 --kded
 # kwin --replace &
 # plasmashell
