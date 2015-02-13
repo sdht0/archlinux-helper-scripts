@@ -11,10 +11,9 @@ global
     git-repository-base kde-projects kde:
 
     # KDE4_BUILD_TESTS kept for now, for old kde4_add_unit_test stuff to be enabled
-    cmake-options -DCMAKE_BUILD_TYPE:STRING=debug -DLIB_INSTALL_DIR=lib -DKDE4_BUILD_TESTS=true
+    cmake-options -DCMAKE_BUILD_TYPE:STRING=debug -DLIB_INSTALL_DIR=lib
 
-    cxxflags -march=native -pipe -Og -DQT_STRICT_ITERATORS -DQURL_NO_CAST_FROM_STRING -DQT_NO_HTTP -DQT_NO_FTP -Wformat -Werror=format-security -Werror=return-type -Wno-variadic-macros -Wlogical-op -Wmissing-include-dirs 
--Wno-deprecated-declarations
+    cxxflags -march=native -pipe -Og -DQT_STRICT_ITERATORS -DQURL_NO_CAST_FROM_STRING -DQT_NO_HTTP -DQT_NO_FTP -Wformat -Werror=format-security -Werror=return-type -Wno-variadic-macros -Wlogical-op -Wmissing-include-dirs -Wno-deprecated-declarations
 
     make-options -j2
     #install-session-driver true
@@ -27,8 +26,35 @@ end global
 
 include kf5-frameworks-build-include
 include kf5-workspace-build-include
-# include kf5-applications-build-include
-# include kf5-kdepim-build-include
+
+module-set kf5-base-applications
+    repository kde-projects
+    use-modules konsole kate kde-baseapps
+end module-set
+
+module-set kdegraphics
+    repository kde-projects
+    use-modules gwenview okular ksnapshot
+end module-set
+
+module-set kdeutils
+    repository kde-projects
+    use-modules filelight kcalc kcharselect kwalletmanager print-manager ktimer ark
+end module-set
+
+module-set kdeadmin
+    repository kde-projects
+    use-modules ksystemlog kcron
+end module-set
+
+module-set kmix
+    repository kde-projects
+    use-modules kmix
+    make-options -DKMIX_KF5_BUILD:STRING=TRUE
+    branch master
+end module
+
+include kf5-kdepim-build-include
 
 options phonon
     cmake-options -DPHONON_BUILD_PHONON4QT5=ON -DCMAKE_INSTALL_LIBDIR=lib
