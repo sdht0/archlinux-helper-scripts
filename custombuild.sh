@@ -48,14 +48,14 @@ case "$pkggroup" in
                 'kf5-kdesignerplugin-git' 'kf5-kemoticons-git' 'kf5-kmediaplayer-git' 'kf5-kross-git' 'kf5-knewstuff-git'
                 'kf5-knotifyconfig-git' 'kf5-ktexteditor-git' 'kf5-kactivities-git' 'kf5-plasma-framework-git'
 
-#                 tier 4
+                # tier 4
                 'kf5-frameworkintegration-git' 'kf5-krunner-git' 'kf5-kapidox-git' 'kf5-kfileaudiopreview-git' 'kf5-khtml-git'
                 'kf5-kdelibs4support-git'
 
                 # all
                 'kf5-kf5umbrella-git'
 
-#                 KDE 5
+                # KDE 5
                 'kde5-systemsettings-git' 'kde5-libksysguard-git' 'kde5-kwin-git' 'kde5-khelpcenter-git' 'kde5-kde-cli-tools-git'
                 'kde5-kio-extras-git' 'kde5-plasma-workspace-git' 'kde5-ksysguard-git' 'kde5-oxygen-git'
                 'kde5-plasma-desktop-git'
@@ -64,25 +64,15 @@ case "$pkggroup" in
                 #'kde5-kfilemetadata-git' 'kde5-baloo-git' 'kde5-milou-git'
                 )
         packages_new=(
-            libdbusmenu-qt extra-cmake-modules attica kconfig ki18n kdbusaddons kwindowsystem kcoreaddons kcrash karchive kdoctools
-            kservice kitemviews kauth kcodecs kguiaddons kwidgetsaddons kconfigwidgets kiconthemes kglobalaccel kcompletion sonnet
-            ktextwidgets kxmlgui kcmutils solid kjobwidgets kbookmarks phonon knotifications kwallet kio kdeclarative kactivities kunitconversion
-            kinit kparts kplotting kdewebkit kdesignerplugin kdelibs4support kded kdnssd kemoticons kjs khtml kidletime kjsembed kitemmodels
-            knewstuff knotifyconfig frameworkintegration kpty kdesu kross ktexteditor threadweaver plasma-framework kdesrc-build
-            phonon-vlc phonon-gstreamer akonadi kapidox krunner kmediaplayer kimageformats libksysguard kwayland kwin kfilemetadata baloo
-            khelpcenter kde-cli-tools kio-extras breeze libkscreen plasma-workspace khotkeys powerdevil kwrited oxygen-fonts kde-gtk-config
-            kmenuedit systemsettings kinfocenter ksysguard oxygen plasma-desktop libmm-qt libnm-qt plasma-nm kdeplasma-addons milou muon
-            libkomparediff2 kdevplatform plasmate libbluedevil bluedevil kwalletmanager baloo-widgets kscreen konsole kate kde-baseapps gwenview
-            okular ksnapshot okteta kdevelop libksane skanlite yakuake ktp-common-internals ktp-desktop-applets konversation kmix prison
-            kdepimlibs libkgapi grantlee kdepim kdepim-runtime
+            libdbusmenu-qt, taglib, extra-cmake-modules, attica, kconfig, ki18n, kdbusaddons, kwindowsystem, kcoreaddons, kcrash, karchive, kdoctools, kservice, kitemviews, kauth, kcodecs, kguiaddons, kwidgetsaddons, kconfigwidgets, kiconthemes, kglobalaccel, kcompletion, sonnet, ktextwidgets, kxmlgui, kcmutils, solid, kjobwidgets, kbookmarks, phonon, knotifications, kwallet, kio, kdeclarative, kactivities, kunitconversion, kinit, kparts, kplotting, kdewebkit, kdesignerplugin, kdelibs4support, kded, kdnssd, kemoticons, kjs, khtml, kidletime, kjsembed, kitemmodels, knewstuff, knotifyconfig, frameworkintegration, kpty, kdesu, kross, ktexteditor, threadweaver, kpackage, plasma-framework, kxmlrpcclient, kdesrc-build, polkit-qt-1, phonon-vlc, phonon-gstreamer, akonadi, kimageformats, kmediaplayer, kapidox, krunner, networkmanager-qt, libksysguard, kwayland, kdecoration, kwin, kfilemetadata, baloo, milou, khelpcenter, kde-cli-tools, kio-extras, breeze, libkscreen, plasma-workspace, kdeplasma-addons, systemsettings, libbluedevil, oxygen-fonts, kscreen, kinfocenter, khotkeys, libmm-qt, ksshaskpass, oxygen, polkit-kde-agent-1, powerdevil, ksysguard, plasma-desktop, kwrited, kmenuedit, kde-gtk-config, muon, plasma-nm, sddm-kcm, kcm-touchpad, user-manager, bluedevil, kwalletmanager, baloo-widgets, konsole, kate, kde-baseapps, gwenview, okular, ksnapshot, filelight, kcalc, kcharselect, print-manager, ktimer, ark, ksystemlog, kcron, kmix, prison, kcontacts, kcalcore, syndication, kblog, kpimtextedit, kidentitymanagement, kcalutils, kholidays, kmime, kimap, kldap, kmbox, kontactinterface, ktnef, gpgmepp, kdepimlibs, kmailtransport, akonadi-search, libkgapi, grantlee, akonadi-calendar, kalarmcal, kdepim-runtime
         )
         ;;
     ktp)
         folder="telepathy-kde"
         prepackages=('kdebase-runtime' 'cmake' 'git' 'automoc4' 'kdepimlibs')
         packages=(
-        'libkpeople-git' 'telepathy-logger-qt-git'
-        'telepathy-kde-common-internals-git' 'telepathy-kde-contact-list-git' 'telepathy-kde-filetransfer-handler-git'
+                'libkpeople-git' 'telepathy-logger-qt-git'
+                'telepathy-kde-common-internals-git' 'telepathy-kde-contact-list-git' 'telepathy-kde-filetransfer-handler-git'
                 'telepathy-kde-send-file-git' 'telepathy-kde-integration-module-git' 'telepathy-kde-auth-handler-git' 'telepathy-kde-text-ui-git'
                 'telepathy-kde-approver-git' 'telepathy-kde-accounts-kcm-git' 'telepathy-kde-desktop-applets-git' 'telepathy-kde-contact-runner-git'
                 'telepathy-kde-git-meta')
@@ -94,14 +84,6 @@ case "$pkggroup" in
     active)
         folder="telepathy-kde-active"
         packages=('kde-plasma-mobile-git' 'plasmate-git')
-        ;;
-    plasma-nm)
-        folder="plasma-nm"
-        packages=('libnm-qt' 'kdeplasma-applets-plasma-nm-git')
-        ;;
-    android)
-        folder="-"
-        packages=('android-sdk' 'android-sdk-platform-tools' 'android-sdk-build-tools')
         ;;
     rest)
         folder="-"

@@ -4,7 +4,7 @@ global
 
     qtdir       /usr
     source-dir  /run/media/sdh/sdh-hdd3/sources/kde5
-    build-dir   /home/sdh/dev/build
+    build-dir   /home/sdh/dev/build/kde
     kdedir      /opt/kde5
     log-dir     /home/sdh/dev/build/kdelogs
 
@@ -24,6 +24,11 @@ global
 
 end global
 
+module grantlee
+    repository git://gitorious.org/grantlee/grantlee.git
+    branch master
+end module 
+
 include kf5-frameworks-build-include
 include kf5-workspace-build-include
 
@@ -39,7 +44,7 @@ end module-set
 
 module-set kdeutils
     repository kde-projects
-    use-modules filelight kcalc kcharselect kwalletmanager print-manager ktimer ark
+    use-modules filelight kcalc kcharselect kwalletmanager print-manager ktimer
 end module-set
 
 module-set kdeadmin
@@ -50,11 +55,22 @@ end module-set
 module-set kmix
     repository kde-projects
     use-modules kmix
-    make-options -DKMIX_KF5_BUILD:STRING=TRUE
+    cmake-options -DKMIX_KF5_BUILD:STRING=TRUE
     branch master
 end module
 
 include kf5-kdepim-build-include
+
+module-set libkomparediff2
+    repository kde-projects
+    use-modules libkomparediff2
+    branch frameworks
+end module
+
+module-set kdevelop-kf5
+    repository kde-projects
+    use-modules kdevplatform kdevelop/kdevelop
+end module-set
 
 options phonon
     cmake-options -DPHONON_BUILD_PHONON4QT5=ON -DCMAKE_INSTALL_LIBDIR=lib
@@ -69,5 +85,17 @@ options phonon-gstreamer
 end options
 
 options libdbusmenu-qt
+    cmake-options -DCMAKE_INSTALL_LIBDIR=lib
+end options
+
+options polkit-qt-1
+    cmake-options -DCMAKE_INSTALL_LIBDIR=lib
+end options
+
+options libbluedevil
+    cmake-options -DCMAKE_INSTALL_LIBDIR=lib
+end options
+
+options bluedevil
     cmake-options -DCMAKE_INSTALL_LIBDIR=lib
 end options

@@ -4,7 +4,7 @@ global
 
     qtdir       /usr
     source-dir  /run/media/sdh/sdh-hdd3/sources/kde5
-    build-dir   /home/sdh/dev/build
+    build-dir   /home/sdh/dev/build/kde
     kdedir      /opt/kde5
     log-dir     /home/sdh/dev/build/kdelogs
 
@@ -13,8 +13,7 @@ global
     # KDE4_BUILD_TESTS kept for now, for old kde4_add_unit_test stuff to be enabled
     cmake-options -DCMAKE_BUILD_TYPE:STRING=debug -DLIB_INSTALL_DIR=lib -DKDE4_BUILD_TESTS=true
 
-    cxxflags -march=native -pipe -Og -DQT_STRICT_ITERATORS -DQURL_NO_CAST_FROM_STRING -DQT_NO_HTTP -DQT_NO_FTP -Wformat -Werror=format-security -Werror=return-type -Wno-variadic-macros -Wlogical-op -Wmissing-include-dirs 
--Wno-deprecated-declarations
+    cxxflags -march=native -pipe -Og -DQT_STRICT_ITERATORS -DQURL_NO_CAST_FROM_STRING -DQT_NO_HTTP -DQT_NO_FTP -Wformat -Werror=format-security -Werror=return-type -Wno-variadic-macros -Wlogical-op -Wmissing-include-dirs -Wno-deprecated-declarations
 
     make-options -j2
     #install-session-driver true
