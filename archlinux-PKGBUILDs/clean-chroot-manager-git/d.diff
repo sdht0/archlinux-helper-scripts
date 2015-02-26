@@ -1,5 +1,5 @@
 diff --git a/common/clean-chroot-manager64.in b/common/clean-chroot-manager64.in
-index d15dd4f..9c5ee24 100644
+index d15dd4f..a8380d0 100644
 --- a/common/clean-chroot-manager64.in
 +++ b/common/clean-chroot-manager64.in
 @@ -167,9 +167,9 @@ build() {
@@ -14,8 +14,12 @@ index d15dd4f..9c5ee24 100644
  	fi
  
  	# stop here if build fails
-@@ -182,9 +182,9 @@ buildnc() {
+@@ -180,11 +180,13 @@ buildnc() {
+ 	# try to build the package
+ 	local mesg="Attempting to build package..."
  	echo -e "${YELLOW}---->${ALL_OFF}${BOLD} ${mesg}${ALL_OFF}"
++	
++	[[ -d $CHROOTPATH64/ccm/startdir ]] && rm -rf $CHROOTPATH64/ccm/startdir/* > /dev/null
  
  	if [[ -z "$RUNNAMCAP" ]]; then
 -		makechrootpkg -u -r $CHROOTPATH64
@@ -26,7 +30,7 @@ index d15dd4f..9c5ee24 100644
  	fi
  
  	# stop here if build fails
-@@ -195,29 +195,42 @@ indexit() {
+@@ -195,29 +197,42 @@ indexit() {
  	# if this is the first time package has been successfully built
  	# then append the local repo to the chroot's pacman.conf
  	if [[ -z $(grep clean-chroot $CHROOTPATH64/root/etc/pacman.conf) ]]; then
