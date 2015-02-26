@@ -5,9 +5,9 @@ directdependencies=findDependencies.findDependencies()
 import xml.etree.ElementTree as ElementTree
 import os,sys
 
-basepath = "/home/lfiles/dev/archlinux-logs/a"
+basepath = "/run/media/sdh/sdh-hdd3/dev/archlinux-logs/a"
 
-tree = ElementTree.parse('/home/lfiles/kde5/sources/kde_projects.xml')
+tree = ElementTree.parse('/run/media/sdh/sdh-hdd3/sources/kde5/kde_projects.xml')
 root = tree.getroot()
 components = root.findall('component')
 for i in components:
@@ -52,8 +52,8 @@ for item in itemlist:
         data['depend']="'qt5-declarative'"
     elif name in ["ki18n"]:
         data['depend']="'qt5-script'"
-    if "kf5-%s-git" % name in directdependencies:
-        data['depend']="'%s'" % ("' '".join(sorted(list(directdependencies["kf5-%s-git" % name]))))
+    if "kde5-%s-git" % name in directdependencies and len(directdependencies["kde5-%s-git" % name])!=0:
+        data['depend']="'%s'" % ("' '".join(sorted(list(directdependencies["kde5-%s-git" % name]))))
     data['depend']+=" "+extradependencies[name] if name in extradependencies else ""
     if name in ['kdoctools']:
         data['extra']="\noptions=('staticlibs')"
@@ -63,7 +63,7 @@ for item in itemlist:
     allitems.append(data)
 
 base='''
-pkgname=kf5-[name]-git
+pkgname=kde5-[name]-git
 _pkgname=[name]
 pkgver=1
 pkgrel=1
@@ -72,10 +72,8 @@ arch=('i686' 'x86_64')
 url="[web]"
 license=('LGPL')
 depends=([depend])
-makedepends=('extra-cmake-modules-git' 'git')
-group=("kf5")
-conflicts=("${_pkgname}-git")
-provides=("${_pkgname}-git")
+makedepends=('kde5-extra-cmake-modules-git' 'git')
+group=("kde5")
 source=("[url]")
 md5sums=('SKIP')[extra]
 
@@ -89,15 +87,12 @@ prepare() {
 }
 
 build() {
-    export PATH="/opt/kf5/bin:$PATH"
-    export XDG_DATA_DIRS="/opt/kf5/share:$XDG_DATA_DIRS"
-    export LD_LIBRARY_PATH="/opt/kf5/lib:$LD_LIBRARY_PATH"
-    export PKG_CONFIG_PATH="/opt/kf5/lib/pkgconfig:$PKG_CONFIG_PATH"
-    export KDEDIRS="/opt/kf5"
+    export PATH="/opt/kde5/bin:$PATH"
+    export XDG_DATA_DIRS="/opt/kde5/share:$XDG_DATA_DIRS"
 
     cd build
     cmake ../"${_pkgname}" \\
-        -DCMAKE_INSTALL_PREFIX=/opt/kf5 \\
+        -DCMAKE_INSTALL_PREFIX=/opt/kde5 \\
         -DCMAKE_BUILD_TYPE=Debug \\
         -DLIB_INSTALL_DIR=lib[extraoptions]
     make
@@ -110,11 +105,11 @@ package() {
 '''
 
 for i in allitems:
-    print("'kf5-%s-git'"%i['name'],end=' ')
+    print(i['name'],end=' ')
     text = base
     for data in i:
         text = text.replace("[%s]" % data,i[data])
-    path=basepath+"/kf5-%s-git" % i['name']
+    path=basepath+"/kde5-%s-git" % i['name']
     if not os.path.exists(path):
         os.mkdir(path)
     f=open(path+"/PKGBUILD","w")

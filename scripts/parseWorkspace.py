@@ -5,36 +5,37 @@ directdependencies=findDependencies.findDependencies()
 import xml.etree.ElementTree as ElementTree
 import os,sys
 
-basepath = "/home/lfiles/dev/archlinux-logs/b"
+basepath = "/run/media/sdh/sdh-hdd3/dev/archlinux-logs/b"
 
-tree = ElementTree.parse('/home/lfiles/kde5/sources/kde_projects.xml')
+tree = ElementTree.parse('/run/media/sdh/sdh-hdd3/sources/kde5/kde_projects.xml')
 root = tree.getroot()
 components = root.findall('component')
+itemlist = []
 for i in components:
     if i.attrib['identifier']=="kde":
         x = i.findall('module')
         for j in x:
-            if j.attrib['identifier']=="workspace":
-                itemlist = j.findall('project')
+            if j.attrib['identifier'] in ["workspace",'pim']:
+                itemlist.extend(j.findall('project'))
 
 allitems=[]
 extradependencies={"kwin":"'libxcursor'",
-                   "plasma-desktop":"'kde5-plasma-workspace-git' 'lomoco' 'libcanberra' 'libxkbfile'",
+                   "plasma-desktop":"'lomoco' 'libcanberra' 'libxkbfile'",
                    "kio-extras":"'openslp' 'samba' 'libssh' 'openexr' 'libkexiv2'"}
 for item in itemlist:
     name=item.attrib['identifier']
     data={"name":name}
     data['description']=item.find('description').text.strip()
     data['web']=item.find('web').text.strip()
-    data['url']=item.find('repo').find('url').text.strip()
+    data['url']="git://anongit.kde.org/%s" % name
     data['extra']=""
     data['depend']="'qt5-base'"
     if name in ['kio-extras']:
-        data['depend']="'kf5-kf5umbrella-git'"
-    if "kde5-%s-git" % name in directdependencies:
+        data['depend']="'kde5-kf5umbrella-git'"
+    if "kde5-%s-git" % name in directdependencies and len(directdependencies["kde5-%s-git" % name])!=0:
         data['depend']="'%s'" % ("' '".join(sorted(list(directdependencies["kde5-%s-git" % name]))))
     data['depend']+=" "+extradependencies[name] if name in extradependencies else ""
-    data['depend']=data['depend'].replace("kf5-kdesupport/attica","kde5-attica").replace("kf5-kdesupport/phonon/phonon","kde5-phonon-qt5")
+    data['depend']=data['depend'].replace("kde5-kdesupport/attica","kde5-attica").replace("kde5-kdesupport/phonon/phonon","kde5-phonon-qt5")
     if name in ['kdoctools']:
         data['extra']="\noptions=('staticlibs')"
     data['extraoptions']=""
@@ -52,10 +53,8 @@ arch=('i686' 'x86_64')
 url="[web]"
 license=('LGPL')
 depends=([depend])
-makedepends=('extra-cmake-modules-git' 'git')
+makedepends=('kde5-extra-cmake-modules-git' 'git')
 group=("kde5")
-conflicts=("${_pkgname}-git")
-provides=("${_pkgname}-git")
 source=("[url]")
 md5sums=('SKIP')[extra]
 
@@ -69,15 +68,12 @@ prepare() {
 }
 
 build() {
-    export PATH="/opt/kf5/bin:$PATH"
-    export XDG_DATA_DIRS="/opt/kf5/share:$XDG_DATA_DIRS"
-    export LD_LIBRARY_PATH="/opt/kf5/lib:$LD_LIBRARY_PATH"
-    export PKG_CONFIG_PATH="/opt/kf5/lib/pkgconfig:$PKG_CONFIG_PATH"
-    export KDEDIRS="/opt/kf5"
+    export PATH="/opt/kde5/bin:$PATH"
+    export XDG_DATA_DIRS="/opt/kde5/share:$XDG_DATA_DIRS"
 
     cd build
     cmake ../"${_pkgname}" \\
-        -DCMAKE_INSTALL_PREFIX=/opt/kf5 \\
+        -DCMAKE_INSTALL_PREFIX=/opt/kde5 \\
         -DCMAKE_BUILD_TYPE=Debug \\
         -DLIB_INSTALL_DIR=lib[extraoptions]
     make
@@ -90,7 +86,7 @@ package() {
 '''
 
 for i in allitems:
-    print("'kde5-%s-git'"%i['name'],end=' ')
+    print(i['name'],end=' ')
     text = base
     for data in i:
         text = text.replace("[%s]" % data,i[data])
@@ -100,3 +96,4 @@ for i in allitems:
     f=open(path+"/PKGBUILD","w")
     f.write(text)
     f.close()
+print()

@@ -2,7 +2,7 @@ import subprocess
 import copy
 
 def findDependencies():
-    data=open("/home/lfiles/kde5/sources/kde-build-metadata/dependency-data-kf5-qt5","r").readlines()
+    data=open("/run/media/sdh/sdh-hdd3/sources/kde5/kde-build-metadata/dependency-data-kf5-qt5","r").readlines()
     directdependencies={}
     reversedependencies={}
     extra=set()
@@ -11,11 +11,11 @@ def findDependencies():
         if line.find("frameworks/")==0 or line.find("kde/workspace/")==0:
             line=line.replace("#KDecorations","").replace("kdesupport/","").replace("#testdependency","")
             parts=line.split(":")
-            if parts[1][0]=="-" or "phonon" in line or "milou" in line or "powerdevil" in line:
+            if parts[1][0]=="-":
                 continue
             for i in range(2):
                 if "frameworks/" in parts[i]:
-                    parts[i]="kf5-%s-git" % parts[i].replace("frameworks/","")
+                    parts[i]="kde5-%s-git" % parts[i].replace("frameworks/","")
                 if "kde/workspace/" in parts[i]:
                     parts[i]="kde5-%s-git" % parts[i].replace("kde/workspace/","")
             if parts[0] not in directdependencies:
@@ -25,10 +25,10 @@ def findDependencies():
                 reversedependencies[parts[1]]=set()
             reversedependencies[parts[1]].add(parts[0])
             if "kde5" in parts[0]:
-                directdependencies[parts[0]].add('kf5-kf5umbrella-git')
-                if 'kf5-kf5umbrella-git' not in reversedependencies:
-                    reversedependencies['kf5-kf5umbrella-git']=set()
-                reversedependencies['kf5-kf5umbrella-git'].add(parts[0])
+                directdependencies[parts[0]].add('kde5-kf5umbrella-git')
+                if 'kde5-kf5umbrella-git' not in reversedependencies:
+                    reversedependencies['kde5-kf5umbrella-git']=set()
+                reversedependencies['kde5-kf5umbrella-git'].add(parts[0])
 
     text="digraph A {"
     for d in directdependencies:

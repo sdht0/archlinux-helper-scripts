@@ -20,51 +20,12 @@ uoptions="$3"
 nonewchroot="$4"
 
 case "$pkggroup" in
-    kf5)
-        folder="kf5"
-        prepackages=('shared-mime-info' 'qt5-base' 'git')
+    kde5)
+        folder="kde5"
+        prepackages=('cmake' 'shared-mime-info' 'qt5-base' 'qt5-tools' 'git')
         packages=(
-                # buid system
-                'cmake-git'
-                'extra-cmake-modules-git'
-
-                # dependencies
-                'kde5-libdbusmenu-qt5-bzr' 'kde5-phonon-qt5-git' 'kde5-akonadi-git' 'kde5-phonon-gstreamer-git' 'kde5-polkit-qt5-git'
-
-                # tier 1
-                'kf5-attica-git' 'kf5-karchive-git' 'kf5-kcodecs-git' 'kf5-kconfig-git' 'kf5-kcoreaddons-git' 'kf5-kdbusaddons-git'
-                'kf5-kglobalaccel-git' 'kf5-kguiaddons-git'  'kf5-ki18n-git' 'kf5-kidletime-git' 'kf5-kimageformats-git'
-                'kf5-kitemmodels-git' 'kf5-kitemviews-git' 'kf5-kjs-git' 'kf5-kplotting-git' 'kf5-kwidgetsaddons-git'
-                'kf5-kwindowsystem-git' 'kf5-solid-git' 'kf5-sonnet-git' 'kf5-threadweaver-git'
-
-                # tier 2
-                'kf5-kauth-git' 'kf5-kcompletion-git' 'kf5-kcrash-git' 'kf5-kdnssd-git' 'kf5-kdoctools-git'
-                'kf5-kjobwidgets-git' 'kf5-kpty-git' 'kf5-kunitconversion-git'
-
-                # tier 3
-                'kf5-kjsembed-git' 'kf5-kconfigwidgets-git' 'kf5-kiconthemes-git' 'kf5-kservice-git' 'kf5-knotifications-git'
-                'kf5-ktextwidgets-git' 'kf5-kxmlgui-git' 'kf5-kbookmarks-git' 'kf5-kcmutils-git' 'kf5-kwallet-git' 'kf5-kio-git'
-                'kf5-kdeclarative-git' 'kf5-kinit-git' 'kf5-kded-git' 'kf5-kdesu-git' 'kf5-kparts-git' 'kf5-kdewebkit-git'
-                'kf5-kdesignerplugin-git' 'kf5-kemoticons-git' 'kf5-kmediaplayer-git' 'kf5-kross-git' 'kf5-knewstuff-git'
-                'kf5-knotifyconfig-git' 'kf5-ktexteditor-git' 'kf5-kactivities-git' 'kf5-plasma-framework-git'
-
-                # tier 4
-                'kf5-frameworkintegration-git' 'kf5-krunner-git' 'kf5-kapidox-git' 'kf5-kfileaudiopreview-git' 'kf5-khtml-git'
-                'kf5-kdelibs4support-git'
-
-                # all
-                'kf5-kf5umbrella-git'
-
-                # KDE 5
-                'kde5-systemsettings-git' 'kde5-libksysguard-git' 'kde5-kwin-git' 'kde5-khelpcenter-git' 'kde5-kde-cli-tools-git'
-                'kde5-kio-extras-git' 'kde5-plasma-workspace-git' 'kde5-ksysguard-git' 'kde5-oxygen-git'
-                'kde5-plasma-desktop-git'
-                'kde5-kmenuedit-git' 'kde5-khotkeys-git' 'kde5-kinfocenter-git' 'kde5-kwrited-git'
-
-                #'kde5-kfilemetadata-git' 'kde5-baloo-git' 'kde5-milou-git'
-                )
-        packages_new=(
-            libdbusmenu-qt, taglib, extra-cmake-modules, attica, kconfig, ki18n, kdbusaddons, kwindowsystem, kcoreaddons, kcrash, karchive, kdoctools, kservice, kitemviews, kauth, kcodecs, kguiaddons, kwidgetsaddons, kconfigwidgets, kiconthemes, kglobalaccel, kcompletion, sonnet, ktextwidgets, kxmlgui, kcmutils, solid, kjobwidgets, kbookmarks, phonon, knotifications, kwallet, kio, kdeclarative, kactivities, kunitconversion, kinit, kparts, kplotting, kdewebkit, kdesignerplugin, kdelibs4support, kded, kdnssd, kemoticons, kjs, khtml, kidletime, kjsembed, kitemmodels, knewstuff, knotifyconfig, frameworkintegration, kpty, kdesu, kross, ktexteditor, threadweaver, kpackage, plasma-framework, kxmlrpcclient, kdesrc-build, polkit-qt-1, phonon-vlc, phonon-gstreamer, akonadi, kimageformats, kmediaplayer, kapidox, krunner, networkmanager-qt, libksysguard, kwayland, kdecoration, kwin, kfilemetadata, baloo, milou, khelpcenter, kde-cli-tools, kio-extras, breeze, libkscreen, plasma-workspace, kdeplasma-addons, systemsettings, libbluedevil, oxygen-fonts, kscreen, kinfocenter, khotkeys, libmm-qt, ksshaskpass, oxygen, polkit-kde-agent-1, powerdevil, ksysguard, plasma-desktop, kwrited, kmenuedit, kde-gtk-config, muon, plasma-nm, sddm-kcm, kcm-touchpad, user-manager, bluedevil, kwalletmanager, baloo-widgets, konsole, kate, kde-baseapps, gwenview, okular, ksnapshot, filelight, kcalc, kcharselect, print-manager, ktimer, ark, ksystemlog, kcron, kmix, prison, kcontacts, kcalcore, syndication, kblog, kpimtextedit, kidentitymanagement, kcalutils, kholidays, kmime, kimap, kldap, kmbox, kontactinterface, ktnef, gpgmepp, kdepimlibs, kmailtransport, akonadi-search, libkgapi, grantlee, akonadi-calendar, kalarmcal, kdepim-runtime
+            kde5-extra-cmake-modules-git kde5-attica-git 
+#             kde5-kconfig-git kde5-ki18n-git kde5-kdbusaddons-git kde5-kwindowsystem-git kde5-kcoreaddons-git kde5-kcrash-git kde5-karchive-git kde5-kdoctools-git kde5-kservice-git kde5-kitemviews-git kde5-kauth-git kde5-kcodecs-git kde5-kguiaddons-git kde5-kwidgetsaddons-git kde5-kconfigwidgets-git kde5-kiconthemes-git kde5-kglobalaccel-git kde5-kcompletion-git kde5-sonnet-git kde5-ktextwidgets-git kde5-kxmlgui-git kde5-kcmutils-git kde5-solid-git kde5-kjobwidgets-git kde5-kbookmarks-git kde5-knotifications-git kde5-kwallet-git kde5-kio-git kde5-kdeclarative-git kde5-kactivities-git kde5-kunitconversion-git kde5-kinit-git kde5-kparts-git kde5-kplotting-git kde5-kdewebkit-git kde5-kdesignerplugin-git kde5-kdelibs4support-git kde5-kded-git kde5-kdnssd-git kde5-kemoticons-git kde5-kjs-git kde5-khtml-git kde5-kidletime-git kde5-kjsembed-git kde5-kitemmodels-git kde5-knewstuff-git kde5-knotifyconfig-git kde5-frameworkintegration-git kde5-kpty-git kde5-kdesu-git kde5-kross-git kde5-ktexteditor-git kde5-threadweaver-git kde5-kpackage-git kde5-plasma-framework-git kde5-kxmlrpcclient-git kde5-kimageformats-git kde5-kapidox-git kde5-krunner-git kde5-kmediaplayer-git kde5-networkmanager-qt-git kde5-ksshaskpass-git kde5-kde-gtk-config-git kde5-oxygen-fonts-git kde5-libmm-qt-git kde5-plasma-nm-git kde5-kdecoration-git kde5-kwayland-git kde5-libksysguard-git kde5-kwin-git kde5-kfilemetadata-git kde5-baloo-git kde5-milou-git kde5-khelpcenter-git kde5-kde-cli-tools-git kde5-kio-extras-git kde5-breeze-git kde5-libkscreen-git kde5-plasma-workspace-git kde5-kmenuedit-git kde5-systemsettings-git kde5-polkit-kde-agent-1-git kde5-kwrited-git kde5-kscreen-git kde5-khotkeys-git kde5-libbluedevil-git kde5-muon-git kde5-powerdevil-git kde5-kdeplasma-addons-git kde5-oxygen-git kde5-bluedevil-git kde5-user-manager-git kde5-kinfocenter-git kde5-ksysguard-git kde5-plasma-desktop-git kde5-sddm-kcm-git kde5-kcontacts-git kde5-kcalcore-git kde5-syndication-git kde5-kblog-git kde5-kpimtextedit-git kde5-kidentitymanagement-git kde5-kcalutils-git kde5-kholidays-git kde5-kmime-git kde5-kimap-git kde5-kldap-git kde5-kmbox-git kde5-kontactinterface-git kde5-ktnef-git kde5-gpgmepp-git kde5-kmailtransport-git kde5-kalarmcal-git kde5-akonadi-calendar-git
         )
         ;;
     ktp)
@@ -89,7 +50,7 @@ case "$pkggroup" in
         folder="-"
         packages=('clean-chroot-manager-git' 'cower' 'google-talkplugin' 'guayadeque-svn')
         ;;
-    *)  printf "kf5\nkte\ntelepathy\nactive\nrest\n";
+    *)  printf "kde5\nkte\ntelepathy\nactive\nrest\n";
         exit 1
         ;;
 esac

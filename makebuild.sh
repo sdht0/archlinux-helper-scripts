@@ -31,7 +31,11 @@ echo "Entering $(pwd)..." && \
 if [[ "$usemakepkg" = "usemakepkg" ]];then
     makepkg --config=$BASEDIR/makepkg.conf $uoptions || exit 1
 else
-    sudo ccm s $uoptions || exit 1
+    if [ "$uoptions" = "noclean" ];then
+        sudo ccm S || exit 1
+    else
+        sudo ccm s || exit 1
+    fi
 fi && \
 source PKGBUILD && \
 for i in ${pkgname[@]};do

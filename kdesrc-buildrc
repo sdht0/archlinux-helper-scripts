@@ -4,16 +4,16 @@ global
 
     qtdir       /usr
     source-dir  /run/media/sdh/sdh-hdd3/sources/kde5
-    build-dir   /home/sdh/dev/build/kde
+    build-dir   /run/media/sdh/sdh-hdd3/dev/build/kde
     kdedir      /opt/kde5
-    log-dir     /home/sdh/dev/build/kdelogs
+    log-dir     /run/media/sdh/sdh-hdd3/dev/build/kdelogs
 
     git-repository-base kde-projects kde:
 
     # KDE4_BUILD_TESTS kept for now, for old kde4_add_unit_test stuff to be enabled
     cmake-options -DCMAKE_BUILD_TYPE:STRING=debug -DLIB_INSTALL_DIR=lib
 
-    cxxflags -march=native -pipe -Og -DQT_STRICT_ITERATORS -DQURL_NO_CAST_FROM_STRING -DQT_NO_HTTP -DQT_NO_FTP -Wformat -Werror=format-security -Werror=return-type -Wno-variadic-macros -Wlogical-op -Wmissing-include-dirs -Wno-deprecated-declarations
+    cxxflags -march=native -pipe -Og -DQT_STRICT_ITERATORS -DQURL_NO_CAST_FROM_STRING -DQT_NO_HTTP -DQT_NO_FTP -Wformat -Werror=format-security -Werror=return-type -Wno-variadic-macros -Wlogical-op -Wmissing-include-dirs -Wno-deprecated-declarations -Wno-unused-parameter
 
     make-options -j2
     #install-session-driver true
@@ -44,12 +44,7 @@ end module-set
 
 module-set kdeutils
     repository kde-projects
-    use-modules filelight kcalc kcharselect kwalletmanager print-manager ktimer
-end module-set
-
-module-set kdeadmin
-    repository kde-projects
-    use-modules ksystemlog kcron
+    use-modules kcalc kwalletmanager print-manager
 end module-set
 
 module-set kmix
@@ -69,7 +64,7 @@ end module
 
 module-set kdevelop-kf5
     repository kde-projects
-    use-modules kdevplatform kdevelop/kdevelop
+    use-modules kdevplatform
 end module-set
 
 options phonon
