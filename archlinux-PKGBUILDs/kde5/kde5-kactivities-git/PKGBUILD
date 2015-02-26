@@ -1,0 +1,48 @@
+
+pkgname=kde5-kactivities-git
+_pkgname=kactivities
+pkgver=1
+pkgrel=1
+pkgdesc="Core components for the KDE's Activities
+
+* Activity Manager
+  System service to manage user's activities, track the usage patterns etc.
+* KActivities library
+  API for using and interacting with the Activity Manager as a consumer,
+  application adding information to them or as an activity manager.
+* Workspace
+  Plugins for KDE workspace to easier integrate activities (KIO, etc.)"
+arch=('i686' 'x86_64')
+url="http://projects.kde.org/projects/frameworks/kactivities"
+license=('LGPL')
+depends=('qt5-base' 'qt5-declarative' 'boost')
+makedepends=('kde5-extra-cmake-modules-git' 'git')
+group=("kde5")
+source=("git://anongit.kde.org/kactivities")
+md5sums=('SKIP')
+
+pkgver() {
+    cd "${_pkgname}"
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+    mkdir -p build
+}
+
+build() {
+    export PATH="/opt/kde5/bin:$PATH"
+    export XDG_DATA_DIRS="/opt/kde5/share:$XDG_DATA_DIRS"
+
+    cd build
+    cmake ../"${_pkgname}" \
+        -DCMAKE_INSTALL_PREFIX=/opt/kde5 \
+        -DCMAKE_BUILD_TYPE=Debug \
+        -DLIB_INSTALL_DIR=lib
+    make
+}
+
+package() {
+    cd build
+    make DESTDIR="${pkgdir}" install
+}

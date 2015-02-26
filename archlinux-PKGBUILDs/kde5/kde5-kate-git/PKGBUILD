@@ -1,0 +1,39 @@
+# Maintainer: Alexey D. <lq07829icatm at rambler.ru>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+pkgname=kate-git
+_pkgname=kate
+pkgver=r14904.bb9735f
+pkgrel=1
+pkgdesc='An advanced editor component which is used in numerous KDE applications requiring a text editing component'
+arch=('i686' 'x86_64')
+url='https://projects.kde.org/projects/kde/applications/kate'
+license=('LGPL')
+depends=('kde5-knewstuff-git' 'kde5-ktexteditor-git' 'kde5-plasma-framework-git' 'kde5-threadweaver-git')
+makedepends=('kde5-extra-cmake-modules-git' 'git' 'kdoctools' 'python')
+install=kate.install
+source=('git://anongit.kde.org/kate.git')
+md5sums=('SKIP')
+
+pkgver() {
+    cd "${_pkgname}"
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+    mkdir -p build
+}
+
+build() {
+    cd build
+    cmake ../${_pkgname} \
+        -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+        -DCMAKE_BUILD_TYPE=Debug \
+        -DLIB_INSTALL_DIR=lib
+    make
+}
+
+package() {
+    cd build
+    make DESTDIR="${pkgdir}" install
+}

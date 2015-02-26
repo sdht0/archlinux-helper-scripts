@@ -1,0 +1,45 @@
+# Maintainer: Gustavo Alvarez <sl1pkn07@gmail.com>
+# Contributor: Xiao-Long Chen <chenxiaolong@cxl.epac.to>
+# Contributor: Jakub Schmidtke <sjakub-at-gmail-dot-com>
+# Contributor: mosra <mosra@centrum.cz>
+
+pkgname=kdevplatform-git
+pkgver=r12403.de55b7d
+pkgrel=1
+pkgdesc="A C/C++ development platform for KDE. (GIT Version)"
+arch=(i686 x86_64)
+url="http://www.kdevelop.org/"
+license=(GPL)
+groups=(kde)
+depends=('qt5-quick1' 'ktexteditor' 'threadweaver' 'kcmutils' 'kdelibs4support' 'knewstuff' 'kdeclarative' 'knotifyconfig'  'grantlee-qt5' 'libkomparediff2-git' 'hicolor-icon-theme')
+makedepends=('cmake' 'boost' 'git' 'kde5-extra-cmake-modules-git' 'kdoctools' 'subversion')
+optdepends=('kompare-git: difference checking'
+            'subversion: Subversion plugin')
+provides=('kdevplatform')
+conflicts=('kdevplatform')
+install='kdevplatform-git.install'
+source=('git+git://anongit.kde.org/kdevplatform')
+sha512sums=('SKIP')
+
+pkgver() {
+  cd kdevplatform
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+  mkdir -p build
+}
+
+build() {
+  cd build
+  cmake ../kdevplatform \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DLIB_INSTALL_DIR=lib \
+    -DKDE_INSTALL_USE_QT_SYS_PATHS=ON
+  make
+}
+
+package() {
+  make -C build DESTDIR="${pkgdir}" install
+}

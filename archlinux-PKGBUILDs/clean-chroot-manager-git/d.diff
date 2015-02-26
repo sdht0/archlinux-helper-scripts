@@ -1,168 +1,51 @@
-diff --git a/common/clean-chroot-manager32.in b/common/clean-chroot-manager32.in
-index b0369f4..1d531c0 100644
---- a/common/clean-chroot-manager32.in
-+++ b/common/clean-chroot-manager32.in
-@@ -129,45 +129,69 @@ check2() {
- }
- 
- build() {
-+	# find name of working copy (taken from makechrootpkg)
-+	workingcopy=$USER
-+	[[ -n $SUDO_USER ]] && workingcopy=$SUDO_USER
-+	[[ -z "$workingcopy" || $workingcopy = root ]] && workingcopy=copy
-+	WORKINGPATH=$CHROOTPATH32/$workingcopy
-+
-+	# set makechrootpkg options
-+	if [[ "$1" != "noclean" ]];then
-+		option="-c"
-+	else
-+		# if not cleaning chroot, clean build 'startdir' of working chroot
-+		[[ -d $WORKINGPATH/startdir ]] && rm -rf $WORKINGPATH/startdir/* > /dev/null
-+		shift
-+	fi
-+	if [[ ! -z "$RUNNAMCAP" ]]; then
-+		option="$option -n"
-+	fi
-+
- 	# try to build the package
- 	local mesg="Attempting to build package..."
- 	echo -e "${YELLOW}---->${ALL_OFF}${BOLD} ${mesg}${ALL_OFF}"
- 
--	if [[ -z "$RUNNAMCAP" ]]; then
--		makechrootpkg -c -u -r $CHROOTPATH32
--	else
--		makechrootpkg -c -u -n -r $CHROOTPATH32
--	fi
--
--	# stop here if build fails
--	[[ $? -gt 0 ]] && exit 1
-+	makechrootpkg $option -u -r $CHROOTPATH32 -- $* || exit 1     # stop here if build fails
- 
- 	# if this is the first time package has been successfully built
- 	# then append the local repo to the chroot's pacman.conf
- 	if [[ -z $(grep clean-chroot $CHROOTPATH32/root/etc/pacman.conf) ]]; then
--		# add a local repo to chroot
--		cat << EOF >> $CHROOTPATH32/root/etc/pacman.conf
-+		# add a local repo to chroot, both in root and working copy
-+		for cuser in root $workingcopy;do
-+			cat << EOF >> $CHROOTPATH32/$cuser/etc/pacman.conf
- 
- # Added by $PKG
- [chroot_local]
- SigLevel = Never
- Server = file:///repo
- EOF
-+		done
- 	fi
- 
--	# setup a local repo and add adjust files in chroot
--	[[ ! -d $CHROOTPATH32/root/repo ]] && mkdir $CHROOTPATH32/root/repo
-+	# source chroot PKGBUILD to get package details
-+	. $WORKINGPATH/startdir/PKGBUILD
-+	# save any changes in pkgver and pkgrel to user PKGBUILD
-+	sed -i "s/^pkgver=.*/pkgver=$pkgver/" PKGBUILD
-+	sed -i "s/^pkgrel=.*/pkgrel=$pkgrel/" PKGBUILD
-+
-+	# setup a local repo and add adjust files in chroot, both in root and working copy
-+	[[ ! -d $CHROOTPATH32/root/repo ]] && mkdir $CHROOTPATH32/{root,$workingcopy}/repo
-+
- 	local mesg="Adding package to chroot repo..."
- 	echo -e "${YELLOW}---->${ALL_OFF}${BOLD} ${mesg}${ALL_OFF}"
-+
-+	pkgpath=$(pwd) && [[ -n "$PKGDEST" ]] && pkgpath=$PKGDEST
-+	pushd $WORKINGPATH/startdir > /dev/null
- 	for i in *.pkg.tar.xz; do
--		cp "$i" $REPO
--		repo-add $REPO/chroot_local.db.tar.gz $REPO/"$i" || exit 1
-+		cp "$pkgpath/$i" $REPO && repo-add $REPO/chroot_local.db.tar.gz $REPO/"$i" || exit 1
-+		cp "$pkgpath/$i" $WORKINGPATH/repo && repo-add $WORKINGPATH/repo/chroot_local.db.tar.gz $WORKINGPATH/repo/"$i" > /dev/null || exit 1
- 
- 		# ensure that the chroot package matches the live pacman cache package
- 		# which avoids checksum errors if the user builds the same $pkgname-$pkgver
- 		# more than once
- 		[[ -f "/var/cache/pacman/pkg/$i" ]] && rm -f "/var/cache/pacman/pkg/$i"
- 	done
-+	popd > /dev/null
- 
- 	# The rm statement above can return 1 if the file to remove is not found,
- 	# causing the function to return a non-zero error code even if everything
-@@ -279,7 +303,8 @@ case "$1" in
- 			mesg=
- 			create
- 		fi
--		build
-+		shift
-+		build $*
- 		;;
- 	u)
- 		check2 && update
-@@ -294,6 +319,7 @@ case "$1" in
- 		echo
- 		echo -e ${BOLD}" --- BUILDING ---"${ALL_OFF}
- 		echo -e ${BOLD}" s) Run makepkg in clean chroot"${ALL_OFF}
-+		echo -e ${BOLD}" s noclean) Run makepkg in chroot, without cleaning it first"${ALL_OFF}
- 		echo
- 		echo -e ${BOLD}" --- MISCELLANEOUS ---"${ALL_OFF}
- 		echo -e ${BOLD}" l) List local repo in chroot (packages you build)"${ALL_OFF}
 diff --git a/common/clean-chroot-manager64.in b/common/clean-chroot-manager64.in
-index dc6509f..0881168 100644
+index d15dd4f..9c5ee24 100644
 --- a/common/clean-chroot-manager64.in
 +++ b/common/clean-chroot-manager64.in
-@@ -140,46 +140,69 @@ check2() {
- }
- 
- build() {
-+	# find name of working copy (taken from makechrootpkg)
-+	workingcopy=$USER
-+	[[ -n $SUDO_USER ]] && workingcopy=$SUDO_USER
-+	[[ -z "$workingcopy" || $workingcopy = root ]] && workingcopy=copy
-+	WORKINGPATH=$CHROOTPATH64/$workingcopy
-+
-+	# set makechrootpkg options
-+	if [[ "$1" != "noclean" ]];then
-+		option="-c"
-+	else
-+		# if not cleaning chroot, clean build 'startdir' of working chroot
-+		[[ -d $WORKINGPATH/startdir ]] && rm -rf $WORKINGPATH/startdir/* > /dev/null
-+		shift
-+	fi
-+	if [[ ! -z "$RUNNAMCAP" ]]; then
-+		option="$option -n"
-+	fi
-+
- 	# try to build the package
- 	local mesg="Attempting to build package..."
+@@ -167,9 +167,9 @@ build() {
  	echo -e "${YELLOW}---->${ALL_OFF}${BOLD} ${mesg}${ALL_OFF}"
  
--	if [[ -z "$RUNNAMCAP" ]]; then
+ 	if [[ -z "$RUNNAMCAP" ]]; then
 -		makechrootpkg -c -u -r $CHROOTPATH64
--	else
++		makechrootpkg -l ccm -c -u -r $CHROOTPATH64
+ 	else
 -		makechrootpkg -c -u -n -r $CHROOTPATH64
--	fi
--
--	# stop here if build fails
--	[[ $? -gt 0 ]] && exit 1
-+	makechrootpkg $option -u -r $CHROOTPATH64 -- $* || exit 1     # stop here if build fails
++		makechrootpkg -l ccm -c -u -n -r $CHROOTPATH64
+ 	fi
  
+ 	# stop here if build fails
+@@ -182,9 +182,9 @@ buildnc() {
+ 	echo -e "${YELLOW}---->${ALL_OFF}${BOLD} ${mesg}${ALL_OFF}"
+ 
+ 	if [[ -z "$RUNNAMCAP" ]]; then
+-		makechrootpkg -u -r $CHROOTPATH64
++		makechrootpkg -l ccm -u -r $CHROOTPATH64
+ 	else
+-		makechrootpkg -u -n -r $CHROOTPATH64
++		makechrootpkg -l ccm -u -n -r $CHROOTPATH64
+ 	fi
+ 
+ 	# stop here if build fails
+@@ -195,29 +195,42 @@ indexit() {
  	# if this is the first time package has been successfully built
  	# then append the local repo to the chroot's pacman.conf
  	if [[ -z $(grep clean-chroot $CHROOTPATH64/root/etc/pacman.conf) ]]; then
 -		# add a local repo to chroot
--		cat << EOF >> $CHROOTPATH64/root/etc/pacman.conf
+-		sed -i '/\[testing\]/i \
 +		# add a local repo to chroot, both in root and working copy
-+		for cuser in root $workingcopy;do
-+			cat << EOF >> $CHROOTPATH64/$cuser/etc/pacman.conf
- 
- # Added by $PKG
- [chroot_local]
- SigLevel = Never
- Server = file:///repo
- EOF
-+		done
++		for cuser in root ccm;do
++                    sed -i '/\[testing\]/i \
+ # Added by clean-chroot-manager\n[chroot_local]\nSigLevel = Never\nServer = file:///repo\n' \
+-			$CHROOTPATH64/root/etc/pacman.conf
++			$CHROOTPATH64/$cuser/etc/pacman.conf
++                done
  	fi
- 
+-
 -	# setup a local repo and add adjust files in chroot
 -	[[ ! -d $CHROOTPATH64/root/repo ]] && mkdir $CHROOTPATH64/root/repo
++	
++	WORKINGPATH=$CHROOTPATH64/ccm
++	
 +	# source chroot PKGBUILD to get package details
 +	. $WORKINGPATH/startdir/PKGBUILD
 +	# save any changes in pkgver and pkgrel to user PKGBUILD
@@ -170,18 +53,19 @@ index dc6509f..0881168 100644
 +	sed -i "s/^pkgrel=.*/pkgrel=$pkgrel/" PKGBUILD
 +
 +	# setup a local repo and add adjust files in chroot, both in root and working copy
-+	[[ ! -d $CHROOTPATH64/root/repo ]] && mkdir $CHROOTPATH64/{root,$workingcopy}/repo
-+
++	[[ ! -d $CHROOTPATH64/root/repo ]] && mkdir $CHROOTPATH64/{root,ccm}/repo
  	local mesg="Adding package to chroot repo..."
  	echo -e "${YELLOW}---->${ALL_OFF}${BOLD} ${mesg}${ALL_OFF}"
--	for i in *.pkg.tar.xz; do
  
--		cp "$i" $REPO
--		repo-add $REPO/chroot_local.db.tar.gz $REPO/"$i" || exit 1
+ 	# it could be that the user is building for both i686 and x86_64
+ 	# in which case we don't want to pollute the pure x86_64 repo
+ 	# with i686 packages so only process 'x86_64' and 'any' types
 +	pkgpath=$(pwd) && [[ -n "$PKGDEST" ]] && pkgpath=$PKGDEST
 +	pushd $WORKINGPATH/startdir > /dev/null
-+	for i in *.pkg.tar.xz; do
-+		cp "$pkgpath/$i" $REPO && repo-add $REPO/chroot_local.db.tar.gz $REPO/"$i" || exit 1
+ 	for i in $(ls *.pkg.tar.xz | sed '/-i686.pkg.tar.xz/d'); do
+-		cp "$i" $REPO
+-		repo-add $REPO/chroot_local.db.tar.gz $REPO/"$i" || exit 1
++                cp "$pkgpath/$i" $REPO && repo-add $REPO/chroot_local.db.tar.gz $REPO/"$i" || exit 1
 +		cp "$pkgpath/$i" $WORKINGPATH/repo && repo-add $WORKINGPATH/repo/chroot_local.db.tar.gz $WORKINGPATH/repo/"$i" > /dev/null || exit 1
  
  		# ensure that the chroot package matches the live pacman cache package
@@ -193,21 +77,3 @@ index dc6509f..0881168 100644
  
  	# The rm statement above can return 1 if the file to remove is not found,
  	# causing the function to return a non-zero error code even if everything
-@@ -323,7 +346,8 @@ case "$1" in
- 			mesg=
- 			create
- 		fi
--			build
-+		shift
-+		build $*
- 		;;
- 	u)
- 		check2 && update
-@@ -339,6 +363,7 @@ case "$1" in
- 		echo
- 		echo -e ${BOLD}" --- BUILDING ---"${ALL_OFF}
- 		echo -e ${BOLD}" s) Run makepkg in clean chroot"${ALL_OFF}
-+		echo -e ${BOLD}" s noclean) Run makepkg in chroot, without cleaning it first"${ALL_OFF}
- 		echo
- 		echo -e ${BOLD}" --- MISCELLANEOUS ---"${ALL_OFF}
- 		echo -e ${BOLD}" l) List local repo in chroot (packages you build)"${ALL_OFF}

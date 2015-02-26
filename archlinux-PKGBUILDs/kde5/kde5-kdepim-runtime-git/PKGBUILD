@@ -1,0 +1,38 @@
+# Maintainer anex <lane.wiscombe[@]gmail.com>
+
+pkgname=kde5-kdepim-runtime-git
+_pkgname=kdepim-runtime
+arch=('x86_64')
+pkgver=r12207.d10aceb
+pkgrel=2
+pkgdesc="KDE Pim Runtime"
+url="http://www.kde.org"
+license=('GPL' 'LGPL' 'FDL')
+install=${_pkgname}.install
+depends=('kde5-kdepimlibs-git' 'qt5-quick1' 'libaccounts-qt5' 'signon-qt5' 'shared-mime-info' 'kde5-akonadi-git' 'kde5-akonadi-calendar-git')
+makedepends=('kde5-extra-cmake-modules-git' 'kde5-kdoctools-git' 'boost')
+source=("git://anongit.kde.org/kdepim-runtime.git")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd "${_pkgname}"
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+    mkdir -p build
+}
+
+build() {
+    cd build
+    cmake ../${_pkgname} \
+        -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+        -DCMAKE_BUILD_TYPE=Debug \
+        -DLIB_INSTALL_DIR=lib
+    make
+}
+
+package() {
+    cd build
+    make DESTDIR="${pkgdir}" install
+}

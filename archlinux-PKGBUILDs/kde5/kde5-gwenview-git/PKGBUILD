@@ -1,0 +1,38 @@
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+
+pkgname=gwenview-git
+_pkgname=gwenview
+pkgver=r5432.be0da0e
+pkgrel=1
+pkgdesc='A fast and easy to use image viewer for KDE'
+arch=('i686' 'x86_64')
+url='http://kde.org/applications/graphics/gwenview/'
+license=('GPL')
+depends=('kde5-kactivities-git' 'kde5-kdelibs4support-git' 'exiv2')
+makedepends=('kde5-extra-cmake-modules-git' 'git' 'kdoctools' 'python')
+source=("git://anongit.kde.org/gwenview.git")
+install=$pkgname.install
+sha256sums=('SKIP')
+
+pkgver() {
+    cd "${_pkgname}"
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+    mkdir -p build
+}
+
+build() {
+    cd build
+    cmake ../${_pkgname} \
+        -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+        -DCMAKE_BUILD_TYPE=Debug \
+        -DLIB_INSTALL_DIR=lib
+    make
+}
+
+package() {
+    cd build
+    make DESTDIR="${pkgdir}" install
+}

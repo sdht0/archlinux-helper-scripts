@@ -1,0 +1,46 @@
+
+pkgname=kde5-sonnet-git
+_pkgname=sonnet
+pkgver=1
+pkgrel=1
+pkgdesc="Spelling framework for Qt.
+
+It has a plugin-based architecture, allowing it to use several different spell-checking libraries (the current supported ones are aspell, hspell and hunspell).
+
+It has automated language detection based on several heuristics (script used, trigram matching and language ranking on available languages in the spell-checking backend). This allows it to automatically switch language in a multi-language document.
+
+"Documentation":http://api.kde.org/frameworks-api/frameworks5-apidocs/sonnet/html/index.html"
+arch=('i686' 'x86_64')
+url="http://projects.kde.org/projects/frameworks/sonnet"
+license=('LGPL')
+depends=('qt5-base' 'enchant')
+makedepends=('kde5-extra-cmake-modules-git' 'git')
+group=("kde5")
+source=("git://anongit.kde.org/sonnet")
+md5sums=('SKIP')
+
+pkgver() {
+    cd "${_pkgname}"
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+    mkdir -p build
+}
+
+build() {
+    export PATH="/opt/kde5/bin:$PATH"
+    export XDG_DATA_DIRS="/opt/kde5/share:$XDG_DATA_DIRS"
+
+    cd build
+    cmake ../"${_pkgname}" \
+        -DCMAKE_INSTALL_PREFIX=/opt/kde5 \
+        -DCMAKE_BUILD_TYPE=Debug \
+        -DLIB_INSTALL_DIR=lib
+    make
+}
+
+package() {
+    cd build
+    make DESTDIR="${pkgdir}" install
+}

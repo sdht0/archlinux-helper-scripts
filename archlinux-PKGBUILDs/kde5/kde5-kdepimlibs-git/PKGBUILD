@@ -1,0 +1,39 @@
+# Maintainer: Antonio Rojas <arojas@archlinux.org>
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+# Contributor: Pierre Schmitz <pierre@archlinux.de>
+
+pkgname=kde5-kdepimlibs-git
+pkgver=r18953.019b5e8
+pkgrel=1
+pkgdesc="KDE PIM Libraries"
+arch=('i686' 'x86_64')
+url='https://projects.kde.org/projects/kde/kdepimlibs'
+license=('GPL' 'LGPL')
+depends=('kde5-akonadi-git' 'kde5-kcalcore-git' 'kde5-kldap-git' 'kde5-kmbox-git' 'kde5-kcontacts-git')
+makedepends=('kde5-extra-cmake-modules-git' 'git' 'kde5-kdoctools-git' 'python' 'boost')
+install=$pkgname.install
+source=('git://anongit.kde.org/kdepimlibs.git')
+md5sums=('SKIP')
+
+pkgver() {
+    cd "${_pkgname}"
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+    mkdir -p build
+}
+
+build() {
+    cd build
+    cmake ../${_pkgname} \
+        -DCMAKE_INSTALL_PREFIX=/opt/kf5 \
+        -DCMAKE_BUILD_TYPE=Debug \
+        -DLIB_INSTALL_DIR=lib
+    make
+}
+
+package() {
+    cd build
+    make DESTDIR="${pkgdir}" install
+}

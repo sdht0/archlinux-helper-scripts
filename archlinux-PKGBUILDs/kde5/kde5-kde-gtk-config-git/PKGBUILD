@@ -1,0 +1,47 @@
+
+pkgname=kde5-kde-gtk-config-git
+_pkgname=kde-gtk-config
+pkgver=1
+pkgrel=1
+pkgdesc="GTK2 and GTK3 Configurator for KDE.
+
+Configuration dialog to adapt GTK applications appearance to your taste under KDE. Among its many features, it lets you:
+ - Choose which theme is used for GTK2 and GTK3 applications.
+ - Tweak some GTK applications behaviour.
+ - Select what icon theme to use in GTK applications.
+ - Select GTK applications default fonts.
+ - Easily browse and install new GTK2 and GTK3 themes."
+arch=('i686' 'x86_64')
+url="http://projects.kde.org/projects/kde/workspace/kde-gtk-config"
+license=('LGPL')
+depends=('qt5-base')
+makedepends=('kde5-extra-cmake-modules-git' 'git')
+group=("kde5")
+source=("git://anongit.kde.org/kde-gtk-config")
+md5sums=('SKIP')
+
+pkgver() {
+    cd "${_pkgname}"
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+    mkdir -p build
+}
+
+build() {
+    export PATH="/opt/kde5/bin:$PATH"
+    export XDG_DATA_DIRS="/opt/kde5/share:$XDG_DATA_DIRS"
+
+    cd build
+    cmake ../"${_pkgname}" \
+        -DCMAKE_INSTALL_PREFIX=/opt/kde5 \
+        -DCMAKE_BUILD_TYPE=Debug \
+        -DLIB_INSTALL_DIR=lib
+    make
+}
+
+package() {
+    cd build
+    make DESTDIR="${pkgdir}" install
+}

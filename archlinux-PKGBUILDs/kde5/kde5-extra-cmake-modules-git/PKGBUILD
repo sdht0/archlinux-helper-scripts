@@ -1,0 +1,37 @@
+# Contributor: Andrea Scarpino <andrea@archlinux.org>
+
+_pkgname=extra-cmake-modules
+pkgname=kde5-${_pkgname}-git
+pkgver=2644.1256936
+pkgrel=1
+pkgdesc='Extra CMake modules'
+arch=('any')
+url='http://quickgit.kde.org/index.php?p=kde5-extra-cmake-modules-git.git&a=summary'
+license=('LGPL')
+depends=('cmake' 'qt5-tools')
+makedepends=('git')
+source=(git://anongit.kde.org/extra-cmake-modules.git)
+md5sums=('SKIP')
+
+pkgver() {
+  cd "$_pkgname"
+  echo "$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+  mkdir -p build
+}
+
+build() {
+  cd build
+  cmake ../${_pkgname} \
+    -DCMAKE_INSTALL_PREFIX=/opt/kde5 \
+    -DCMAKE_BUILD_TYPE=Debug
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="${pkgdir}" install
+}
+

@@ -1,0 +1,42 @@
+
+pkgname=kde5-polkit-kde-agent-1-git
+_pkgname=polkit-kde-agent-1
+pkgver=1
+pkgrel=1
+pkgdesc="Daemon providing a polkit authentication UI for KDE.
+
+Please be sure to read and follow "the polkit-KDE contribution and development guidelines":http://techbase.kde.org/Polkit-KDE_development_guidelines to contribute code."
+arch=('i686' 'x86_64')
+url="http://projects.kde.org/projects/kde/workspace/polkit-kde-agent-1"
+license=('LGPL')
+depends=('qt5-base')
+makedepends=('kde5-extra-cmake-modules-git' 'git')
+group=("kde5")
+source=("git://anongit.kde.org/polkit-kde-agent-1")
+md5sums=('SKIP')
+
+pkgver() {
+    cd "${_pkgname}"
+    echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+    mkdir -p build
+}
+
+build() {
+    export PATH="/opt/kde5/bin:$PATH"
+    export XDG_DATA_DIRS="/opt/kde5/share:$XDG_DATA_DIRS"
+
+    cd build
+    cmake ../"${_pkgname}" \
+        -DCMAKE_INSTALL_PREFIX=/opt/kde5 \
+        -DCMAKE_BUILD_TYPE=Debug \
+        -DLIB_INSTALL_DIR=lib
+    make
+}
+
+package() {
+    cd build
+    make DESTDIR="${pkgdir}" install
+}
