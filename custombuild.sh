@@ -1,6 +1,6 @@
 #!/usr/bin/zsh
 
-BASEDIR=/home/sdh/dev
+BASEDIR=/run/media/sdh/sdh-hdd3/dev
 PKGBUILDSDIR=$BASEDIR/archlinux-PKGBUILDs
 
 pkggroup="$1"
