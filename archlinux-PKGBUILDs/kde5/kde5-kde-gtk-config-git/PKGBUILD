@@ -14,7 +14,7 @@ Configuration dialog to adapt GTK applications appearance to your taste under KD
 arch=('i686' 'x86_64')
 url="http://projects.kde.org/projects/kde/workspace/kde-gtk-config"
 license=('LGPL')
-depends=('qt5-base')
+depends=('kde5-kcmutils-git' 'kde5-knewstuff-git')
 makedepends=('kde5-extra-cmake-modules-git' 'git')
 group=("kde5")
 source=("git://anongit.kde.org/kde-gtk-config")

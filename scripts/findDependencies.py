@@ -9,22 +9,19 @@ def findDependencies():
     for line in data:
         line=line.strip(" \n").replace(" ","")
         if line.find("frameworks/")==0 or line.find("kde/workspace/")==0:
-            line=line.replace("#KDecorations","").replace("kdesupport/","").replace("#testdependency","")
+            line=line.replace("#KDecorations","").replace("#testdependency","")
             parts=line.split(":")
             if parts[1][0]=="-":
                 continue
             for i in range(2):
-                if "frameworks/" in parts[i]:
-                    parts[i]="kde5-%s-git" % parts[i].replace("frameworks/","")
-                if "kde/workspace/" in parts[i]:
-                    parts[i]="kde5-%s-git" % parts[i].replace("kde/workspace/","")
+                    parts[i]="kde5-%s-git" % parts[i].split('/')[-1]
             if parts[0] not in directdependencies:
                 directdependencies[parts[0]]=set()
             directdependencies[parts[0]].add(parts[1])
             if parts[1] not in reversedependencies:
                 reversedependencies[parts[1]]=set()
             reversedependencies[parts[1]].add(parts[0])
-            if "kde5" in parts[0]:
+            if line.find("kde/workspace/")==0:
                 directdependencies[parts[0]].add('kde5-kf5umbrella-git')
                 if 'kde5-kf5umbrella-git' not in reversedependencies:
                     reversedependencies['kde5-kf5umbrella-git']=set()
@@ -59,7 +56,6 @@ def findDependencies():
         if framework in reversedependencies:
             visited=set()
             searchDependencies(framework, framework)
-
 
     fl=open("dependencies.txt","w")
     text="digraph A {"

@@ -5,7 +5,7 @@ directdependencies=findDependencies.findDependencies()
 import xml.etree.ElementTree as ElementTree
 import os,sys
 
-basepath = "/run/media/sdh/sdh-hdd3/dev/archlinux-logs/b"
+basepath = "/run/media/sdh/sdh-hdd3/dev/archlinux-extra/packages"
 
 tree = ElementTree.parse('/run/media/sdh/sdh-hdd3/sources/kde5/kde_projects.xml')
 root = tree.getroot()
@@ -30,8 +30,6 @@ for item in itemlist:
     data['url']="git://anongit.kde.org/%s" % name
     data['extra']=""
     data['depend']="'qt5-base'"
-    if name in ['kio-extras']:
-        data['depend']="'kde5-kf5umbrella-git'"
     if "kde5-%s-git" % name in directdependencies and len(directdependencies["kde5-%s-git" % name])!=0:
         data['depend']="'%s'" % ("' '".join(sorted(list(directdependencies["kde5-%s-git" % name]))))
     data['depend']+=" "+extradependencies[name] if name in extradependencies else ""

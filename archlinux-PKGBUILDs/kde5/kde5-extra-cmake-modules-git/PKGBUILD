@@ -2,7 +2,7 @@
 
 _pkgname=extra-cmake-modules
 pkgname=kde5-${_pkgname}-git
-pkgver=2644.1256936
+pkgver=0.0.11.r2508.d336179
 pkgrel=1
 pkgdesc='Extra CMake modules'
 arch=('any')

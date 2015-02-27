@@ -1,14 +1,14 @@
 
 pkgname=kde5-ki18n-git
 _pkgname=ki18n
-pkgver=102.0ca1dbc
+pkgver=1
 pkgrel=1
 pkgdesc="Ki18n"
 arch=('i686' 'x86_64')
 url="http://projects.kde.org/projects/frameworks/ki18n"
 license=('LGPL')
-depends=('qt5-script')
-makedepends=('kde5-extra-cmake-modules-git' 'git' 'python')
+depends=('qt5-script' 'python')
+makedepends=('kde5-extra-cmake-modules-git' 'git')
 group=("kde5")
 source=("git://anongit.kde.org/ki18n")
 md5sums=('SKIP')

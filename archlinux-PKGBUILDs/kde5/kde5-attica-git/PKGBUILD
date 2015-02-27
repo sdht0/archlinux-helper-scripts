@@ -1,7 +1,7 @@
 
 pkgname=kde5-attica-git
 _pkgname=attica
-pkgver=512.5fdac71
+pkgver=1
 pkgrel=1
 pkgdesc="Attica is a Qt library that implements the Open Collaboration Services API.
 

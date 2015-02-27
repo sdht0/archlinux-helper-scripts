@@ -5,7 +5,7 @@ directdependencies=findDependencies.findDependencies()
 import xml.etree.ElementTree as ElementTree
 import os,sys
 
-basepath = "/run/media/sdh/sdh-hdd3/dev/archlinux-logs/a"
+basepath = "/run/media/sdh/sdh-hdd3/dev/archlinux-extra/packages"
 
 tree = ElementTree.parse('/run/media/sdh/sdh-hdd3/sources/kde5/kde_projects.xml')
 root = tree.getroot()
@@ -21,6 +21,7 @@ extradependencies={"kapidox":"'python2'",
                     "kdelibs4support":"'qt5-tools' 'networkmanager'",
                     'kactivities':"'qt5-declarative' 'boost'",
                     "kdnssd":"'avahi'",
+                    "ki18n":"'python'",
                     "kdoctools":"'docbook-xsl'",
                     "kfileaudiopreview":"'kde5-phonon-qt5-git'",
                     "khtml":"'kde5-phonon-qt5-git' 'giflib'",
@@ -46,7 +47,7 @@ for item in itemlist:
     data['url']=item.find('repo').find('url').text.strip()
     data['extra']=""
     data['depend']="'qt5-base'"
-    if name in ["kglobalaccel", "kidletime" ,"kwindowsystem"]:
+    if name in ["kglobalaccel", "kidletime" ,"kwindowsystem", "kdbusaddons"]:
         data['depend']="'qt5-x11extras'"
     elif name in ["solid"]:
         data['depend']="'qt5-declarative'"

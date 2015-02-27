@@ -1,13 +1,13 @@
 
 pkgname=kde5-kdbusaddons-git
 _pkgname=kdbusaddons
-pkgver=96.22cc1ac
+pkgver=1
 pkgrel=1
 pkgdesc="KDBusAddons"
 arch=('i686' 'x86_64')
 url="http://projects.kde.org/projects/frameworks/kdbusaddons"
 license=('LGPL')
-depends=('qt5-base')
+depends=('qt5-x11extras')
 makedepends=('kde5-extra-cmake-modules-git' 'git')
 group=("kde5")
 source=("git://anongit.kde.org/kdbusaddons")
