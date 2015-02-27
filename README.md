@@ -36,7 +36,8 @@ $BASEDIR
 |-- archlinux-pkgfiles  
 |-- archlinux-sources  
 |-- build  
-|-- archlinux-logs
+|-- archlinux-extra
+    |-- archlinux-logs
 
 * I have all my PKGBUILDs in the `$BASEDIR/archlinux-PKGBUILDs` folder, with sub-folders used for packages of same group.
 * The folder names are the same as the name of the package.

@@ -6,7 +6,7 @@
 build/
 sources/
 kdesrc-build/
-archlinux-logs/
+archlinux-extra/
 archlinux-chroot/
 archlinux-pkgfiles/
 archlinux-sources/
