@@ -21,11 +21,6 @@ def findDependencies():
             if parts[1] not in reversedependencies:
                 reversedependencies[parts[1]]=set()
             reversedependencies[parts[1]].add(parts[0])
-            if line.find("kde/workspace/")==0:
-                directdependencies[parts[0]].add('kde5-kf5umbrella-git')
-                if 'kde5-kf5umbrella-git' not in reversedependencies:
-                    reversedependencies['kde5-kf5umbrella-git']=set()
-                reversedependencies['kde5-kf5umbrella-git'].add(parts[0])
 
     text="digraph A {"
     for d in directdependencies:
