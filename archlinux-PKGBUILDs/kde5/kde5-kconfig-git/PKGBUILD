@@ -1,7 +1,7 @@
 
 pkgname=kde5-kconfig-git
 _pkgname=kconfig
-pkgver=1
+pkgver=244.270b5ef
 pkgrel=1
 pkgdesc="KConfig"
 arch=('i686' 'x86_64')

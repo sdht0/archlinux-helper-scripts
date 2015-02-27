@@ -1,7 +1,7 @@
 
 pkgname=kde5-karchive-git
 _pkgname=karchive
-pkgver=1
+pkgver=99.9e0def4
 pkgrel=1
 pkgdesc="Qt 5 addon providing access to numerous types of archives"
 arch=('i686' 'x86_64')

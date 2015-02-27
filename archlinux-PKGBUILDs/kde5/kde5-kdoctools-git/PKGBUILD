@@ -1,13 +1,13 @@
 
 pkgname=kde5-kdoctools-git
 _pkgname=kdoctools
-pkgver=1
+pkgver=183.7e09874
 pkgrel=1
 pkgdesc="KDocTools"
 arch=('i686' 'x86_64')
 url="http://projects.kde.org/projects/frameworks/kdoctools"
 license=('LGPL')
-depends=('kde5-karchive-git' 'docbook-xsl')
+depends=('kde5-karchive-git' 'kde5-ki18n-git' 'docbook-xsl')
 makedepends=('kde5-extra-cmake-modules-git' 'git')
 group=("kde5")
 source=("git://anongit.kde.org/kdoctools")
