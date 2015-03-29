@@ -1,0 +1,13 @@
+Index: CMakeLists.txt
+===================================================================
+diff --git a/Trunk/src/CMakeLists.txt b/Trunk/src/CMakeLists.txt
+--- a/Trunk/src/CMakeLists.txt	(revision 1894)
++++ b/Trunk/src/CMakeLists.txt	(working copy)
+@@ -319,6 +319,7 @@
+ 	${LIBINDICATE07_LIBRARIES}
+ 	${LIBAPPINDICATOR_LIBRARIES}
+ 	${LIBWXSQLITE3_LIBRARIES}
++	-lgdk_pixbuf-2.0
+ 	)
+ 
+ INSTALL( TARGETS guayadeque

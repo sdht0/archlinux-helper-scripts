@@ -1,7 +1,7 @@
 
 pkgname=kde5-kservice-git
 _pkgname=kservice
-pkgver=1
+pkgver=269.8e4df32
 pkgrel=1
 pkgdesc="KService"
 arch=('i686' 'x86_64')

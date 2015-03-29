@@ -1,8 +1,6 @@
-# Adjust all these settings at will
 
 global
 
-    qtdir       /usr
     source-dir  /run/media/sdh/sdh-hdd3/sources/kde5
     build-dir   /run/media/sdh/sdh-hdd3/dev/build/kde
     kdedir      /opt/kde5
@@ -10,31 +8,34 @@ global
 
     git-repository-base kde-projects kde:
 
-    # KDE4_BUILD_TESTS kept for now, for old kde4_add_unit_test stuff to be enabled
-    cmake-options -DCMAKE_BUILD_TYPE:STRING=debug -DLIB_INSTALL_DIR=lib
+    cmake-options -DCMAKE_BUILD_TYPE:STRING=debug -DLIB_INSTALL_DIR=lib -GNinja
 
     cxxflags -march=native -pipe -Og -DQT_STRICT_ITERATORS -DQURL_NO_CAST_FROM_STRING -DQT_NO_HTTP -DQT_NO_FTP -Wformat -Werror=format-security -Werror=return-type -Wno-variadic-macros -Wlogical-op -Wmissing-include-dirs -Wno-deprecated-declarations -Wno-unused-parameter
 
-    make-options -j2
+    #make-options -j2
     #install-session-driver true
+    custom-build-command ninja
 
     branch-group kf5-qt5
 
     stop-on-failure true
+    purge-old-logs false
 
 end global
 
 module grantlee
-    repository git://gitorious.org/grantlee/grantlee.git
+    repository https://github.com/steveire/grantlee.git
     branch master
 end module 
 
 include kf5-frameworks-build-include
 include kf5-workspace-build-include
+include kf5-kdepim-build-include
+#include kf5-applications-build-include
 
 module-set kf5-base-applications
     repository kde-projects
-    use-modules konsole kate kde-baseapps
+    use-modules konsole kate kde-baseapps dolphin
 end module-set
 
 module-set kdegraphics
@@ -42,9 +43,19 @@ module-set kdegraphics
     use-modules gwenview okular ksnapshot
 end module-set
 
+module-set libkomparediff2
+    repository kde-projects
+    use-modules libkomparediff2
+end module
+
+module-set konversation
+    repository kde-projects
+    use-modules konversation
+end module
+
 module-set kdeutils
     repository kde-projects
-    use-modules kcalc kwalletmanager print-manager
+    use-modules kcalc kwalletmanager print-manager ark
 end module-set
 
 module-set kmix
@@ -54,17 +65,14 @@ module-set kmix
     branch master
 end module
 
-include kf5-kdepim-build-include
-
-module-set libkomparediff2
-    repository kde-projects
-    use-modules libkomparediff2
-    branch frameworks
-end module
-
 module-set kdevelop-kf5
     repository kde-projects
-    use-modules kdevplatform
+    use-modules kdevplatform kdevelop/kdevelop
+end module-set
+
+module-set
+    repository kde-projects
+    use-modules kdeconnect-kde
 end module-set
 
 options phonon

@@ -1,7 +1,7 @@
 
 pkgname=kde5-kitemviews-git
 _pkgname=kitemviews
-pkgver=1
+pkgver=67.7368647
 pkgrel=1
 pkgdesc="KItemViews"
 arch=('i686' 'x86_64')
