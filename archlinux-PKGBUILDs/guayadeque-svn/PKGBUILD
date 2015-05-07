@@ -11,7 +11,7 @@ arch=('i686' 'x86_64')
 url='http://sourceforge.net/projects/$_pkgname'
 license=('GPL3')
 depends=('curl' 'desktop-file-utils' 'flac' 'libgpod' 'taglib' 'wxgtk2.8')
-makedepends=('cmake' 'subversion')
+makedepends=('cmake' 'subversion' 'ninja')
 optdepends=('gstreamer0.10-plugins: all Gstreamer plugins to play all kind of music files'
             'gvfs: Support for external devices')
 provides=($_pkgname)

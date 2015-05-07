@@ -1,4 +1,3 @@
-
 global
 
     source-dir  /run/media/sdh/sdh-hdd3/sources/kde5
@@ -12,21 +11,21 @@ global
 
     cxxflags -march=native -pipe -Og -DQT_STRICT_ITERATORS -DQURL_NO_CAST_FROM_STRING -DQT_NO_HTTP -DQT_NO_FTP -Wformat -Werror=format-security -Werror=return-type -Wno-variadic-macros -Wlogical-op -Wmissing-include-dirs -Wno-deprecated-declarations -Wno-unused-parameter
 
-    #make-options -j2
-    #install-session-driver true
-    custom-build-command ninja
+    #make-options           -j2
+    custom-build-command    ninja
 
-    branch-group kf5-qt5
+    branch-group            kf5-qt5
 
-    stop-on-failure true
-    purge-old-logs false
+    ignore-kde-structure    true
+    stop-on-failure         true
+    purge-old-logs          false
 
 end global
 
 module grantlee
     repository https://github.com/steveire/grantlee.git
     branch master
-end module 
+end module
 
 include kf5-frameworks-build-include
 include kf5-workspace-build-include
@@ -55,7 +54,7 @@ end module
 
 module-set kdeutils
     repository kde-projects
-    use-modules kcalc kwalletmanager print-manager ark
+    use-modules kcalc kwalletmanager print-manager ark kdebugsettings
 end module-set
 
 module-set kmix
