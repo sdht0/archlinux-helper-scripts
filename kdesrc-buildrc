@@ -6,12 +6,13 @@ global
     log-dir     /run/media/sdh/sdh-hdd3/dev/build/kdelogs
 
     git-repository-base kde-projects kde:
+    async false
 
     cmake-options -DCMAKE_BUILD_TYPE:STRING=debug -DLIB_INSTALL_DIR=lib -GNinja
 
     cxxflags -march=native -pipe -Og -DQT_STRICT_ITERATORS -DQURL_NO_CAST_FROM_STRING -DQT_NO_HTTP -DQT_NO_FTP -Wformat -Werror=format-security -Werror=return-type -Wno-variadic-macros -Wlogical-op -Wmissing-include-dirs -Wno-deprecated-declarations -Wno-unused-parameter
 
-    #make-options           -j2
+    #make-options           -j4
     custom-build-command    ninja
 
     branch-group            kf5-qt5
@@ -29,7 +30,7 @@ end module
 
 include kf5-frameworks-build-include
 include kf5-workspace-build-include
-include kf5-kdepim-build-include
+#include kf5-kdepim-build-include
 #include kf5-applications-build-include
 
 module-set kf5-base-applications
@@ -37,9 +38,14 @@ module-set kf5-base-applications
     use-modules konsole kate kde-baseapps dolphin
 end module-set
 
+module-set
+    repository kde-projects
+    use-modules kio-extras
+end module-set
+
 module-set kdegraphics
     repository kde-projects
-    use-modules gwenview okular ksnapshot
+    use-modules gwenview okular kdegraphics-thumbnailers
 end module-set
 
 module-set libkomparediff2
@@ -74,6 +80,11 @@ module-set
     use-modules kdeconnect-kde
 end module-set
 
+module-set
+    repository kde-projects
+    use-modules kscreengenie
+end module-set
+
 options phonon
     cmake-options -DPHONON_BUILD_PHONON4QT5=ON -DCMAKE_INSTALL_LIBDIR=lib
 end options
@@ -100,4 +111,12 @@ end options
 
 options bluedevil
     cmake-options -DCMAKE_INSTALL_LIBDIR=lib
+end options
+
+options plasma-desktop
+    cmake-options -DXLIBDIR=/usr/lib64/X11
+end options
+
+options kwallet-pam
+    cmake-options -DCMAKE_INSTALL_LIBDIR=/opt/kde5/lib
 end options

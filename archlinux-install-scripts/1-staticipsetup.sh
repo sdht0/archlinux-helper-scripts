@@ -1,7 +1,7 @@
-devname=enp19s0
-ip=192.168.102.104/21
-gateway=192.168.100.1
-nameserver=192.168.5.20
+devname=eno1
+ip=172.31.131.5/22
+gateway=172.31.128.1
+nameserver=172.31.100.7
 
 echo "Stopping dhcpd service..."
 systemctl stop dhcpcd@$devname
