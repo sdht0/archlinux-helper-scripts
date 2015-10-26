@@ -35,17 +35,12 @@ include kf5-workspace-build-include
 
 module-set kf5-base-applications
     repository kde-projects
-    use-modules konsole kate kde-baseapps dolphin
-end module-set
-
-module-set
-    repository kde-projects
-    use-modules kio-extras
+    use-modules konsole kate kde-baseapps dolphin kio-extras
 end module-set
 
 module-set kdegraphics
     repository kde-projects
-    use-modules gwenview okular kdegraphics-thumbnailers
+    use-modules gwenview okular spectacle
 end module-set
 
 module-set libkomparediff2
@@ -72,17 +67,12 @@ end module
 
 module-set kdevelop-kf5
     repository kde-projects
-    use-modules kdevplatform kdevelop/kdevelop
+    use-modules kdevplatform kdevelop-pg-qt kdevelop/kdevelop
 end module-set
 
 module-set
     repository kde-projects
     use-modules kdeconnect-kde
-end module-set
-
-module-set
-    repository kde-projects
-    use-modules kscreengenie
 end module-set
 
 options phonon
